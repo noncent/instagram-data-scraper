@@ -13,6 +13,5 @@ You can also get their post images but it's just a POC so you have to change PHP
 parse by PHP arrays... let me know if you like or want improvement.. 
 
 # Screenshot
-![App Screenshot](https://octodex.github.com/images/yaktocat.png)
-![App Screenshot](/Public/images/screen-app.png)
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/assets/images/screen-app.png)
 
