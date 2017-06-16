@@ -13,5 +13,11 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 # Screenshot
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/assets/images/screen-app.png)
 
+# Requirement
+
+>PHP, APACHE, Browser & Off-course internet Connection :)
+
+# Note
+> Rename dev.htaccess to .htaccess (If you are using windows just rename file dev.htaccess to .htaccess. and window will ignore last dot.. )
 
 Feel free to use and enjoy!! & Yes! all feedbacks, enhancement are most welcome... 
