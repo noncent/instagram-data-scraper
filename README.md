@@ -1,4 +1,4 @@
-# Instagram-Scraper
+# Instagram-Super-Scraper
 Get/Scrape Instagram data Likes, Followers, Following, Comments etc... without API (PHP)
 
 # See working demo
