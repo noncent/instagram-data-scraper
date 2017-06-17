@@ -14,37 +14,72 @@
  *                                                                                                    
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
-$ = jQuery;
+ $ = jQuery;
+// jQuery document object
 var $document = $(document);
+// on page load hide indicator
 var $loading = $('#indicator').hide();
+// All button elements
 var $btns = $('button');
+// Add more button
 var $btnAddMore = $('.add-more');
+// Get info button
 var $btnStartNow = $("#fetch-insta-btn");
+// Remove row button
 var $btnDeleteNow = $(".remove");
+// Start demo button
 var $btnStartDemo = $("#startDemo");
+// New row html data
 var $coneNewurlent = $(".clone").html();
+// Clone html wrapper class
 var $coneurlentWrapper = $('.row.extra');
+// Small success label
 var $topNavigeationBar = $(".nav.navbar-nav .label-success");
+// Checkbox element
 var $inputSelectCheckbox = $(".checkbox-toggle");
+// Delete button in table
 var $btnTableDel = $("#tbl-del-row");
+// Refresh button in table
 var $tblReferesh = $("#tbl-refresh");
+// Export button in table
 var $btnExportExcel = $("#btnExport");
+// Main top progress bar
 var $loadingContainer = $('.progress-bar');
+// Title label
 var $modelTitle = $(".modal-title");
+// Form html input
 var $form = $('form');
+// Total no of Instagram links
 var totalRequestUrl = 0;
+// Application starting index
 var currentMasterIndex = 1;
+// Application starting progress value
 var currentMasterProgress = 0;
-
-var stateProgress = function () {
-    console.info('currentMasterIndex: ' + currentMasterIndex);
-    console.info('currentMasterProgress: ' + currentMasterProgress);
+// App debug flag
+var logInfo = false;
+// Application log method
+var log_message = function (data_object_array){
+    if(logInfo===true){
+        console.log(data_object_array);
+    }
+}
+/**
+ * Main application progress bar
+ * @return {[type]} [description]
+ */
+ var stateProgress = function () {
+    log_message('currentMasterIndex: ' + currentMasterIndex);
+    log_message('currentMasterProgress: ' + currentMasterProgress);
     $loadingContainer.attr({
         'aria-valuenow': currentMasterProgress
     }).attr('style', 'width:' + currentMasterProgress + '%').html('&nbsp;&nbsp;&nbsp;Process Completed ' + currentMasterProgress + '%, Now fetching comments & likes');
 };
-
-function fnExcelReport(elid) {
+/**
+ * Table to Excel Export data
+ * @param  {[type]} elid [description]
+ * @return {[type]}      [description]
+ */
+ function fnExcelReport(elid) {
     //getting data from our div that contains the HTML table
     var data_type = 'data:application/vnd.ms-excel';
     var table = document.getElementById(elid);
@@ -64,7 +99,10 @@ function fnExcelReport(elid) {
     tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, "");
     return data_type + ', ' + encodeURIComponent(tab_text);
 }
-var Instagram = function () {
+/**
+ * Main Instagram JavaScript Object
+ */
+ var Instagram = function () {
     this.stateError = false;
     this.txtProgressState = 0;
     this.info = [];
@@ -82,7 +120,11 @@ var Instagram = function () {
     this.txtIndicator = $('.txt-progress');
     this.sendRequestUrl = "Instagram/fetch_data";
 };
-Instagram.prototype.setAccount = function () {
+/**
+ * Get User's account information from
+ * Instagram JSON and set in Object Property
+ */
+ Instagram.prototype.setAccount = function () {
     // ++++++++++++++++++++++++++++++++++++++
     // get user's personal data from json
     // ++++++++++++++++++++++++++++++++++++++
@@ -150,7 +192,11 @@ Instagram.prototype.setAccount = function () {
         this.isSearchingForNext = false;
     }
 };
-Instagram.prototype.buildViews = function () {
+/**
+ * Create Table data row with User's information
+ * @return {[type]} [description]
+ */
+ Instagram.prototype.buildViews = function () {
     var row = '';
     row += '<tr class="info-row">';
     row += '<td><input class="tbl-chk" type="checkbox"></td>';
@@ -166,10 +212,21 @@ Instagram.prototype.buildViews = function () {
     row += '</tr>';
     return row;
 };
-Instagram.prototype.errorHandler = function (errors) {
+/**
+ * Instagram wrong link error handler
+ * @param  {[type]} errors [description]
+ * @return {[type]}        [description]
+ */
+ Instagram.prototype.errorHandler = function (errors) {
     this.errorContainer.html(errors);
 };
-Instagram.prototype.eventHandler = function (label, error_class) {
+/**
+ * Small label indicator success/false/error
+ * @param  {[type]} label       [description]
+ * @param  {[type]} error_class [description]
+ * @return {[type]}             [description]
+ */
+ Instagram.prototype.eventHandler = function (label, error_class) {
     if (typeof error_class == 'undefined') {
         this.txtIndicator.eq(this.currentIndex).css({
             'width': this.txtProgressState + '%',
@@ -184,10 +241,19 @@ Instagram.prototype.eventHandler = function (label, error_class) {
         this.infoContainer.eq(this.currentIndex).addClass(error_class).html(label);
     }
 };
-Instagram.prototype.getAccount = function () {
+/**
+ * Abandoned for now...
+ * @return {[type]} [description]
+ */
+ Instagram.prototype.getAccount = function () {
     // body...
 };
-Instagram.prototype.initNow = function (link) {
+/**
+ * Start the application script process
+ * @param  {[type]} link [description]
+ * @return {[type]}      [description]
+ */
+ Instagram.prototype.initNow = function (link) {
     // cache main object
     var $this = this;
     // you said promise
@@ -223,9 +289,9 @@ Instagram.prototype.initNow = function (link) {
                 $this.currentIndexPost = 1;
                 $this.txtProgressState = 0;
                 $this.eventHandler("Likes & Comments Done..." + $this.info.FullName);
-                console.info('Current Index ' + $this.currentIndex);
-                console.info('totalRequestUrl ' + totalRequestUrl);
-                console.info('Current% ' + done_so_far);
+                log_message('Current Index ' + $this.currentIndex);
+                log_message('totalRequestUrl ' + totalRequestUrl);
+                log_message('Current% ' + done_so_far);
                 currentMasterProgress = done_so_far;
                 stateProgress();
                 $this.tableContentWrapper.append($this.buildViews());
@@ -233,7 +299,7 @@ Instagram.prototype.initNow = function (link) {
         }
     });
 };
-// jQuery DOM state ready function
+// jQuery DOM ready function
 $(document).ready(function () {
     // bind ajax loader
     $(document).ajaxStart(function () {
@@ -295,18 +361,18 @@ $(document).ready(function () {
         totalRequestUrl = $("input[name='iUrl[]']:visible").length;
         $topNavigeationBar.html($(".insta-url:visible").length);
         var InstagramUrls = $("input[name='iUrl[]']:visible").map(function (index) {
-                var appHandler = new Instagram();
-                appHandler.currentIndex = index;
-                appHandler.eventHandler("Getting data, please wait....");
-                appHandler.initNow($(this).val()).done(function (data) {
-                    if (!appHandler.stateError) {
+            var appHandler = new Instagram();
+            appHandler.currentIndex = index;
+            appHandler.eventHandler("Getting data, please wait....");
+            appHandler.initNow($(this).val()).done(function (data) {
+                if (!appHandler.stateError) {
                         // promise action can be done here
                     } else {
                         appHandler.currentIndexPost = 1;
                         appHandler.eventHandler("Error in Instagram profile link, wrong link", "label-danger");
                     }
                 });
-            });
+        });
     });
     // table del button
     $btnTableDel.bind('click', function () {
