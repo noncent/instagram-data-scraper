@@ -6,7 +6,7 @@ related to user e.g. likes, comments, post count, images, likes on images etc...
 jQuery is using to build the Awesome View, to handle each and every request separately. I hope you like this small chunk of code
 
 All code is well commented to understand the flow and functionality, if I missed something or
-any improvement/suggestion you have, kindly let me know.. ....
+any improvement/suggestion you have, kindly let me know.. .... [Read More on Wiki](https://github.com/neerajsinghsonu/Instagram-Data-Scraper/wiki)
 
 # See working demo
 You can see a working demo here [Click to See](https://drive.google.com/file/d/0B2Jr4ZrDD_hFbkhLdXRFb0xBQk0/view)
