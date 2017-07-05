@@ -88,31 +88,36 @@ class Instagram
      */
     public function insta_connect($link, $loop = false)
     {
-        // get source html data
-        $source = @file_get_contents($link);
-        // get script json data
-        $first_set_pattern = "/<script[^>](.*)_sharedData(.*)<\/script>/";
-        // replacement string
-        $get_json_data_pattern = '/(?i)<script[[:space:]]+type="text\/javascript"(.*?)>([^\a]+?)<\/script>/si';
-        // if source get
-        if ($source) {
-            // filter script tag
-            preg_match_all($first_set_pattern, $source, $matches);
-            // get script inside json data
-            preg_match($get_json_data_pattern, array_shift($matches[0]), $array_string);
-            // check result request type
-            if ($this->result_type === 'ARRAY') {
-                // convert javscript code to php assoc array object
-                $js2php_array = json_decode(preg_replace('/(window\.\_sharedData \=|\;)/', '', $array_string[2]), true);
-                // build result array, you have to manage html view by array
-                $this->data = $this->build_useful_array($js2php_array);
+        if (ini_get('allow_url_fopen')) {
+            // get source html data
+            $source = @file_get_contents($link);
+            // get script json data
+            $first_set_pattern = "/<script[^>](.*)_sharedData(.*)<\/script>/";
+            // replacement string
+            $get_json_data_pattern = '/(?i)<script[[:space:]]+type="text\/javascript"(.*?)>([^\a]+?)<\/script>/si';
+            // if source get
+            if ($source) {
+                // filter script tag
+                preg_match_all($first_set_pattern, $source, $matches);
+                // get script inside json data
+                preg_match($get_json_data_pattern, array_shift($matches[0]), $array_string);
+                // check result request type
+                if ($this->result_type === 'ARRAY') {
+                    // convert javscript code to php assoc array object
+                    $js2php_array = json_decode(preg_replace('/(window\.\_sharedData \=|\;)/', '', $array_string[2]), true);
+                    // build result array, you have to manage html view by array
+                    $this->data = $this->build_useful_array($js2php_array);
+                } else {
+                    // return script directly
+                    $this->data = $array_string[2];
+                }
             } else {
-                // return script directly
-                $this->data = $array_string[2];
+                return $this->error_trace("Invalid or corrupt Instagram url: " . $link);
             }
         } else {
-            return $this->error_trace("Invalid or corrupt Instagram url: " . $link);
+            return $this->error_trace("PHP Setting Error: 'allow_url_fopen' is not enable on server.");
         }
+
     }
 
     /**
@@ -125,9 +130,9 @@ class Instagram
         // pre($data);
         $collection = array();
         // collect all personal information, same key as in result data
-        $collection['country_code']       = $data['country_code'];
-        $collection['language_code']      = $data['language_code']; 
-        // get       
+        $collection['country_code']  = $data['country_code'];
+        $collection['language_code'] = $data['language_code'];
+        // get
         extract(array_shift($data['entry_data']['ProfilePage']));
         // this is total post count
         $collection['count']              = $user['media']['count'];
