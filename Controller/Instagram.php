@@ -78,7 +78,7 @@ class Instagram
     public function load_view()
     {
         // set json header
-        // header('Content-Type: application/javascript');
+        header('Content-Type: application/javascript');
         // get script
         return $this->data;
     }
