@@ -1,4 +1,4 @@
-# Instagram-Super-Scraper
+# Instagram-Super-Scraper V 2.0
 
 Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
 related to user e.g. likes, comments, post count, images, likes on images etc...
@@ -28,3 +28,16 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 > Rename dev.htaccess to .htaccess (If you are using windows just rename file dev.htaccess to .htaccess. and window will ignore last dot.. )
 
 Feel free to use and enjoy!! & Yes! all feedbacks, enhancement are most welcome... 
+
+#Change logs:
+
+Committed repo change code version 2.0
+`
+1 - Added data file example
+2 - Added result php array example
+3 - Updated nav bar css
+4 - Update js file and css file and minify files
+5 - Remove htaccess [re_write apache module] dependencies
+6 - Added PHP Code to build PHP array
+7 - Some minor UI changes
+`
