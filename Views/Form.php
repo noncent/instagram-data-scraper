@@ -39,7 +39,7 @@ $accounts = array
                             <!-- section -->
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="iUrl">Link</label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span> 
+                                    <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span> 
                                     <div class="txt-progress"></div>
                                     <input type="text" class="form-control insta-url" name="iUrl[]" value="" placeholder="You can add another box by 'Add New'" />
                                 </div>
@@ -60,7 +60,7 @@ $accounts = array
     <div class="clone hide">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="iUrl">Link</label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span>  
+                <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span>  
                 <div class="input-group">
                   <span class="input-group-addon">
                     <input type="checkbox" class="chk-input">
