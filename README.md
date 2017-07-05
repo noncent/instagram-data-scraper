@@ -29,15 +29,15 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 Feel free to use and enjoy!! & Yes! all feedbacks, enhancement are most welcome... 
 
-#Change logs:
+# Change logs:
 
-Committed repo change code version 2.0
+> Committed repo change code version 2.0
 `
-1 - Added data file example
-2 - Added result php array example
-3 - Updated nav bar css
-4 - Update js file and css file and minify files
-5 - Remove htaccess [re_write apache module] dependencies
-6 - Added PHP Code to build PHP array
-7 - Some minor UI changes
+- 1 - Added data file example
+- 2 - Added result php array example
+- 3 - Updated nav bar css
+- 4 - Update js file and css file and minify files
+- 5 - Remove htaccess [re_write apache module] dependencies
+- 6 - Added PHP Code to build PHP array
+- 7 - Some minor UI changes
 `
