@@ -18,17 +18,19 @@ class Instagram
      * get all links array
      * @var array
      */
-    public $link_array = [];
+    public $link_array = array();
     /**
      * collection of data
      * @var array
      */
-    public $data = [];
+    public $data = array();
     /**
-     * [$result_type description]
+     * JSON or ARRAY
+     * Default is JSON to build awesome view, if you set ARRAY you have to make your own
+     * JavaScript template by returning response as array
      * @var string
      */
-    public $result_type = 'Java-Script';
+    public $result_type = 'JSON';
     /**
      * [$error description]
      * @var string
@@ -40,13 +42,13 @@ class Instagram
      */
     public function __construct()
     {
-        $url = [];
-        // if data set
-        if (isset($_POST['iUrl']) && !empty($_POST['iUrl'])) {
+        $url = array();
+        // if data set & url
+        if (filter_input(INPUT_POST, 'iUrl', FILTER_VALIDATE_URL)) {
             // array to php vars
             extract($_POST);
             // create array
-            $url = [$iUrl];
+            $url = array($iUrl);
         }
         if (is_array($url) && count($url) > 0) {
             $this->link_array = $url;
@@ -76,7 +78,7 @@ class Instagram
     public function load_view()
     {
         // set json header
-        header('Content-Type: application/javascript');
+        // header('Content-Type: application/javascript');
         // get script
         return $this->data;
     }
@@ -98,11 +100,63 @@ class Instagram
             preg_match_all($first_set_pattern, $source, $matches);
             // get script inside json data
             preg_match($get_json_data_pattern, array_shift($matches[0]), $array_string);
-            // return script directly
-            $this->data = $array_string[2];
+            // check result request type
+            if ($this->result_type === 'ARRAY') {
+                // convert javscript code to php assoc array object
+                $js2php_array = json_decode(preg_replace('/(window\.\_sharedData \=|\;)/', '', $array_string[2]), true);
+                // build result array, you have to manage html view by array
+                $this->data = $this->build_useful_array($js2php_array);
+            } else {
+                // return script directly
+                $this->data = $array_string[2];
+            }
         } else {
             return $this->error_trace("Invalid or corrupt Instagram url: " . $link);
         }
+    }
+
+    /**
+     * Build the array data from json respond
+     * @param  [type] $data [description]
+     * @return [type]       [description]
+     */
+    public function build_useful_array($data)
+    {
+        // pre($data);
+        $collection = array();
+        // collect all personal information, same key as in result data
+        $collection['country_code']       = $data['country_code'];
+        $collection['language_code']      = $data['language_code']; 
+        // get       
+        extract(array_shift($data['entry_data']['ProfilePage']));
+        // this is total post count
+        $collection['count']              = $user['media']['count'];
+        $collection['biography']          = $user['biography'];
+        $collection['external_url']       = $user['external_url'];
+        $collection['count']              = $user['followed_by']['count'];
+        $collection['count']              = $user['follows']['count'];
+        $collection['follows_viewer']     = $user['follows_viewer'];
+        $collection['full_name']          = $user['full_name'];
+        $collection['id']                 = $user['id'];
+        $collection['username']           = $user['username'];
+        $collection['external_url']       = $user['external_url'];
+        $collection['profile_pic_url']    = $user['profile_pic_url'];
+        $collection['followed_by_viewer'] = $user['followed_by_viewer'];
+        // collect all post information
+        if ($user['media']['nodes']) {
+            // parse one by one
+            foreach ($user['media']['nodes'] as $index => $array) {
+                $collection['post']['data'][$index]['id']            = $array['id'];
+                $collection['post']['data'][$index]['thumbnail_src'] = $array['thumbnail_src'];
+                $collection['post']['data'][$index]['is_video']      = $array['is_video'];
+                $collection['post']['data'][$index]['date']          = $array['date'];
+                $collection['post']['data'][$index]['display_src']   = $array['display_src'];
+                $collection['post']['data'][$index]['caption']       = isset($array['caption']) ? $array['caption'] : '';
+                $collection['post']['data'][$index]['comments']      = $array['comments']['count'];
+                $collection['post']['data'][$index]['likes']         = $array['likes']['count'];
+            }
+        }
+        return $collection;
     }
     /**
      * [error_trace description]

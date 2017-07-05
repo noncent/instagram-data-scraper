@@ -25,11 +25,11 @@ $accounts = array
                 <form action="" method="post" id="form-collector" autocomplete="off">
                     <div class="modal-body">
                         <div class="row extra">
-                            <?php if (isset($_GET['dummy'])) { ?>
+                            <?php if (filter_input(INPUT_GET, 'start_demo', FILTER_VALIDATE_INT)) { ?>
                             <?php foreach ($accounts as $key => $value): ?>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="iUrl">Link</label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span> 
+                                        <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span> 
                                         <div class="txt-progress"></div>
                                         <input type="text" class="form-control insta-url" name="iUrl[]" value="<?=$value?>" placeholder="You can add another box by 'Add New'" />
                                     </div>

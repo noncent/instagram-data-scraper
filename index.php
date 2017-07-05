@@ -5,9 +5,13 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ENV', 'development');
 // error reporting on/off
 if (ENV == 'development') {
-    // Error reporting
+    // Error reporting ON
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
+} else {
+    // Error reporting OFF
+    error_reporting(0);
+    ini_set('display_errors', 0);
 }
 /*
  * App URL/ BASE Url

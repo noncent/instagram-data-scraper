@@ -2,7 +2,7 @@
 /**
  * @param array $data
  */
-function pre($data = [])
+function pre($data = array())
 {
     echo '<pre>', print_r($data, true), '</pre>';
     exit(4);
@@ -44,13 +44,27 @@ function assets($path)
 function render_template()
 {
     $pages =
-        [
+        array(
         Template_Path . 'Base.header.php',
         Template_Path . 'Base.menu.php',
         View_Path . 'Content.php',
         Template_Path . 'Base.footer.php'
-    ];
+    );
     foreach ($pages as $i => $page) {
         require_once $page;
     }
+}
+/**
+ * Check if Server Supports htaccess
+ * @return boolean [description]
+ */
+function is_hraccess_enable()
+{
+    // check if mode re_write enabled or not
+    if (!in_array('mod_rewrite', apache_get_modules()) || !isset($_SERVER['HTACCESS'])) {
+        return false;
+    } else {
+        return true;
+    }
+
 }
