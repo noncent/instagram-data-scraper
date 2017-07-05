@@ -88,38 +88,76 @@ class Instagram
      */
     public function insta_connect($link, $loop = false)
     {
+        // get script json data
+        $first_set_pattern = "/<script[^>](.*)_sharedData(.*)<\/script>/";
+        // replacement string
+        $get_json_data_pattern = '/(?i)<script[[:space:]]+type="text\/javascript"(.*?)>([^\a]+?)<\/script>/si';
+        // check allow_url_fopen settings
         if (ini_get('allow_url_fopen')) {
             // get source html data
             $source = @file_get_contents($link);
-            // get script json data
-            $first_set_pattern = "/<script[^>](.*)_sharedData(.*)<\/script>/";
-            // replacement string
-            $get_json_data_pattern = '/(?i)<script[[:space:]]+type="text\/javascript"(.*?)>([^\a]+?)<\/script>/si';
-            // if source get
-            if ($source) {
-                // filter script tag
-                preg_match_all($first_set_pattern, $source, $matches);
-                // get script inside json data
-                preg_match($get_json_data_pattern, array_shift($matches[0]), $array_string);
-                // check result request type
-                if ($this->result_type === 'ARRAY') {
-                    // convert javscript code to php assoc array object
-                    $js2php_array = json_decode(preg_replace('/(window\.\_sharedData \=|\;)/', '', $array_string[2]), true);
-                    // build result array, you have to manage html view by array
-                    $this->data = $this->build_useful_array($js2php_array);
-                } else {
-                    // return script directly
-                    $this->data = $array_string[2];
-                }
+        } else {
+            // get source html data by using cURL
+            $source = $this->curl_get_contents($link);
+            // check return data, if no error
+            if ($source['error_no'] == '0') {
+                $source = $source['content'];
             } else {
-                return $this->error_trace("Invalid or corrupt Instagram url: " . $link);
+                // cURL error message
+                return $this->error_trace($source['error_message']);
+            }
+        }
+        // if source get
+        if ($source) {
+            // filter script tag
+            preg_match_all($first_set_pattern, $source, $matches);
+            // get script inside json data
+            preg_match($get_json_data_pattern, array_shift($matches[0]), $array_string);
+            // check result request type
+            if ($this->result_type === 'ARRAY') {
+                // convert javscript code to php assoc array object
+                $js2php_array = json_decode(preg_replace('/(window\.\_sharedData \=|\;)/', '', $array_string[2]), true);
+                // build result array, you have to manage html view by array
+                $this->data = $this->build_useful_array($js2php_array);
+            } else {
+                // return script directly
+                $this->data = $array_string[2];
             }
         } else {
-            return $this->error_trace("PHP Setting Error: 'allow_url_fopen' is not enable on server.");
+            return $this->error_trace("Invalid or corrupt Instagram url: " . $link);
         }
-
     }
-
+    /**
+     * file_get_contents fallback method
+     * @param  [type] $url [description]
+     * @return [type]      [description]
+     */
+    public function curl_get_contents($url)
+    {
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true, // return web page
+            CURLOPT_HEADER         => false, // don't return headers
+            CURLOPT_FOLLOWLOCATION => true, // follow redirects
+            CURLOPT_ENCODING       => "", // handle all encodings
+            CURLOPT_USERAGENT      => "spider", // who am i
+            CURLOPT_AUTOREFERER    => true, // set referer on redirect
+            CURLOPT_CONNECTTIMEOUT => 120, // timeout on connect
+            CURLOPT_TIMEOUT        => 120, // timeout on response
+            CURLOPT_MAXREDIRS      => 10, // stop after 10 redirects
+            CURLOPT_SSL_VERIFYPEER => false // Disabled SSL Cert checks
+        );
+        $ch = curl_init($url);
+        curl_setopt_array($ch, $options);
+        $content = curl_exec($ch);
+        $err     = curl_errno($ch);
+        $errmsg  = curl_error($ch);
+        $header  = curl_getinfo($ch);
+        curl_close($ch);
+        $header['error_no']      = $err;
+        $header['error_message'] = $errmsg;
+        $header['content']       = $content;
+        return $header;
+    }
     /**
      * Build the array data from json respond
      * @param  [type] $data [description]
