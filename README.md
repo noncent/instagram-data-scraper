@@ -1,4 +1,4 @@
-## Instagram-Super-Scraper V 2.0
+## Instagram-Super-Scraper V 2.1
 
 Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
 related to user e.g. likes, comments, post count, images, likes on images etc...
@@ -44,6 +44,20 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 - 5 - Remove htaccess [re_write apache module] dependencies
 - 6 - Added PHP Code to build PHP array
 - 7 - Some minor UI changes
+
+> Committed repo change code version 2.1
+- 8 - Updated Class Instagram
+- 9-  Updated JavaScript Code
+- 11- Updated Content
+- 12- Add MultiCurl feature [Thanks to @Pete Warden][https://github.com/petewarden/ParallelCurl]
+- 13- Added Error Handling
 `
 
 Feel free to use and enjoy!! & Yes! all feedbacks, enhancement are most welcome... 
+
+## Request:
+The application is provided free of cost and for learning purpose that how we can scrape a website html source code. It not intended to harm anyone or
+any illegal use. Kindly, respect user's privacy and others efforts. Do not try to intent break something. The World is Beautiful More Then We thought :)
+
+
+Thank you all :) :|
