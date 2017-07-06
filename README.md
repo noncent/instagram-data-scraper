@@ -21,6 +21,16 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 > Example: https://www.instagram.com/any-user-name/, You can add any link and can get their Total Likes, Total Posts, Comments etc.
 > You can also get their post images but it's just a POC so you have to change PHP Code. What you need to just decode json string >and parse by PHP arrays... let me know if you like or want improvement.. 
 
+## Requirement
+
+> Apache version => 2.4
+> PHP version =>5.*
+
+### PHP Settings:
+> A-) allow_url_fopen + openssl extension OR cURL enable
+
+### Apache Settings:
+> Enable .htaccess (optional)
 
 ## Screenshot
 
