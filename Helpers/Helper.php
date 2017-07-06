@@ -14,7 +14,7 @@ function pre($data = array())
  */
 function load_controller($controller)
 {
-    if (file_exists(Controller_Path . $controller . '.php')) {
+    if (file_exists(CONTROLLER_PATH . $controller . '.php')) {
         return true;
     } else {
         return false;
