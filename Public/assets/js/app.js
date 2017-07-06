@@ -1,7 +1,7 @@
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- * Kindly respect other People
- * Every thing is Respectful in Nature... :)
+ * Kindly respect the People
+ * Everything is Respectful in Nature... :)
  * Be Good and spend life  happily.....
  *  _        _______  _______  _______  _______ _________   _______ _________ _        _______          
  * ( (    /|(  ____ \(  ____ \(  ____ )(  ___  )\__    _/  (  ____ \\__   __/( (    /|(  ____ \|\     /|
@@ -14,7 +14,6 @@
  *                                                                                                    
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
-
 // jQuery alias
 $ = jQuery;
 // jQuery document object
@@ -61,17 +60,19 @@ var currentMasterProgress = 0;
 var logInfo = false;
 // Application log method
 var log_message = function(data_object_array) {
-        if (logInfo === true) {
-            console.log(data_object_array);
-        }
+    if (logInfo === true) {
+        console.log(data_object_array);
     }
-    /**
-     * Main application progress bar
-     * @return {[type]} [description]
-     */
+};
+/**
+ * Main application progress bar
+ * @return {[type]} [description]
+ */
 var stateProgress = function() {
+    // debugger message console
     log_message('currentMasterIndex: ' + currentMasterIndex);
     log_message('currentMasterProgress: ' + currentMasterProgress);
+    // update progress bar
     $loadingContainer.attr({
         'aria-valuenow': currentMasterProgress
     }).attr('style', 'width:' + currentMasterProgress + '%').html('&nbsp;&nbsp;&nbsp;Process Completed ' + currentMasterProgress + '%, Now fetching comments & likes');
@@ -240,7 +241,7 @@ Instagram.prototype.eventHandler = function(label, error_class) {
             'width': this.txtProgressState + '%',
             'border-top': '2px solid red'
         });
-        this.infoContainer.eq(this.currentIndex).addClass(error_class).html(label);
+        this.infoContainer.eq(this.currentIndex).removeClass('label-info').addClass(error_class).html(label);
     }
 };
 /**
@@ -270,6 +271,14 @@ Instagram.prototype.initNow = function(link) {
             $this.stateError = true;
             // show error message
             $this.errorHandler(window._sharedData.error);
+            // error percentage
+            var done_so_far = Math.floor(((currentMasterIndex) / (totalRequestUrl)) * 100);
+            // get over all percentage
+            currentMasterProgress = done_so_far;
+            // update master progress bar
+            stateProgress();
+            // increase master index value
+            currentMasterIndex++;
             // break the bone
             return false;
         }
@@ -285,17 +294,27 @@ Instagram.prototype.initNow = function(link) {
                 // next ajax call
                 $this.initNow($this.urlInstagramNext);
             } else {
+                // increase master index value
                 currentMasterIndex++;
+                // calculate work status
                 var done_so_far = Math.floor(((currentMasterIndex) / (totalRequestUrl)) * 100);
+                // set next request false
                 $this.isSearchingForNext = false;
+                // reset index post
                 $this.currentIndexPost = 1;
+                // set txt progress bar
                 $this.txtProgressState = 0;
-                $this.eventHandler("Likes & Comments Done..." + $this.info.FullName);
+                // update label text
+                $this.eventHandler("Likes & Comments Done..." + $this.info.FullName, 'label-success');
+                // debugger message console
                 log_message('Current Index ' + $this.currentIndex);
                 log_message('totalRequestUrl ' + totalRequestUrl);
                 log_message('Current% ' + done_so_far);
+                // update master progress bar value
                 currentMasterProgress = done_so_far;
+                // call progress bar
                 stateProgress();
+                // show values rows in table
                 $this.tableContentWrapper.append($this.buildViews());
             }
         }
@@ -303,7 +322,6 @@ Instagram.prototype.initNow = function(link) {
 };
 // jQuery DOM ready function
 $(document).ready(function() {
-
     /**
      * This object controls the nav bar. Implement the add and remove
      * action over the elements of the nav bar that we want to change.
@@ -348,19 +366,18 @@ $(document).ready(function() {
         } else if (currYOffSet == yOffset) {
             myNavBar.remove();
         }
-    }
+    };
     /**
      * bind to the document scroll detection
      */
     window.onscroll = function(e) {
-            offSetManager();
-        }
-        /**
-         * We have to do a first detection of offset because the page
-         * could be load with scroll down set.
-         */
+        offSetManager();
+    };
+    /**
+     * We have to do a first detection of offset because the page
+     * could be load with scroll down set.
+     */
     offSetManager();
-
     // bind ajax loader
     $(document).ajaxStart(function() {
         $loading.show();
@@ -377,9 +394,9 @@ $(document).ready(function() {
     });
     // update counter function
     var updateCounterLink = function() {
-            $topNavigeationBar.html($(".insta-url:visible").length);
-        }
-        // update link count
+        $topNavigeationBar.html($(".insta-url:visible").length);
+    };
+    // update link count
     updateCounterLink();
     // table top head checkbox toggle
     $inputSelectCheckbox.bind('click', function() {
@@ -394,41 +411,62 @@ $(document).ready(function() {
     });
     // export button
     $btnExportExcel.click(function(e) {
+        // export to excel
         var data = fnExcelReport('export-report');
+        // create download button and trigger
         $(this).attr('download', 'ExcelExport.xls').attr('href', data).attr('target', '_blank');
     });
     // demo button
     $btnStartDemo.bind('click', function(e) {
+        // stop default action
         e.preventDefault();
+        // alert message
         alert("Now you can click on [Get Info] button to see, How this works..");
+        // redirect user on demo page
         window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + "?start_demo=1";
     });
     // add more button
     $btnAddMore.bind('click', function(e) {
+        // stop default action
         e.preventDefault();
+        // append new html element text 
         $($coneNewurlent).appendTo($coneurlentWrapper);
+        // update link counter
         updateCounterLink();
     });
     // delete button
     $btnDeleteNow.bind('click', function(e) {
+        // stop default action
         e.preventDefault();
+        // remove text input
         $form.find('input:checkbox.chk-input:checked').parents('.col-md-4').remove();
+        // update link count
         updateCounterLink();
     });
     // start fetch button
     $btnStartNow.bind('click', function(e) {
+        // stop default action
         e.preventDefault();
+        // total no of urls count
         totalRequestUrl = $("input[name='iUrl[]']:visible").length;
+        // update top notification "Total Instagram Links"
         $topNavigeationBar.html($(".insta-url:visible").length);
+        // send each url one by one
         var InstagramUrls = $("input[name='iUrl[]']:visible").map(function(index) {
+            // new Object Instagram
             var appHandler = new Instagram();
+            // set internal index
             appHandler.currentIndex = index;
+            // update label blue info
             appHandler.eventHandler("Getting data, please wait....");
+            // call Instagram object
             appHandler.initNow($(this).val()).done(function(data) {
                 if (!appHandler.stateError) {
                     // promise action can be done here
                 } else {
+                    // reset index post master
                     appHandler.currentIndexPost = 1;
+                    // if any error
                     appHandler.eventHandler("Error in Instagram profile link, wrong link", "label-danger");
                 }
             });

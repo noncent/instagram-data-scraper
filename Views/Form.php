@@ -30,44 +30,54 @@ $accounts = array
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span> 
+                                        <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="checkbox" class="chk-input">
+                                        </span>
                                         <div class="txt-progress"></div>
                                         <input type="text" class="form-control insta-url" name="iUrl[]" value="<?=$value?>" placeholder="You can add another box by 'Add New'" />
                                     </div>
                                 </div>
-                            <?php endforeach ?>
-                            <?php } else { ?>
-                            <!-- section -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span> 
-                                    <div class="txt-progress"></div>
-                                    <input type="text" class="form-control insta-url" name="iUrl[]" value="" placeholder="You can add another box by 'Add New'" />
-                                </div>
                             </div>
-                            <?php } ?>                           
-                        </div> 
+                        <?php endforeach ?>
+                        <?php } else { ?>
+                        <!-- section -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span> 
+                                <div class="input-group">
+                                  <span class="input-group-addon">
+                                    <input type="checkbox" class="chk-input">
+                                </span>
+                                <div class="txt-progress"></div>
+                                <input type="text" class="form-control insta-url" name="iUrl[]" value="" placeholder="You can add another box by 'Add New'" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <!-- Footer Content Here -->
-                    </div>
-                </form>
+                    <?php } ?>                           
+                </div> 
             </div>
+            <div class="modal-footer">
+                <!-- Footer Content Here -->
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<!-- cloning input -->
+<div class="clone hide">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span>  
+            <div class="input-group">
+              <span class="input-group-addon">
+                <input type="checkbox" class="chk-input">
+            </span>
+            <div class="txt-progress"></div>
+            <input type="text" class="form-control insta-url" name="iUrl[]" value="" />
         </div>
     </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">&nbsp;</div>
-    <!-- cloning input -->
-    <div class="clone hide">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="fa fa-instagram fa-sm" for="iUrl"></label>&nbsp;&nbsp;&nbsp;<span class="user-info label label-info"></span>  
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <input type="checkbox" class="chk-input">
-                </span>
-                <div class="txt-progress"></div>
-                <input type="text" class="form-control insta-url" name="iUrl[]" value="" />
-            </div>
-        </div>
-    </div>
+</div>
 </div>

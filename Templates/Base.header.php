@@ -11,6 +11,6 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?=assets('assets/css/app.min.css')?>" /> 
     <script type="text/javascript" id="X-Parser"></script>
-    <script type="text/javascript">var $is_htaccess_enable = "<?=is_hraccess_enable();?>";</script>
+    <script type="text/javascript">var $is_htaccess_enable = "<?=is_htaccess_enable();?>";</script>
 </head>
 <body>

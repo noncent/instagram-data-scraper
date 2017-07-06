@@ -22,24 +22,24 @@ define('APP_URL', (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') |
  * App Controller Path
  * @var [type]
  */
-define('Controller_Path', str_replace(DS, '/', dirname(__FILE__) . '/Controller/'));
+define('CONTROLLER_PATH', str_replace(DS, '/', dirname(__FILE__) . '/Controller/'));
 /*
  * App Template Path
  * @var [type]
  */
-define('Template_Path', str_replace(DS, '/', dirname(__FILE__) . '/Templates/'));
+define('TEMPLATE_PATH', str_replace(DS, '/', dirname(__FILE__) . '/Templates/'));
 /*
  * App Views Path
  * @var [type]
  */
-define('View_Path', str_replace(DS, '/', dirname(__FILE__) . '/Views/'));
+define('VIEW_PATH', str_replace(DS, '/', dirname(__FILE__) . '/Views/'));
 /*
  * App Helpers
  * @var [type]
  */
-define('Helpers_Path', str_replace(DS, '/', dirname(__FILE__) . '/Helpers/'));
+define('HELPER_PATH', str_replace(DS, '/', dirname(__FILE__) . '/Helpers/'));
 // Adding Helper File
-require_once Helpers_Path . 'Helper.php';
+require_once HELPER_PATH . 'Helper.php';
 /* Split the parts of the request by / */
 $request = (isset($_GET['request']) ? explode('/', $_GET['request']) : null);
 // Get Controller Name
@@ -55,7 +55,7 @@ if (!empty($Controller)) {
     // load controller if exist
     if (load_controller($controller_call)) {
         // adding controller file
-        require_once Controller_Path . $controller_call . '.php';
+        require_once CONTROLLER_PATH . $controller_call . '.php';
         // if Class Method exist
         if (!empty($Method)) {
             // Make Class Object

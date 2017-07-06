@@ -3,8 +3,8 @@
 		<div class="container-fluid">
 			<div class="content-container clearfix">
 				<div class="col-md-12">
-					<?php require_once View_Path . 'Form.php';?>
-					<?php require_once View_Path . 'Table.php';?>
+					<?php require_once VIEW_PATH . 'Form.php';?>
+					<?php require_once VIEW_PATH . 'Table.php';?>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,6 @@
 <?php
+// Added multi cURL Class
+require_once 'ParallelCurl.php';
 /**
  * Instagram Scrapper Class
  */
@@ -23,7 +25,8 @@ class Instagram
      * collection of data
      * @var array
      */
-    public $data = array();
+    public $data      = array();
+    public $data_html = null;
     /**
      * JSON or ARRAY
      * Default is JSON to build awesome view, if you set ARRAY you have to make your own
@@ -42,17 +45,30 @@ class Instagram
      */
     public function __construct()
     {
+        // array to php vars
+        extract($_POST);
+        // var url
         $url = array();
-        // if data set & url
-        if (filter_input(INPUT_POST, 'iUrl', FILTER_VALIDATE_URL)) {
-            // array to php vars
-            extract($_POST);
+        // var flag validation
+        $validation = false;
+        // validation
+        if (isset($_POST['iUrl']) && is_array($_POST['iUrl'])) {
+            // if array has a valid urls
+            $validation = filter_var_array($_POST['iUrl'], FILTER_VALIDATE_URL);
+            // array
+            $url = $iUrl;
+        } else {
+            // if a valid url
+            $validation = filter_input(INPUT_POST, 'iUrl', FILTER_VALIDATE_URL);
             // create array
             $url = array($iUrl);
         }
-        if (is_array($url) && count($url) > 0) {
+        // if data set & url
+        if ($validation && is_array($url) && count($url) > 0) {
+            // collect all urls
             $this->link_array = $url;
         } else {
+            // show error message
             return $this->error_trace("Invalid or corrupt Instagram url request.");
         }
     }
@@ -63,7 +79,7 @@ class Instagram
     public function fetch_data()
     {
         if (!is_array($this->link_array)) {
-            return $this->error_trace("Data not set or invalid");
+            return $this->error_trace("Invalid data request or bad input send...");
         } else {
             foreach ($this->link_array as $index => $link) {
                 $this->insta_connect($link);
@@ -78,9 +94,39 @@ class Instagram
     public function load_view()
     {
         // set json header
-        header('Content-Type: application/javascript');
+        //header('Content-Type: application/javascript');
         // get script
         return $this->data;
+    }
+    public function get_curl_std_options()
+    {
+        $sppof_ip = "" . mt_rand(0, 255) . "." . mt_rand(0, 255) . "." . mt_rand(0, 255) . "." . mt_rand(0, 255);
+        // add additional curl options here
+        $std_options = array(
+            // return web page
+            CURLOPT_RETURNTRANSFER => true,
+            // don't return headers
+            CURLOPT_HEADER         => false,
+            // follow redirects
+            CURLOPT_FOLLOWLOCATION => true,
+            // handle all encodings
+            CURLOPT_ENCODING       => "",
+            // set referer on redirect
+            CURLOPT_AUTOREFERER    => true,
+            // timeout on connect
+            CURLOPT_CONNECTTIMEOUT => 120,
+            // timeout on response
+            CURLOPT_TIMEOUT        => 120,
+            // stop after 10 redirects
+            CURLOPT_MAXREDIRS      => 10,
+            // Disabled SSL Cert checks
+            CURLOPT_SSL_VERIFYPEER => false,
+            // user agent be present in the request
+            CURLOPT_USERAGENT      => 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13',
+            // set fake ip address
+            CURLOPT_HTTPHEADER     => array("REMOTE_ADDR: $sppof_ip", "HTTP_X_FORWARDED_FOR: $sppof_ip")
+        );
+        return $std_options;
     }
     /**
      * [insta_connect description]
@@ -88,24 +134,31 @@ class Instagram
      */
     public function insta_connect($link, $loop = false)
     {
+        $source = null;
         // get script json data
         $first_set_pattern = "/<script[^>](.*)_sharedData(.*)<\/script>/";
         // replacement string
         $get_json_data_pattern = '/(?i)<script[[:space:]]+type="text\/javascript"(.*?)>([^\a]+?)<\/script>/si';
         // check allow_url_fopen settings
-        if (ini_get('allow_url_fopen')) {
+        if (ini_get('allow_url_fopen') && extension_loaded('openssl')) {
             // get source html data
             $source = @file_get_contents($link);
+        }
+        // make sure cURL enable
+        elseif (function_exists('curl_version')) {
+            // execute multi curl
+            $parallelcurl = new ParallelCurl(10);
+            // set curl option
+            $parallelcurl->setOptions($this->get_curl_std_options());
+            // send link and get response by callback
+            $parallelcurl->startRequest($link, array($this, 'get_request_info'));
+            // get response
+            $parallelcurl->finishAllRequests();
+            // store html scrap data in class property
+            $source = $this->data_html;
         } else {
-            // get source html data by using cURL
-            $source = $this->curl_get_contents($link);
-            // check return data, if no error
-            if ($source['error_no'] == '0') {
-                $source = $source['content'];
-            } else {
-                // cURL error message
-                return $this->error_trace($source['error_message']);
-            }
+            // show error
+            $this->error_trace("You must enable Curl or allow_url_fopen & openssl to use this application");
         }
         // if source get
         if ($source) {
@@ -119,8 +172,13 @@ class Instagram
                 $js2php_array = json_decode(preg_replace('/(window\.\_sharedData \=|\;)/', '', $array_string[2]), true);
                 // build result array, you have to manage html view by array
                 $this->data = $this->build_useful_array($js2php_array);
+            }
+            // check if no error or 404 page
+            else if (strpos($array_string[2], '"entry_data": {}') !== false) {
+                // return error
+                return $this->error_trace("Invalid or corrupt Instagram url: " . $link);
             } else {
-                // return script directly
+                // return script directly in response
                 $this->data = $array_string[2];
             }
         } else {
@@ -128,35 +186,13 @@ class Instagram
         }
     }
     /**
-     * file_get_contents fallback method
-     * @param  [type] $url [description]
-     * @return [type]      [description]
+     * [get_request_info description]
+     * @param  [type] $data [description]
+     * @return [type]       [description]
      */
-    public function curl_get_contents($url)
+    public function get_request_info($data)
     {
-        $options = array(
-            CURLOPT_RETURNTRANSFER => true, // return web page
-            CURLOPT_HEADER         => false, // don't return headers
-            CURLOPT_FOLLOWLOCATION => true, // follow redirects
-            CURLOPT_ENCODING       => "", // handle all encodings
-            CURLOPT_USERAGENT      => "spider", // who am i
-            CURLOPT_AUTOREFERER    => true, // set referer on redirect
-            CURLOPT_CONNECTTIMEOUT => 120, // timeout on connect
-            CURLOPT_TIMEOUT        => 120, // timeout on response
-            CURLOPT_MAXREDIRS      => 10, // stop after 10 redirects
-            CURLOPT_SSL_VERIFYPEER => false // Disabled SSL Cert checks
-        );
-        $ch = curl_init($url);
-        curl_setopt_array($ch, $options);
-        $content = curl_exec($ch);
-        $err     = curl_errno($ch);
-        $errmsg  = curl_error($ch);
-        $header  = curl_getinfo($ch);
-        curl_close($ch);
-        $header['error_no']      = $err;
-        $header['error_message'] = $errmsg;
-        $header['content']       = $content;
-        return $header;
+        return $this->data_html = $data;
     }
     /**
      * Build the array data from json respond

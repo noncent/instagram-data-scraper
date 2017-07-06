@@ -44,11 +44,11 @@ function assets($path)
 function render_template()
 {
     $pages =
-        array(
-        Template_Path . 'Base.header.php',
-        Template_Path . 'Base.menu.php',
-        View_Path . 'Content.php',
-        Template_Path . 'Base.footer.php'
+    array(
+        TEMPLATE_PATH   . 'Base.header.php',
+        TEMPLATE_PATH   . 'Base.menu.php',
+        VIEW_PATH       . 'Content.php',
+        TEMPLATE_PATH   . 'Base.footer.php'
     );
     foreach ($pages as $i => $page) {
         require_once $page;
@@ -58,7 +58,7 @@ function render_template()
  * Check if Server Supports htaccess
  * @return boolean [description]
  */
-function is_hraccess_enable()
+function is_htaccess_enable()
 {
     // check if mode re_write enabled or not
     if (!in_array('mod_rewrite', apache_get_modules()) || !isset($_SERVER['HTACCESS'])) {
