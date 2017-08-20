@@ -16,6 +16,8 @@
  */
 // jQuery alias
 $ = jQuery;
+// check if internet connection enable
+is_online = window.navigator.onLine;
 // jQuery document object
 var $document = $(document);
 // on page load hide indicator
@@ -447,6 +449,11 @@ $(document).ready(function() {
     $btnStartNow.bind('click', function(e) {
         // stop default action
         e.preventDefault();
+        // check internet connections
+        if(!is_online){
+            alert('Please enable Internet Connection. You are off-line');
+            return;
+        }
         // total no of urls count
         totalRequestUrl = $("input[name='iUrl[]']:visible").length;
         // update top notification "Total Instagram Links"
