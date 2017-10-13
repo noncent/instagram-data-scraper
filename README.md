@@ -1,3 +1,17 @@
+## Bingo!!! Instagram-Super-Scraper V 2.5 coming soon (7 days left)
+
+## What is in new Super Scraper?
+> Now you can Search #Hashtags and @UserAccounts simultaneously - New Feauture
+> Searching Keyword added - New Feature
+> Keywords Analytics - New Feature
+> Top Posts - New Feature
+> Top Post Comments - New Feature
+> Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
+
+## Screenshot of New 2.5 release:
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/assets/images/new-screen-app.png)
+
+
 ## Instagram-Super-Scraper V 2.1
 
 Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
