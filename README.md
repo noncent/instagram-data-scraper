@@ -13,7 +13,7 @@
 > Download in Excel available
 
 ## Screenshot of New 2.5 released:
-![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/core/images/new-screen-app.png)
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/new-screen-app.png)
 
 
 ## Instagram-Super-Scraper V 2.1
@@ -40,7 +40,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ## Screenshot
 
-![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/core/images/screen-app.png)
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/screen-app.png)
 
 
 ## Development
