@@ -1,15 +1,19 @@
-## Bingo!!! Instagram-Super-Scraper V 2.5 coming soon (7 days left)
+## Bingo!!! Instagram-Super-Scraper V 2.5 Now Available :)
 
 ## What is in new Super Scraper?
-> Now you can Search #Hashtags and @UserAccounts simultaneously - New Feauture
+> Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
 > Searching Keyword added - New Feature
 > Keywords Analytics - New Feature
 > Top Posts - New Feature
 > Top Post Comments - New Feature
 > Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
+> Pure html file to make easy template to use in PHP or ASP or any language.
+> Search tips: '#' to search Hash tags and '@' to search account information
+> Use 'Space' to search multiple hash tags and accounts
+> Download in Excel available
 
-## Screenshot of New 2.5 release:
-![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/assets/images/new-screen-app.png)
+## Screenshot of New 2.5 released:
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/core/images/new-screen-app.png)
 
 
 ## Instagram-Super-Scraper V 2.1
@@ -36,7 +40,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ## Screenshot
 
-![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/assets/images/screen-app.png)
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/Public/core/images/screen-app.png)
 
 
 ## Development
@@ -83,6 +87,18 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 - 11- Updated Content
 - 12- Add MultiCurl feature [Thanks to @Pete Warden][https://github.com/petewarden/ParallelCurl]
 - 13- Added Error Handling
+
+> Committed repo change code version 2.5
+- Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
+- Searching Keyword added - New Feature
+- Keywords Analytics - New Feature
+- Top Posts - New Feature
+- Top Post Comments - New Feature
+- Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
+- Pure html file to make easy template to use in PHP or ASP or any language.
+- Search tips: '#' to search Hash tags and '@' to search account information
+- Use 'Space' to search multiple hash tags and accounts
+- Download in Excel available
 `
 
 Feel free to use and enjoy!! & Yes! all feedbacks, enhancement are most welcome... 
@@ -91,7 +107,7 @@ Feel free to use and enjoy!! & Yes! all feedbacks, enhancement are most welcome.
 The application is provided free of cost and for learning purpose that how we can scrape a website html source code. It not intended to harm anyone or
 any illegal use. Kindly, respect user's privacy and others efforts. Do not try to intent break something. The World is Beautiful More Then We thought :)
 
-## Next Buld Development:
-#### (Working on next build - Search, Filter, Location with Facebook, RSS & Twitter)
+## Next Build Development:
+#### (Working on next build - Location with Facebook, RSS & Twitter)
 
 Thank you all :) :|
