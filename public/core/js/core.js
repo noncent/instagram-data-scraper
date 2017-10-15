@@ -572,7 +572,7 @@ $document.ready(function() {
         // export to excel
         var elData = fnExcelReport(data);
         // create download button and trigger
-        _this.attr('download', 'ExcelExport' + new Date().getTime() + '.xls').attr('href', elData).attr('target', '_blank');
+        _this.attr('download', 'ExcelExport-' + new Date().getTime() + '.xls').attr('href', elData).attr('target', '_blank');
     });
     /**
      * ============================================================================================
