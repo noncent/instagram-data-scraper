@@ -3,7 +3,7 @@
 ## What is in new Super Scraper?
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
 - Searching Keyword added - New Feature
-- Keywords Analytics - New Feature
+- Keywords Analytic s - New Feature
 - Top Posts - New Feature
 - Top Post Comments - New Feature
 - Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
@@ -101,7 +101,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 - Download in Excel available
 `
 
-Feel free to use and enjoy!! & Yes! all feedbacks, enhancement are most welcome... 
+Feel free to use and enjoy!! & Yes! all feedback's, enhancement are most welcome... 
 
 ## Request:
 The application is provided free of cost and for learning purpose that how we can scrape a website html source code. It not intended to harm anyone or
