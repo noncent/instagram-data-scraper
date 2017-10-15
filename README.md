@@ -1,16 +1,16 @@
 ## Bingo!!! Instagram-Super-Scraper V 2.5 Now Available :)
 
 ## What is in new Super Scraper?
-> Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
-> Searching Keyword added - New Feature
-> Keywords Analytics - New Feature
-> Top Posts - New Feature
-> Top Post Comments - New Feature
-> Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
-> Pure html file to make easy template to use in PHP or ASP or any language.
-> Search tips: '#' to search Hash tags and '@' to search account information
-> Use 'Space' to search multiple hash tags and accounts
-> Download in Excel available
+- Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
+- Searching Keyword added - New Feature
+- Keywords Analytics - New Feature
+- Top Posts - New Feature
+- Top Post Comments - New Feature
+- Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
+- Pure html file to make easy template to use in PHP or ASP or any language.
+- Search tips: '#' to search Hash tags and '@' to search account information
+- Use 'Space' to search multiple hash tags and accounts
+- Download in Excel available
 
 ## Screenshot of New 2.5 released:
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/new-screen-app.png)
