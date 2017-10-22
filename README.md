@@ -1,6 +1,6 @@
-## Bingo!!! Instagram-Super-Scraper V 2.5 Now Available :)
+## Bingo!!! Instagram-Super-Scraper V 2.5 (Dev) Now Available :)
 
-## What is in new Super Scraper?
+## What is in new Super Scraper (Dev)?
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
 - Searching Keyword added - New Feature
 - Keywords Analytic s - New Feature
@@ -12,8 +12,87 @@
 - Use 'Space' to search multiple hash tags and accounts
 - Download in Excel available
 
-## Screenshot of New 2.5 released:
+## Screenshot of New 2.5 (Dev) released:
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/new-screen-app.png)
+
+
+## Words for Developers:
+- Instagram Super Scraper can fetch #hashtag likes, views, top posts (10), comments, keywords count.
+- You can set N Depth Level Search by editing JavaScript code, currently it's 4 level see. 'this.maxRequestNo = 4;' in core.js file. The depth control currently set for only keyword Search, Account Search is still open without any limit, but in future you may see Depth Controller for Account Search too.
+- You may have Depth Search Controller in future release.
+- Instagram Scraper doesn't follow any Standard API Rules (Because it's POC/Demo purpose only). If you thinking to make this as Commercial the Have OWN INSTAGRAM VALID API ACCESS, MODIFY THE REQUEST PART & ENJOY!
+- Currently Instagram Scraper works on Purely Scrape Method, there is no API implemented. It's open some Instagram link which returns JSON data and then application creating view by business logics. 
+- The Instagram links are uncertain and may change any time so Please don't depend on them and have VALID INSTAGRAM API to BUILD APPLICATION. Below are some examples:
+- Simple Application Flow:
+
+> (A) - User Input > Account or Hashtag > Request Link > JSON Response > Make Result
+> (B) - (A) -> JSON Response -> If Next Page or Has Next Page > User Input > Account or Hashtag > Request Link > JSON Response > Make Result
+
+## Data available in Super Scraper
+
+1 - Account information - N Level Search
+    - User Biography
+    - User Followers Counts
+    - User Followings Count
+    - User Posts Count
+    - User Likes Count
+    - User Comments Count
+    - User Views Count
+
+2 - Search information - 4 Level Search
+
+    - Unique Keyword Used and Count
+    - No Of Posts by Hashtags
+    - No Of Likes by Hashtags
+    - No Of Comments by Hashtag
+    - Top 10 Posts, Comments and Likes by Hashtag
+    - Keyword summery, how many times a word used in Posts
+
+
+## Instagram JSON Response Endpoints & Parameters:
+
+```php
+
+/**
+ * Instagram links to get JSON data
+ * @var array
+ */
+
+* Next-ID = JSON Response page_info > has_next_page > end_cursor
+
+public $endpoint = array(
+    // returns an user information - first set - html data
+    'account'                         => 'https://www.instagram.com/{user}',
+
+    // returns an user information - next set - html data until has_next_page = 0 or null or false
+    'account_next_call'               => 'https://www.instagram.com/{user}/?max_id={max_id}',
+
+    // returns an user account information - first set - in json format
+    'account_json'                    => 'https://www.instagram.com/{user}/?__a=1',
+
+    // returns an user account information - next set -in json format until has_next_page = 0 or null or false
+    'account_json_next_call'          => 'https://www.instagram.com/{user}/?__a=1&max_id={max_id}',
+
+    // returns json data for hashtag search or keyword search in json format - first set
+    'search_tags_json'                => 'https://www.instagram.com/explore/tags/{tag}/?__a=1',
+
+    // returns json data for hashtag search or keyword search in json format - next set until has_next_page = 0 or null or false
+    'search_tags_json_next_call'      => 'https://www.instagram.com/explore/tags/{tag}/?__a=1&max_id={max_id}',
+
+    // get all available hashtag or keyword or account name list, e.g. Instagram Search Box Auto complete list
+    'search_all_tags_json'            => 'https://www.instagram.com/web/search/topsearch/?context=blended&query={keyword}&__a=1',
+
+    // send tag code and get all user related information
+    'search_username_by_tagcode_json' => 'https://www.instagram.com/p/{code}/?tagged={tag}&__a=1',
+);
+
+
+```
+
+## For your application 
+
+Use PHP Class, HTML & Core.js to tweak as per your requirement.
+
 
 
 ## Instagram-Super-Scraper V 2.1
