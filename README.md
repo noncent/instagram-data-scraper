@@ -31,6 +31,7 @@
 ## Data available in Super Scraper
 
 1 - Account information - N Level Search
+
     - User Biography
     - User Followers Counts
     - User Followings Count
