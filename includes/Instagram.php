@@ -180,7 +180,7 @@ class Instagram
             // execute multi curl
             $parallelcurl = new \ParallelCurl();
             // set curl option
-            $parallelcurl->setOptions($this->get_curl_std_options());
+            $parallelcurl->setOptions($this->cUrlOptionHandler());
             // send link and get response by callback
             $parallelcurl->startRequest($this->users_input, function ($data) {
                 // set response data
