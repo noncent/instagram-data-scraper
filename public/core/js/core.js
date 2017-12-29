@@ -12,7 +12,7 @@
  * | )  \  || (____/\| (____/\| ) \ \__| )   ( ||\_)  )    /\____) |___) (___| )  \  || (___) || )   ( |
  * |/    )_)(_______/(_______/|/   \__/|/     \|(____/     \_______)\_______/|/    )_)(_______)|/     \|
  *
- * 
+ *
  * This is global JavaScript file
  *
  * This file contains all global level variable and function
@@ -22,8 +22,8 @@
  *
  * The superScraper is global variable to get and set JavaScript Application Settings
  *
- * @todo:// Code Clean up, Minification & Optimization ... 
- * 
+ * @todo:// Code Clean up, Minification & Optimization ...
+ *
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
 // jQuery alias
@@ -60,10 +60,14 @@ var booClose = $(".close");
 var keyContainer = ["#digitaslbi"];
 // counter
 var currentIndex = 0;
+// get account max-min setting
+var chkOpt = $("input[name='infoopt']:checked").val();
 // Config Object Settings
 var Config = {
     // current search action
     action: 'account',
+    // get minimum (Link, Biography, Followers, Following) or maximum account information
+    infoFullMin: chkOpt,
     // ajax url
     urlRequest: "includes/AjaxServices.php",
     // user internet connection status
@@ -120,7 +124,7 @@ var _l = function(data_object_array) {
         console.log(data_object_array);
     }
 };
-// global aja error handling 
+// global aja error handling
 $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
     errStr = '';
     errStr += '<div class="alert alert-danger alert-dismissable">';
@@ -186,6 +190,7 @@ var Instagram = function() {
     this.tableContentWrapper = $("#search-account-table.table-striped tbody");
     this.txtIndicator = $('.txt-progress');
     this.sendRequestUrl = Config.getItem('urlRequest');
+    this.infoFullMin = Config.getItem('infoFullMin');
 };
 /**
  * Get User's account information from
@@ -205,58 +210,72 @@ Instagram.prototype.setAccount = function() {
         this.info.Following = this.InstaJSON.user.follows.count;
         this.info.AccountHref = this.urlInstagram + '/' + this.InstaJSON.user.username;
     }
-    // show label
-    var post_index = Math.ceil(this.info.Posts / 12);
-    this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + post_index + ", " + this.info.FullName);
-    this.txtProgressState = Math.ceil(this.currentIndexPost * 100) / post_index;
-    // +++++++++++++++++++++++++++++++++++
-    // get users social data from json
-    // +++++++++++++++++++++++++++++++++++
-    // collectors empty arrays
-    var Nodes = this.InstaJSON.user.media.nodes,
-        likes = [],
-        comments = [],
-        views = [],
-        likes_sum = 0,
-        comments_sum = 0,
-        views_sum = 0;
-    // setters
-    $.each(Nodes, function(index, node) {
-        likes.push(node.likes.count);
-        comments.push(node.comments.count);
-        views.push((node.video_views) ? node.video_views : 0);
-    });
-    // filters and sum, likes
-    $.each(likes, function() {
-        likes_sum += parseInt(this) || 0;
-    });
-    // comments
-    $.each(comments, function() {
-        comments_sum += parseInt(this) || 0;
-    });
-    // video views
-    $.each(views, function() {
-        views_sum += parseInt(this) || 0;
-    });
-    // set all values of sum
-    if (this.isSearchingForNext === false) {
-        this.info.TotalLikes = likes_sum;
-        this.info.TotalComments = comments_sum;
-        this.info.TotalViews = views_sum;
-    } else {
-        // add in previous values
-        this.info.TotalLikes = parseInt(this.info.TotalLikes) + likes_sum;
-        this.info.TotalComments = parseInt(this.info.TotalComments) + comments_sum;
-        this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
+    // check if information request is full or minimum
+    if (this.infoFullMin != 'min') {
+
+        // show label
+        var post_index = Math.ceil(this.info.Posts / 12);
+        this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + post_index + ", " + this.info.FullName);
+        this.txtProgressState = Math.ceil(this.currentIndexPost * 100) / post_index;
+        // +++++++++++++++++++++++++++++++++++
+        // get users social data from json
+        // +++++++++++++++++++++++++++++++++++
+        // collectors empty arrays
+        var Nodes = this.InstaJSON.user.media.nodes,
+            likes = [],
+            comments = [],
+            views = [],
+            likes_sum = 0,
+            comments_sum = 0,
+            views_sum = 0;
+        // setters
+        $.each(Nodes, function(index, node) {
+            likes.push(node.likes.count);
+            comments.push(node.comments.count);
+            views.push((node.video_views) ? node.video_views : 0);
+        });
+        // filters and sum, likes
+        $.each(likes, function() {
+            likes_sum += parseInt(this) || 0;
+        });
+        // comments
+        $.each(comments, function() {
+            comments_sum += parseInt(this) || 0;
+        });
+        // video views
+        $.each(views, function() {
+            views_sum += parseInt(this) || 0;
+        });
+        // set all values of sum
+        if (this.isSearchingForNext === false) {
+            this.info.TotalLikes = likes_sum;
+            this.info.TotalComments = comments_sum;
+            this.info.TotalViews = views_sum;
+        } else {
+            // add in previous values
+            this.info.TotalLikes = parseInt(this.info.TotalLikes) + likes_sum;
+            this.info.TotalComments = parseInt(this.info.TotalComments) + comments_sum;
+            this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
+        }
+        // check if next id available to get next result set
+        if (this.InstaJSON.user.media.page_info.has_next_page === true) {
+            this.urlInstagramNext = Nodes[Nodes.length - 1].id;
+            this.currentIndexPost += 1;
+            this.isSearchingForNext = true;
+        } else {
+            this.currentIndexPost = 1;
+            this.isSearchingForNext = false;
+        }
     }
-    // check if next id available to get next result set
-    if (this.InstaJSON.user.media.page_info.has_next_page === true) {
-        this.urlInstagramNext = Nodes[Nodes.length - 1].id;
-        this.currentIndexPost += 1;
-        this.isSearchingForNext = true;
-    } else {
-        this.currentIndexPost = 1;
-        this.isSearchingForNext = false;
+    // safe values set fall-back values
+    if (typeof this.info.TotalLikes == 'undefined') {
+        this.info.TotalLikes = 0;
+    }
+    if (typeof this.info.TotalComments == 'undefined') {
+        this.info.TotalComments = 0;
+    }
+    if (typeof this.info.TotalViews == 'undefined') {
+        this.info.TotalViews = 0;
     }
 };
 /**
@@ -365,7 +384,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
             $this.setAccount();
             // if next result set found with max id
             if ($this.isSearchingForNext === true) {
-                // next ajax call                
+                // next ajax call
                 var _send_payload = {
                     // send user name with loop next request
                     keyword: $this.info.UserName,
@@ -417,7 +436,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
  * | )  \  || (____/\| (____/\| ) \ \__| )   ( ||\_)  )    /\____) |___) (___| )  \  || (___) || )   ( |
  * |/    )_)(_______/(_______/|/   \__/|/     \|(____/     \_______)\_______/|/    )_)(_______)|/     \|
  *
- * 
+ *
  * This is global JavaScript file
  *
  * This file contains all global level variable and function
@@ -426,10 +445,16 @@ Instagram.prototype.initNow = function(link, _send_payload) {
  * Also this file contains all global level settings variable too
  *
  * The superScraper is global variable to get and set JavaScript Application Settings
- * 
+ *
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
 $document.ready(function() {
+
+    $("input[name='infoopt']").on('change', function() {
+        chkOpt = $(this).val();
+        Config.setItem('infoFullMin', chkOpt);
+    });
+
     /**
      * ============================================================================================
      */
@@ -977,7 +1002,7 @@ $document.ready(function() {
             _self.like += parseInt(val.likes.count) || 0;
             // collect all keywords
             _self.findHashtags(val.caption).forEach(function(hashtag) {
-                //if(_self.filterKeywords.indexOf(hashtag) === -1){          
+                //if(_self.filterKeywords.indexOf(hashtag) === -1){
                 _self.filterKeywords.push(hashtag);
                 //}
             }, this);
@@ -1003,7 +1028,7 @@ $document.ready(function() {
             _self.like += parseInt(val.likes.count) || 0;
             // collect all keywords
             _self.findHashtags(val.caption).forEach(function(hashtag) {
-                //if(_self.filterKeywords.indexOf(hashtag) === -1){          
+                //if(_self.filterKeywords.indexOf(hashtag) === -1){
                 _self.filterKeywords.push(hashtag);
                 //}
             }, this);

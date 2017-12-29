@@ -53,7 +53,7 @@ if (isset($_REQUEST['request_action'])) {
     $request_action = 'search_info';
 }
 
-// condition for account infor
+// condition for account info
 if ($request_action == 'search_account') {
     // echo output
     echo $instagram->insta_account();
