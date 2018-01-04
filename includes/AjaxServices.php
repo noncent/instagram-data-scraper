@@ -10,9 +10,9 @@
 |
  */
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(0);
 
 /*
 |--------------------------------------------------------------------------
@@ -50,11 +50,11 @@ $instagram = new InstagramWrapper();
 if (isset($_REQUEST['request_action'])) {
     extract($_REQUEST);
 } else {
-    $request_action = 'search_info';
+    $request_action = 'pull_hashtag';
 }
 
 // condition for account info
-if ($request_action == 'search_account') {
+if ($request_action == 'pull_account') {
     // echo output
     echo $instagram->insta_account();
 }
@@ -62,3 +62,11 @@ if ($request_action == 'search_account') {
 else {
     echo $instagram->insta_search();
 }
+
+/**
+ * Debug JSON Data Test
+ * @var [type]
+ */
+# $json = file_get_contents('data.json');
+# header('Content-Type: application/javascript');
+# echo $json;

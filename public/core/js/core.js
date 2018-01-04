@@ -45,7 +45,7 @@ var currentMasterIndex = 1;
 // Application starting progress value
 var currentMasterProgress = 0;
 // App debug flag
-var logInfo = true;
+var logInfo = false;
 // Search Flag
 var isFilter = false;
 // htaccess check
@@ -212,7 +212,6 @@ Instagram.prototype.setAccount = function() {
     }
     // check if information request is full or minimum
     if (this.infoFullMin != 'min') {
-
         // show label
         var post_index = Math.ceil(this.info.Posts / 12);
         this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + post_index + ", " + this.info.FullName);
@@ -346,7 +345,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
     if (!_send_payload) {
         _send_payload = {
             iUrl: link,
-            request_action: 'search_account'
+            request_action: 'pull_account'
         };
     }
     // you said promise
@@ -389,7 +388,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
                     // send user name with loop next request
                     keyword: $this.info.UserName,
                     // request filter
-                    request_action: 'search_account',
+                    request_action: 'pull_account',
                     // next request id
                     max_id: $this.urlInstagramNext
                 };
@@ -449,12 +448,10 @@ Instagram.prototype.initNow = function(link, _send_payload) {
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
 $document.ready(function() {
-
     $("input[name='infoopt']").on('change', function() {
         chkOpt = $(this).val();
         Config.setItem('infoFullMin', chkOpt);
     });
-
     /**
      * ============================================================================================
      */
@@ -843,7 +840,7 @@ $document.ready(function() {
         this.maxRequestNo = 4;
         this.requestRecursiveCycle = true;
         this.limitRequest = 0;
-        this.action = option.action ? option.action : 'search_info';
+        this.action = option.action ? option.action : 'pull_hashtag';
         // return self object
         return this;
     };
@@ -876,15 +873,16 @@ $document.ready(function() {
             // json in to local var
             _self.dataJson = json;
             // if next id present in json
-            if (_self.dataJson.tag.media.page_info.has_next_page === true) {
+            if (_self.dataJson.graphql.hashtag.edge_hashtag_to_media.page_info.has_next_page === true) {
                 // set next flag true
                 _self.isNextOn = true;
                 // get max or next id for next request
-                _self.nextId = _self.dataJson.tag.media.page_info.end_cursor;
+                _self.nextId = _self.dataJson.graphql.hashtag.edge_hashtag_to_media.page_info.end_cursor;
             } else {
                 // no next request
                 _self.isNextOn = false;
             }
+            _l(json);
             // parse the json data
             _self.buildMediaPost(json);
             // parse most popular posts, only for once
@@ -985,23 +983,27 @@ $document.ready(function() {
     InstagramSearch.prototype.buildMediaPost = function(json) {
         var _self = this;
         // tag name
-        _self.name = json.tag.name;
+        _self.name = json.graphql.hashtag.name;
         // no of total posts
-        _self.count = json.tag.media.count;
+        _self.count = json.graphql.hashtag.edge_hashtag_to_media.count;
         // sum of all posts on each click
         _self.sumOfCount += parseInt(_self.count) || 0;
         // get result media
-        $.each(json.tag.media.nodes, function(index, val) {
+        $.each(json.graphql.hashtag.edge_hashtag_to_media.edges, function(index, val) {
             // image path
-            _self.src = val.thumbnail_src;
+            _self.src = val.node.thumbnail_src;
             // post text
-            _self.caption = val.caption;
+            _self.caption = 'N/A';
+            // check if caption exists
+            if(val.node.edge_media_to_caption.edges.length){
+                _self.caption = val.node.edge_media_to_caption.edges[0].node.text;
+            }                
             // comment text
-            _self.comment += parseInt(val.comments.count) || 0;
+            _self.comment += parseInt(val.node.edge_media_to_comment.count) || 0;
             // sum of like
-            _self.like += parseInt(val.likes.count) || 0;
+            _self.like += parseInt(val.node.edge_liked_by.count) || 0;
             // collect all keywords
-            _self.findHashtags(val.caption).forEach(function(hashtag) {
+            _self.findHashtags(_self.caption).forEach(function(hashtag) {
                 //if(_self.filterKeywords.indexOf(hashtag) === -1){
                 _self.filterKeywords.push(hashtag);
                 //}
@@ -1015,46 +1017,50 @@ $document.ready(function() {
     InstagramSearch.prototype.buildTopPostMedia = function(json) {
         var _self = this;
         // get result top
-        $.each(json.tag.top_posts.nodes, function(index, val) {
+        $.each(json.graphql.hashtag.edge_hashtag_to_top_posts.edges, function(index, val) {
             // table row no
             var sr = index + 1;
             // image path
-            _self.src = val.thumbnail_src;
+            _self.src = val.node.thumbnail_src;
             // post text
-            _self.caption = val.caption;
+            _self.caption = 'N/A';
+            // check if caption exists
+            if(val.node.edge_media_to_caption.edges.length){
+                _self.caption = val.node.edge_media_to_caption.edges[0].node.text;
+            }
             // comment text
-            _self.comment += parseInt(val.comments.count) || 0;
+            _self.comment += parseInt(val.node.edge_media_to_comment.count) || 0;
             // sum of like
-            _self.like += parseInt(val.likes.count) || 0;
+            _self.like += parseInt(val.node.edge_liked_by.count) || 0;
             // collect all keywords
-            _self.findHashtags(val.caption).forEach(function(hashtag) {
+            _self.findHashtags(_self.caption).forEach(function(hashtag) {
                 //if(_self.filterKeywords.indexOf(hashtag) === -1){
                 _self.filterKeywords.push(hashtag);
                 //}
             }, this);
             // is video
-            if (val.is_video === true) {
+            if (val.node.is_video === true) {
                 // img preview gallery
                 _self.imgSrcTemplate.push({
                     img_src: _self.src,
-                    likes_img: val.likes.count,
-                    comments_img: val.comments.count,
-                    video_views: parseInt(val.video_views) || 0
+                    likes_img: val.node.edge_liked_by.count,
+                    comments_img: val.node.edge_media_to_comment.count,
+                    video_views: parseInt(val.node.video_view_count) || 0
                 });
             } else {
                 // img preview gallery
                 _self.imgSrcTemplate.push({
-                    img_src: val.thumbnail_src,
-                    likes_img: val.likes.count,
-                    comments_img: val.comments.count
+                    img_src: val.node.thumbnail_src,
+                    likes_img: val.node.edge_liked_by.count,
+                    comments_img: val.node.edge_media_to_comment.count
                 });
             }
             // build table summer
             _self.tblSummery.push({
                 no: sr,
-                posts: val.caption,
-                likes_count: val.likes.count,
-                comments_count: val.comments.count
+                posts: _self.caption,
+                likes_count: val.node.edge_liked_by.count,
+                comments_count: val.node.edge_media_to_comment.count
             });
         });
     };
@@ -1149,7 +1155,7 @@ $document.ready(function() {
                         container: $(Config.getItem('searchFormChartContainer')),
                         keyword: val.replace("#", "") || "digitaslbi",
                         template: $(Config.getItem('chartTemplate')).html(),
-                        action: 'search_info',
+                        action: 'pull_hashtag',
                         callback: showChart
                     };
                     // start fetching...
@@ -1175,7 +1181,6 @@ $document.ready(function() {
                     }
                     // request for filter
                     if ($.trim(val)) {
-                        _l(val);
                         val = val.replace(/\@/, '', val);
                         // set filter flag
                         isFilter = true;
@@ -1188,7 +1193,7 @@ $document.ready(function() {
                         // call Instagram object
                         appHandler.initNow(null, {
                             keyword: val,
-                            request_action: 'search_account',
+                            request_action: 'pull_account',
                             next: 'false'
                         }).done(function(data) {
                             if (!appHandler.stateError) {

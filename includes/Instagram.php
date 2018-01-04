@@ -8,7 +8,7 @@ require_once 'ParallelCurl.php';
  * The Instagram Class required open file url & openssl OR Curl
  * if that's requirement doesn't meet, you wont able to run this program
  *
- * @version: 2.2
+ * @version: 2.2.1
  * @build: PHP Class
  * @date: 8 August 2017
  * @author: Neeraj Singh
@@ -40,17 +40,17 @@ class Instagram
     protected $scrap_mode = 'JSON';
     /**
      * Default action request
-     * OPTIONS: search_account|search_info
+     * OPTIONS: pull_account|pull_hashtag
      * @var array
      */
     protected $default_request_action = array(
-        'search_account', 'search_info',
+        'pull_account', 'pull_hashtag',
     );
     /**
      * The request action
      * @var string
      */
-    public $request_action = 'search_account';
+    public $request_action = 'pull_account';
     /**
      * Response for Request
      * @var string
@@ -88,7 +88,7 @@ class Instagram
      * Class constructor function
      * @param string $request_action
      */
-    public function initialize($request_action = 'search_account', $request_data = array())
+    public function initialize($request_action = 'pull_account', $request_data = array())
     {
         // validate request
         if ($this->validateRequestType() === true) {
@@ -123,7 +123,7 @@ class Instagram
     {
         if (1) {
             // check action type & build request url according to request
-            if ($this->request_action === 'search_account') {
+            if ($this->request_action === 'pull_account') {
                 // build request url
                 if (isset($this->users_input['max_id'])) {
                     $this->users_input = str_replace(array('{user}', '{max_id}'), array($this->users_input[$this->input_key], $this->users_input['max_id']), $this->endpoint['account_json_next_call']);
@@ -142,7 +142,7 @@ class Instagram
                     // return response
                     return $this->getInstagramResponse();
                 }
-            } elseif ($this->request_action === 'search_info') {
+            } elseif ($this->request_action === 'pull_hashtag') {
                 // check if hash tag or account name
                 if (trim($this->users_input[$this->input_key])) {
                     // build request url
@@ -183,6 +183,7 @@ class Instagram
         if (ini_get('allow_url_fopen') && extension_loaded('openssl')) {
             // get source html data
             $this->curlResponseData = @file_get_contents($this->users_input);
+            //file_put_contents(time() . '.txt', $this->curlResponseData, FILE_APPEND);
             // pre($http_response_header);
             // check return data status
             if ($this->curlResponseData != false) {
@@ -206,6 +207,7 @@ class Instagram
             });
             // get response
             $parallelcurl->finishAllRequests();
+            //file_put_contents(time() . '.txt', $this->curlResponseData, FILE_APPEND);
             // check return data status
             if ($this->curlResponseData && !$this->curlResponseData) {
                 // return status
@@ -244,7 +246,7 @@ class Instagram
             // if source get check scrape mode
             if ($this->scrap_mode === 'PHP_ARRAY' && !empty($output)) {
                 // if want to PHP array
-                if ($this->request_action === 'search_account') {
+                if ($this->request_action === 'pull_account') {
                     // check empty response
                     if (strpos($output[2], $this->regexPattern['empty_error']) !== false) {
                         // remove JavaScript var from data & build result array, you have to manage html view by array
@@ -255,7 +257,7 @@ class Instagram
                     }
                 }
                 // else if filter on
-                elseif ($this->request_action === 'search_info') {
+                elseif ($this->request_action === 'pull_hashtag') {
                     // build result array, you have to manage html view by array
                     $this->curlResponseData = $this->buildJsonToPhpArray(json_decode($this->curlResponseData, true));
                 } else {
@@ -266,7 +268,7 @@ class Instagram
             // return as JavaScript json
             elseif ($this->scrap_mode === 'JSON' && !empty($output)) {
                 // if wanna json data
-                if ($this->request_action === 'search_account') {
+                if ($this->request_action === 'pull_account') {
                     // check empty response
                     if (strpos($output[2], $this->regexPattern['empty_error']) !== false) {
                         $this->curlResponseData = $output[2];
@@ -276,7 +278,7 @@ class Instagram
                         // url error
                         $this->exitErrorString('url');
                     }
-                } elseif ($this->request_action === 'search_info') {
+                } elseif ($this->request_action === 'pull_hashtag') {
                     // build result array, you have to manage html view by array
                     $this->curlResponseData = str_replace('{source}', $this->curlResponseData, $this->regexPattern['filter_response']);
                 } else {
