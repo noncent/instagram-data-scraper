@@ -1,4 +1,8 @@
-## Bingo!!! Instagram-Super-Scraper V 2.5 (Dev) Now Available :)
+## Bingo!!! Instagram-Super-Scraper V 2.5.1 (Dev) Now Available :)
+
+### Last Updated : 5-Jan-2018
+> Updated code as per new Instagram JSON data structure
+
 
 ## What is in new Super Scraper (Dev)?
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
@@ -12,7 +16,7 @@
 - Use 'Space' to search multiple hash tags and accounts
 - Download in Excel available
 
-## Screenshot of New 2.5 (Dev) released:
+## Screenshot of New 2.5.1 (Dev) released:
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/new-screen-app.png)
 
 
