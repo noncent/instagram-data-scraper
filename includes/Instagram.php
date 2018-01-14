@@ -369,7 +369,7 @@ class Instagram
             CURLOPT_FOLLOWLOCATION => true,
             // handle all encodings
             CURLOPT_ENCODING => "",
-            // set referer on redirect
+            // set referrer on redirect
             CURLOPT_AUTOREFERER => true,
             // timeout on connect
             CURLOPT_CONNECTTIMEOUT => 120,

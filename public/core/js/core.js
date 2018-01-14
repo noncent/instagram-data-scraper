@@ -61,7 +61,7 @@ var keyContainer = ["#digitaslbi"];
 // counter
 var currentIndex = 0;
 // get account max-min setting
-var chkOpt = $("input[name='infoopt']:checked").val();
+var chkOpt = $("input[name='info-toggle']:checked").val();
 // Config Object Settings
 var Config = {
     // current search action
@@ -78,6 +78,8 @@ var Config = {
     txtSearch: '#txtSearch',
     // form input template
     queryFormTemplate: '#query-form-template',
+    // account likes posts
+    accountThumbPopup: '#account-thumbs',
     // Search Details Section
     searchFormContainer: "#search-form-section",
     // Chart Section
@@ -197,6 +199,7 @@ var Instagram = function() {
  * Instagram JSON and set in Object Property
  */
 Instagram.prototype.setAccount = function() {
+    var _this = this;
     // ++++++++++++++++++++++++++++++++++++++
     // get user's personal data from json
     // ++++++++++++++++++++++++++++++++++++++
@@ -209,6 +212,7 @@ Instagram.prototype.setAccount = function() {
         this.info.Followers = this.InstaJSON.user.followed_by.count;
         this.info.Following = this.InstaJSON.user.follows.count;
         this.info.AccountHref = this.urlInstagram + '/' + this.InstaJSON.user.username;
+        this.info.Thumbs = [];
     }
     // check if information request is full or minimum
     if (this.infoFullMin != 'min') {
@@ -229,6 +233,11 @@ Instagram.prototype.setAccount = function() {
             views_sum = 0;
         // setters
         $.each(Nodes, function(index, node) {
+            _this.info.Thumbs.push({
+                'thumb-src': node.thumbnail_resources[0].src,
+                comments : node.comments.count,
+                likes : node.likes.count
+            });
             likes.push(node.likes.count);
             comments.push(node.comments.count);
             views.push((node.video_views) ? node.video_views : 0);
@@ -290,7 +299,7 @@ Instagram.prototype.buildViews = function() {
     row += '<td>' + this.info.Followers + '</td>';
     row += '<td>' + this.info.Following + '</td>';
     row += '<td>' + this.info.Posts + '</td>';
-    row += '<td>' + this.info.TotalLikes + '</td>';
+    row += '<td><a href="#" data-toggle="modal" data-target="#thumb-' + this.info.UserName + '">' + this.info.TotalLikes + '</a></td>';
     row += '<td>' + this.info.TotalComments + '</td>';
     row += '<td>' + this.info.TotalViews + '</td>';
     row += '<td>';
@@ -302,6 +311,17 @@ Instagram.prototype.buildViews = function() {
     row += '</a>';
     row += '</td>';
     row += '</tr>';
+    // form template
+    var template = $(Config.getItem('accountThumbPopup')).html();
+    // optional, speeds up future uses
+    Mustache.parse(template);
+    //console.log(this.info.Thumbs)
+    // set form input with search values
+    rendered = Mustache.render(template, {
+        username: this.info.UserName,
+        'thumb-loop': this.info.Thumbs
+    });
+    this.tableWrapper.after(rendered);
     return row;
 };
 /**
@@ -448,7 +468,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
  * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
 $document.ready(function() {
-    $("input[name='infoopt']").on('change', function() {
+    $("input[name='info-toggle']").on('change', function() {
         chkOpt = $(this).val();
         Config.setItem('infoFullMin', chkOpt);
     });
@@ -463,7 +483,7 @@ $document.ready(function() {
      */
     (function($) {
         $.fn.flash = function(message) {
-            if (typeof message == 'undefined') {
+            if (typeof message === 'undefined') {
                 $('.container.preloader').addClass('hide');
             } else {
                 $('.container.preloader').removeClass('hide').find('.progress-bar.progress-bar-striped').html(message);
@@ -995,9 +1015,9 @@ $document.ready(function() {
             // post text
             _self.caption = 'N/A';
             // check if caption exists
-            if(val.node.edge_media_to_caption.edges.length){
+            if (val.node.edge_media_to_caption.edges.length) {
                 _self.caption = val.node.edge_media_to_caption.edges[0].node.text;
-            }                
+            }
             // comment text
             _self.comment += parseInt(val.node.edge_media_to_comment.count) || 0;
             // sum of like
@@ -1025,7 +1045,7 @@ $document.ready(function() {
             // post text
             _self.caption = 'N/A';
             // check if caption exists
-            if(val.node.edge_media_to_caption.edges.length){
+            if (val.node.edge_media_to_caption.edges.length) {
                 _self.caption = val.node.edge_media_to_caption.edges[0].node.text;
             }
             // comment text
