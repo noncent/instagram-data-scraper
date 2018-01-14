@@ -1,10 +1,9 @@
-## Bingo!!! Instagram-Super-Scraper V 2.5.1 (Dev) Now Available :)
-
-### Last Updated : 5-Jan-2018
-> Updated code as per new Instagram JSON data structure
+## Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 14-Jan-2018
 
 
 ## What is in new Super Scraper (Dev)?
+- All Images in account information (likes)
+- Select Full or Minimum Account information by toggle option
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
 - Searching Keyword added - New Feature
 - Keywords Analytic s - New Feature
@@ -16,7 +15,7 @@
 - Use 'Space' to search multiple hash tags and accounts
 - Download in Excel available
 
-## Screenshot of New 2.5.1 (Dev) released:
+## Screenshot of New 2.5.2 (Dev) released:
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/new-screen-app.png)
 
 
@@ -43,6 +42,7 @@
     - User Likes Count
     - User Comments Count
     - User Views Count
+    - User's Post (Likes)
 
 2 - Search information - 4 Level Search
 
@@ -183,6 +183,12 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 - Search tips: '#' to search Hash tags and '@' to search account information
 - Use 'Space' to search multiple hash tags and accounts
 - Download in Excel available
+
+> Committed repo change code version 2.5.1
+- Min or Full Account Information Toggle Button
+
+> Committed repo change code version 2.5.2
+- Account Information Likes has Post Preview
 `
 
 Feel free to use and enjoy!! & Yes! all feedback's, enhancement are most welcome... 
