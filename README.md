@@ -1,7 +1,7 @@
-## Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 14-Jan-2018
+## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 14-Jan-2018
 
 
-## What is in new Super Scraper (Dev)?
+## :innocent: What is in new Super Scraper (Dev)?
 - All Images in account information (likes)
 - Select Full or Minimum Account information by toggle option
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
