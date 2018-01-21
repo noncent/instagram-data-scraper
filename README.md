@@ -1,6 +1,6 @@
 ## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 14-Jan-2018
 
-##  :see_no_evil: What's Instagram Super Scraper DO?
+##  :see_no_evil: What... Instagram Super Scraper DO?
 
 Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
 related to user e.g. likes, comments, post count, images, likes on images etc... Currently only User Name, Biography, Followers,
