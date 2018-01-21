@@ -1,7 +1,20 @@
 ## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 14-Jan-2018
 
+##  :see_no_evil: What's Instagram Super Scraper DO?
 
-## :innocent: What is in new Super Scraper (Dev)?
+Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
+related to user e.g. likes, comments, post count, images, likes on images etc... Currently only User Name, Biography, Followers,
+Following, Posts, Likes, Comments & Views data in displaying. For other details you have to enable from php script code, Update
+Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';"
+
+jQuery is using to build the Awesome View, to handle each and every request separately. I hope you like this small chunk of code
+> The Instagram Scrapper is a PHP, Html, jQuery Script to get user's data from their Instagram account url.
+> Example: https://www.instagram.com/any-user-name/, You can add any link and can get their Total Likes, Total Posts, Comments etc.
+> You can also get their post images but it's just a POC so you have to change PHP Code. What you need to just decode json string >and parse by PHP arrays... let me know if you like or want improvement.. 
+
+---
+
+## :innocent: What's new in Instagram Super Scraper (ISS) (Dev)?
 - All Images in account information (likes)
 - Select Full or Minimum Account information by toggle option
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
@@ -15,11 +28,14 @@
 - Use 'Space' to search multiple hash tags and accounts
 - Download in Excel available
 
-## Screenshot of New 2.5.2 (Dev) released:
+---
+
+##  :scream_cat: Screenshot of New 2.5.2 (Dev) released:
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/new-screen-app.png)
 
+---
 
-## Words for Developers:
+##  :pencil2: Development Notes:
 - Instagram Super Scraper can fetch #hashtag likes, views, top posts (10), comments, keywords count.
 - You can set N Depth Level Search by editing JavaScript code, currently it's 4 level see. 'this.maxRequestNo = 4;' in core.js file. The depth control currently set for only keyword Search, Account Search is still open without any limit, but in future you may see Depth Controller for Account Search too.
 - You may have Depth Search Controller in future release.
@@ -28,8 +44,13 @@
 - The Instagram links are uncertain and may change any time so Please don't depend on them and have VALID INSTAGRAM API to BUILD APPLICATION. Below are some examples:
 - Simple Application Flow:
 
+> All code is well commented to understand the flow and functionality, if I missed something or
+> any improvement/suggestion you have, kindly let me know.. .... [Read More on Wiki](https://github.com/neerajsinghsonu/Instagram-Data-Scraper/wiki)
+
 > (A) - User Input > Account or Hashtag > Request Link > JSON Response > Make Result
 > (B) - (A) -> JSON Response -> If Next Page or Has Next Page > User Input > Account or Hashtag > Request Link > JSON Response > Make Result
+
+---
 
 ## Data available in Super Scraper
 
@@ -53,6 +74,7 @@
     - Top 10 Posts, Comments and Likes by Hashtag
     - Keyword summery, how many times a word used in Posts
 
+---
 
 ## Instagram JSON Response Endpoints & Parameters:
 
@@ -93,45 +115,15 @@ public $endpoint = array(
 
 
 ```
+---
 
 ## For your application 
 
 Use PHP Class, HTML & Core.js to tweak as per your requirement.
 
-
-
-## Instagram-Super-Scraper V 2.1
-
-Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
-related to user e.g. likes, comments, post count, images, likes on images etc... Currently only User Name, Biography, Followers,
-Following, Posts, Likes, Comments & Views data in displaying. For other details you have to enable from php script code, Update
-Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';"
-
-jQuery is using to build the Awesome View, to handle each and every request separately. I hope you like this small chunk of code
-
-
-## See working demo
-
 You can see a working demo here [Click to See](https://drive.google.com/file/d/0B2Jr4ZrDD_hFbkhLdXRFb0xBQk0/view)
 
-
-## What is Instagram Scraper
-
-> The Instagram Scrapper is a PHP, Html, jQuery Script to get user's data from their Instagram account url.
-> Example: https://www.instagram.com/any-user-name/, You can add any link and can get their Total Likes, Total Posts, Comments etc.
-> You can also get their post images but it's just a POC so you have to change PHP Code. What you need to just decode json string >and parse by PHP arrays... let me know if you like or want improvement.. 
-
-
-## Screenshot
-
-![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/screen-app.png)
-
-
-## Development
-
-> All code is well commented to understand the flow and functionality, if I missed something or
-> any improvement/suggestion you have, kindly let me know.. .... [Read More on Wiki](https://github.com/neerajsinghsonu/Instagram-Data-Scraper/wiki)
-
+---
 
 ## Requirement
 
@@ -153,24 +145,16 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 > C-) Rename dev.htaccess to .htaccess (If you are using windows just rename file dev.htaccess to .htaccess. and window will ignore last dot.. )
 
+---
 
 ## Change logs:
 
-> Committed repo change code version 2.0
-- 1 - Added data file example
-- 2 - Added result php array example
-- 3 - Updated nav bar css
-- 4 - Update js file and css file and minify files
-- 5 - Remove htaccess [re_write apache module] dependencies
-- 6 - Added PHP Code to build PHP array
-- 7 - Some minor UI changes
 
-> Committed repo change code version 2.1
-- 8 - Updated Class Instagram
-- 9-  Updated JavaScript Code
-- 11- Updated Content
-- 12- Add MultiCurl feature [Thanks to @Pete Warden][https://github.com/petewarden/ParallelCurl]
-- 13- Added Error Handling
+> Committed repo change code version 2.5.2
+- Account Information Likes has Post Preview
+
+> Committed repo change code version 2.5.1
+- Min or Full Account Information Toggle Button
 
 > Committed repo change code version 2.5
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
@@ -184,14 +168,24 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 - Use 'Space' to search multiple hash tags and accounts
 - Download in Excel available
 
-> Committed repo change code version 2.5.1
-- Min or Full Account Information Toggle Button
+> Committed repo change code version 2.1
+- 8 - Updated Class Instagram
+- 9-  Updated JavaScript Code
+- 11- Updated Content
+- 12- Add MultiCurl feature [Thanks to @Pete Warden][https://github.com/petewarden/ParallelCurl]
+- 13- Added Error Handling
 
-> Committed repo change code version 2.5.2
-- Account Information Likes has Post Preview
+> Committed repo change code version 2.0
+- 1 - Added data file example
+- 2 - Added result php array example
+- 3 - Updated nav bar css
+- 4 - Update js file and css file and minify files
+- 5 - Remove htaccess [re_write apache module] dependencies
+- 6 - Added PHP Code to build PHP array
+- 7 - Some minor UI changes
 `
 
-Feel free to use and enjoy!! & Yes! all feedback's, enhancement are most welcome... 
+Feel free to use and enjoy!! & Yes! all feedback's, enhancements are most welcome... 
 
 ## Request:
 The application is provided free of cost and for learning purpose that how we can scrape a website html source code. It not intended to harm anyone or
