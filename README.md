@@ -52,7 +52,7 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 
 ---
 
-## Data available in Super Scraper
+##  :package: Data available in Super Scraper
 
 1 - Account information - N Level Search
 
@@ -125,7 +125,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ---
 
-## Requirement
+##  :wrench: Requirement
 
 > Apache version => 2.4
 > PHP version =>5.*
@@ -147,7 +147,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ---
 
-## Change logs:
+##  :chart_with_upwards_trend: Change logs:
 
 
 > Committed repo change code version 2.5.2
