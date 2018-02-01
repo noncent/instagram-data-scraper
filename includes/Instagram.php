@@ -182,7 +182,11 @@ class Instagram
         // check allow_url_fopen settings
         if (ini_get('allow_url_fopen') && extension_loaded('openssl')) {
             // get source html data
-            $this->curlResponseData = @file_get_contents($this->users_input);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $this->users_input);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $this->curlResponseData = curl_exec($ch);
+            curl_close($ch);
             //file_put_contents(time() . '.txt', $this->curlResponseData, FILE_APPEND);
             // pre($http_response_header);
             // check return data status
