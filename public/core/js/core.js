@@ -919,17 +919,34 @@ $document.ready(function() {
      */
     // Check if hash tag Exist
     InstagramSearch.prototype.findHashtags = function findHashtags(searchText) {
-        if (searchText) {
-            var regexp = /\B\#\w\w+\b/g;
-            result = searchText.match(regexp);
-            if (result) {
-                return result;
-            } else {
-                return [];
-            }
-        } else {
+        if (!searchText) {
             return [];
         }
+
+        var hash = '#';
+        var tag = 'a-zÀ-ÖØ-öø-ÿĀ-ɏɓ-ɔɖ-ɗəɛɣɨɯɲʉʋʻ̀-ͯḀ-ỿЀ-ӿԀ-ԧⷠ-ⷿꙀ-֑ꚟ-ֿׁ-ׂׄ-ׇׅא-תװ-״﬒-ﬨשׁ-זּטּ-לּמּנּ-סּףּ-פּצּ-ﭏؐ-ؚؠ-ٟٮ-ۓە-ۜ۞-۪ۨ-ۯۺ-ۼۿݐ-ݿࢠࢢ-ࢬࣤ-ࣾﭐ-ﮱﯓ-ﴽﵐ-ﶏﶒ-ﷇﷰ-ﷻﹰ-ﹴﹶ-ﻼ‌ก-ฺเ-๎ᄀ-ᇿ㄰-ㆅꥠ-꥿가-힯ힰ-퟿ﾡ-ￜァ-ヺー-ヾｦ-ﾟｰＡ-Ｚａ-ｚぁ-ゖ゙-ゞ㐀-䶿一-鿿꜀-뜿띀-렟-﨟〃々〻';
+        var digit = '0-9０-９';
+        var underscore = '_';
+        var regexp = new RegExp(
+          '(?:^|[^' + tag + digit + underscore + ']+)' +
+          '[' + hash + ']' +
+          '(' +
+          '[' + tag + digit + underscore + ']*' +
+          '[' + tag + ']+' +
+          '[' + tag + digit + underscore + ']*' +
+          ')' +
+          '(?![' + hash + tag + digit + underscore + ']+)',
+        'g');
+
+        result = searchText.match(regexp);
+        if (!result) {
+            return [];
+        }
+        res = result.map(function (value) {
+            value = value.trim().split('#');
+            return '#' + value[1];
+        });
+        return res;
     };
     /**
      * ============================================================================================
