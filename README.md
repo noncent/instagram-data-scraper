@@ -1,5 +1,12 @@
 ## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 14-Jan-2018
 
+## 😊 Active Contrbutor (Thanks! a lot ):
+| #  | :) |Member |
+| ------------- | ------------- |-------------|
+| 1  |![Yuzuru Suzuki](https://avatars0.githubusercontent.com/u/1485195?s=120&v=4)|🌟 Yuzuru Suzuki(https://github.com/YuzuruS)|
+
+
+
 ##  :see_no_evil: What... Instagram Super Scraper DO?
 
 Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
