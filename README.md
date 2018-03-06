@@ -1,7 +1,7 @@
-## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 14-Jan-2018
+## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 06-March-2018
 
-## 😊 Active Contrbutor (Thanks! a lot ):
-| #  | :) |Say Hello! |
+## 😊 Active Contrbutor (Thanks! a lot)
+| #  | 📷 |Say Hello! 😇 |
 | ------------- | ------------- |-------------|
 | 1  |![Yuzuru Suzuki](https://avatars0.githubusercontent.com/u/1485195?s=120&v=4)|🌟 Yuzuru Suzuki(https://github.com/YuzuruS)|
 
