@@ -203,77 +203,80 @@ Instagram.prototype.setAccount = function() {
     // ++++++++++++++++++++++++++++++++++++++
     // get user's personal data from json
     // ++++++++++++++++++++++++++++++++++++++
+    this.info = [];
+    this.info.Biography = this.InstaJSON.graphql.user.biography;
+    this.info.UserName = this.InstaJSON.graphql.user.username;
+    this.info.FullName = this.InstaJSON.graphql.user.full_name;
+    this.info.user_id = this.InstaJSON.graphql.user.id,
+    this.info.Posts = this.InstaJSON.graphql.user.edge_owner_to_timeline_media.count;
+    this.info.Followers = this.InstaJSON.graphql.user.edge_followed_by.count;
+    this.info.Following = this.InstaJSON.graphql.user.edge_follow.count;
+    this.info.AccountHref = this.urlInstagram + '/' + this.InstaJSON.graphql.user.username;
+    this.info.Thumbs = [];
+}
+/**
+ * Get User's media information from
+ * Instagram JSON and set in Object Property
+ */
+Instagram.prototype.setMedia = function() {
+    var _this = this;
+    // show label
+    var post_index = Math.ceil(this.info.Posts / 12);
+    this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + post_index + ", " + this.info.FullName);
+    this.txtProgressState = Math.ceil(this.currentIndexPost * 100) / post_index;
+    // +++++++++++++++++++++++++++++++++++
+    // get users social data from json
+    // +++++++++++++++++++++++++++++++++++
+    // collectors empty arrays
+    var Edges = this.InstaJSON.data.user.edge_owner_to_timeline_media.edges,
+        likes = [],
+        comments = [],
+        views = [],
+        likes_sum = 0,
+        comments_sum = 0,
+        views_sum = 0;
+    // setters
+    $.each(Edges, function(index, edge) {
+        _this.info.Thumbs.push({
+            'thumb-src': edge.node.thumbnail_resources[0].src,
+            comments : edge.node.edge_media_to_comment.count,
+            likes : edge.node.edge_media_preview_like.count
+        });
+        likes.push(edge.node.edge_media_preview_like.count);
+        comments.push(edge.node.edge_media_to_comment.count);
+        views.push((edge.node.video_view_count) ? edge.node.video_view_count : 0);
+    });
+    // filters and sum, likes
+    $.each(likes, function() {
+        likes_sum += parseInt(this) || 0;
+    });
+    // comments
+    $.each(comments, function() {
+        comments_sum += parseInt(this) || 0;
+    });
+    // video views
+    $.each(views, function() {
+        views_sum += parseInt(this) || 0;
+    });
+    // set all values of sum
     if (this.isSearchingForNext === false) {
-        this.info = [];
-        this.info.Biography = this.InstaJSON.user.biography;
-        this.info.UserName = this.InstaJSON.user.username;
-        this.info.FullName = this.InstaJSON.user.full_name;
-        this.info.Posts = this.InstaJSON.user.media.count;
-        this.info.Followers = this.InstaJSON.user.followed_by.count;
-        this.info.Following = this.InstaJSON.user.follows.count;
-        this.info.AccountHref = this.urlInstagram + '/' + this.InstaJSON.user.username;
-        this.info.Thumbs = [];
+        this.info.TotalLikes = likes_sum;
+        this.info.TotalComments = comments_sum;
+        this.info.TotalViews = views_sum;
+    } else {
+        // add in previous values
+        this.info.TotalLikes = parseInt(this.info.TotalLikes) + likes_sum;
+        this.info.TotalComments = parseInt(this.info.TotalComments) + comments_sum;
+        this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
     }
-    // check if information request is full or minimum
-    if (this.infoFullMin != 'min') {
-        // show label
-        var post_index = Math.ceil(this.info.Posts / 12);
-        this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + post_index + ", " + this.info.FullName);
-        this.txtProgressState = Math.ceil(this.currentIndexPost * 100) / post_index;
-        // +++++++++++++++++++++++++++++++++++
-        // get users social data from json
-        // +++++++++++++++++++++++++++++++++++
-        // collectors empty arrays
-        var Nodes = this.InstaJSON.user.media.nodes,
-            likes = [],
-            comments = [],
-            views = [],
-            likes_sum = 0,
-            comments_sum = 0,
-            views_sum = 0;
-        // setters
-        $.each(Nodes, function(index, node) {
-            _this.info.Thumbs.push({
-                'thumb-src': node.thumbnail_resources[0].src,
-                comments : node.comments.count,
-                likes : node.likes.count
-            });
-            likes.push(node.likes.count);
-            comments.push(node.comments.count);
-            views.push((node.video_views) ? node.video_views : 0);
-        });
-        // filters and sum, likes
-        $.each(likes, function() {
-            likes_sum += parseInt(this) || 0;
-        });
-        // comments
-        $.each(comments, function() {
-            comments_sum += parseInt(this) || 0;
-        });
-        // video views
-        $.each(views, function() {
-            views_sum += parseInt(this) || 0;
-        });
-        // set all values of sum
-        if (this.isSearchingForNext === false) {
-            this.info.TotalLikes = likes_sum;
-            this.info.TotalComments = comments_sum;
-            this.info.TotalViews = views_sum;
-        } else {
-            // add in previous values
-            this.info.TotalLikes = parseInt(this.info.TotalLikes) + likes_sum;
-            this.info.TotalComments = parseInt(this.info.TotalComments) + comments_sum;
-            this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
-        }
-        // check if next id available to get next result set
-        if (this.InstaJSON.user.media.page_info.has_next_page === true) {
-            this.urlInstagramNext = Nodes[Nodes.length - 1].id;
-            this.currentIndexPost += 1;
-            this.isSearchingForNext = true;
-        } else {
-            this.currentIndexPost = 1;
-            this.isSearchingForNext = false;
-        }
+    // check if next id available to get next result set
+    if (this.InstaJSON.data.user.edge_owner_to_timeline_media.page_info.has_next_page === true) {
+        this.urlInstagramNext = this.InstaJSON.data.user.edge_owner_to_timeline_media.page_info.end_cursor;
+        this.currentIndexPost += 1;
+        this.isSearchingForNext = true;
+    } else {
+        this.currentIndexPost = 1;
+        this.isSearchingForNext = false;
     }
     // safe values set fall-back values
     if (typeof this.info.TotalLikes == 'undefined') {
@@ -361,15 +364,16 @@ Instagram.prototype.eventHandler = function(label, error_class) {
 Instagram.prototype.initNow = function(link, _send_payload) {
     // cache main object
     var $this = this;
+    var send_payload = _send_payload;
     // set default payload object
-    if (!_send_payload) {
-        _send_payload = {
+    if (!send_payload) {
+        send_payload = {
             iUrl: link,
             request_action: 'pull_account'
         };
     }
     // you said promise
-    return $.post($this.sendRequestUrl, _send_payload, function(data, textStatus, xhr) {
+    return $.post($this.sendRequestUrl, send_payload, function(data, textStatus, xhr) {
         // set var counter
         var masterProgress = 0;
         // if any error in ajax response
@@ -388,27 +392,40 @@ Instagram.prototype.initNow = function(link, _send_payload) {
             currentMasterIndex++;
             // break the bone
             return false;
-        } else {
-            // handle success response
-            $this.InstaJSON = window._sharedData.entry_data.ProfilePage.shift();
+        }
+
+        // handle success response
+        $this.InstaJSON = window._sharedData.entry_data.ProfilePage.shift();
+        // set error flag false
+        $this.stateError = false;
+        // get/set users data
+        if (send_payload["request_action"] === 'pull_account') {
             // check private account status
-            if ($this.InstaJSON.user.is_private === true) {
+            if ($this.InstaJSON.graphql.user.is_private === true) {
                 // update label text
-                $this.eventHandler("This is Private account: " + $this.InstaJSON.user.full_name, 'label-danger');
+                $this.eventHandler("This is Private account: " + $this.InstaJSON.graphql.user.full_name, 'label-danger');
                 return false;
             }
-            // set error flag false
-            $this.stateError = false;
-            // get/set users data
             $this.setAccount();
+            // next ajax call
+            var _send_payload = {
+                // send user name with loop next request
+                keyword: $this.info.user_id,
+                // request filter
+                request_action: 'pull_media'
+            };
+            // send ajax request again
+            $this.initNow($this.info.UserName, _send_payload);
+        } else {
+            $this.setMedia();
             // if next result set found with max id
             if ($this.isSearchingForNext === true) {
                 // next ajax call
                 var _send_payload = {
                     // send user name with loop next request
-                    keyword: $this.info.UserName,
+                    keyword: $this.info.user_id,
                     // request filter
-                    request_action: 'pull_account',
+                    request_action: 'pull_media',
                     // next request id
                     max_id: $this.urlInstagramNext
                 };
