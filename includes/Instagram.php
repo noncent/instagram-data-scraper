@@ -25,8 +25,6 @@ class Instagram
         'account_next_call' => 'https://www.instagram.com/{user}/?max_id={max_id}',
         'account_json' => 'https://www.instagram.com/{user}/?__a=1',
         'account_json_next_call' => 'https://www.instagram.com/{user}/?__a=1&max_id={max_id}',
-        'account_media_json' => 'https://instagram.com/graphql/query/?query_id=17888483320059182&id={user_id}&first=12',
-        'account_media_json_next_call' => 'https://instagram.com/graphql/query/?query_id=17888483320059182&id={user_id}&first=12&after={max_id}',
         'search_tags_json' => 'https://www.instagram.com/explore/tags/{tag}/?__a=1',
         'search_tags_json_next_call' => 'https://www.instagram.com/explore/tags/{tag}/?__a=1&max_id={max_id}',
         'search_all_tags_json' => 'https://www.instagram.com/web/search/topsearch/?context=blended&query={keyword}&__a=1',
@@ -46,7 +44,7 @@ class Instagram
      * @var array
      */
     protected $default_request_action = array(
-        'pull_account', 'pull_hashtag', 'pull_media'
+        'pull_account', 'pull_hashtag',
     );
     /**
      * The request action
@@ -167,25 +165,6 @@ class Instagram
                         // return response
                         return $this->getInstagramResponse();
                     }
-                }
-            } elseif ($this->request_action === 'pull_media') {
-                // build request url
-                if (isset($this->users_input['max_id'])) {
-                    $this->users_input = str_replace(array('{user_id}', '{max_id}'), array($this->users_input[$this->input_key], $this->users_input['max_id']), $this->endpoint['account_media_json_next_call']);
-                } else {
-                    $this->users_input = str_replace('{user_id}', $this->users_input[$this->input_key], $this->endpoint['account_media_json']);
-                }
-                // user's media information requested, bulk mode, account name information, single user
-                if ($this->sendInstagramRequest() && $this->buildResultFromCurl()) {
-                    // return response
-                    return $this->getInstagramResponse();
-                } else {
-                    // fall-back error data
-                    if (is_null($this->curlResponseData)) {
-                        $this->exitErrorString('url');
-                    }
-                    // return response
-                    return $this->getInstagramResponse();
                 }
             } else {
                 // error request
