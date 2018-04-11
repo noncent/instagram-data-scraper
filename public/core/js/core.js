@@ -45,7 +45,7 @@ var currentMasterIndex = 1;
 // Application starting progress value
 var currentMasterProgress = 0;
 // App debug flag
-var logInfo = false;
+var logInfo = true;
 // Search Flag
 var isFilter = false;
 // htaccess check
@@ -126,6 +126,10 @@ var _l = function(data_object_array) {
         console.log(data_object_array);
     }
 };
+// check if a json has property
+function hasProp(obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+}
 // global aja error handling
 $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
     errStr = '';
@@ -208,85 +212,97 @@ Instagram.prototype.setAccount = function() {
     this.info.UserName = this.InstaJSON.graphql.user.username;
     this.info.FullName = this.InstaJSON.graphql.user.full_name;
     this.info.user_id = this.InstaJSON.graphql.user.id,
-    this.info.Posts = this.InstaJSON.graphql.user.edge_owner_to_timeline_media.count;
+        this.info.Posts = this.InstaJSON.graphql.user.edge_owner_to_timeline_media.count;
     this.info.Followers = this.InstaJSON.graphql.user.edge_followed_by.count;
     this.info.Following = this.InstaJSON.graphql.user.edge_follow.count;
     this.info.AccountHref = this.urlInstagram + '/' + this.InstaJSON.graphql.user.username;
     this.info.Thumbs = [];
-}
+};
 /**
  * Get User's media information from
  * Instagram JSON and set in Object Property
  */
 Instagram.prototype.setMedia = function() {
+    _l('Set Media Calling....');
     var _this = this;
-    // show label
-    var post_index = Math.ceil(this.info.Posts / 12);
-    this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + post_index + ", " + this.info.FullName);
-    this.txtProgressState = Math.ceil(this.currentIndexPost * 100) / post_index;
+    // show label, no of total post / 12
+    var userPostIndex = Math.ceil(this.info.Posts / 12);
+    this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + userPostIndex + ", " + this.info.FullName);
+    this.txtProgressState = Math.ceil(this.currentIndexPost * 100) / userPostIndex;
+    _l('New JSON Data .... ');
+    _l(this.InstaJSON);
     // +++++++++++++++++++++++++++++++++++
     // get users social data from json
     // +++++++++++++++++++++++++++++++++++
     // collectors empty arrays
-    var Edges = this.InstaJSON.data.user.edge_owner_to_timeline_media.edges,
+    var Edges = [],
         likes = [],
         comments = [],
         views = [],
         likes_sum = 0,
         comments_sum = 0,
         views_sum = 0;
-    // setters
-    $.each(Edges, function(index, edge) {
-        _this.info.Thumbs.push({
-            'thumb-src': edge.node.thumbnail_resources[0].src,
-            comments : edge.node.edge_media_to_comment.count,
-            likes : edge.node.edge_media_preview_like.count
-        });
-        likes.push(edge.node.edge_media_preview_like.count);
-        comments.push(edge.node.edge_media_to_comment.count);
-        views.push((edge.node.video_view_count) ? edge.node.video_view_count : 0);
-    });
-    // filters and sum, likes
-    $.each(likes, function() {
-        likes_sum += parseInt(this) || 0;
-    });
-    // comments
-    $.each(comments, function() {
-        comments_sum += parseInt(this) || 0;
-    });
-    // video views
-    $.each(views, function() {
-        views_sum += parseInt(this) || 0;
-    });
-    // set all values of sum
-    if (this.isSearchingForNext === false) {
-        this.info.TotalLikes = likes_sum;
-        this.info.TotalComments = comments_sum;
-        this.info.TotalViews = views_sum;
-    } else {
-        // add in previous values
-        this.info.TotalLikes = parseInt(this.info.TotalLikes) + likes_sum;
-        this.info.TotalComments = parseInt(this.info.TotalComments) + comments_sum;
-        this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
-    }
-    // check if next id available to get next result set
-    if (this.InstaJSON.data.user.edge_owner_to_timeline_media.page_info.has_next_page === true) {
-        this.urlInstagramNext = this.InstaJSON.data.user.edge_owner_to_timeline_media.page_info.end_cursor;
-        this.currentIndexPost += 1;
-        this.isSearchingForNext = true;
-    } else {
-        this.currentIndexPost = 1;
-        this.isSearchingForNext = false;
-    }
-    // safe values set fall-back values
-    if (typeof this.info.TotalLikes == 'undefined') {
-        this.info.TotalLikes = 0;
-    }
-    if (typeof this.info.TotalComments == 'undefined') {
-        this.info.TotalComments = 0;
-    }
-    if (typeof this.info.TotalViews == 'undefined') {
-        this.info.TotalViews = 0;
+    // check if property exist
+    if (hasProp(this.InstaJSON, 'graphql')) {
+        if (hasProp(this.InstaJSON.graphql, 'user')) {
+            // collectors empty arrays
+            Edges = this.InstaJSON.graphql.user.edge_owner_to_timeline_media.edges;
+            // get thumbnail, comments, likes, views....
+            $.each(Edges, function(index, edge) {
+                _this.info.Thumbs.push({
+                    'thumb-src': edge.node.thumbnail_resources[0].src,
+                    comments: edge.node.edge_media_to_comment.count,
+                    likes: edge.node.edge_media_preview_like.count
+                });
+                likes.push(edge.node.edge_media_preview_like.count);
+                comments.push(edge.node.edge_media_to_comment.count);
+                views.push((edge.node.video_view_count) ? edge.node.video_view_count : 0);
+            });
+            // filters and sum, likes
+            $.each(likes, function() {
+                likes_sum += parseInt(this) || 0;
+            });
+            // filter and sum, comments
+            $.each(comments, function() {
+                comments_sum += parseInt(this) || 0;
+            });
+            // filter and sum, video views
+            $.each(views, function() {
+                views_sum += parseInt(this) || 0;
+            });
+        }
+        _l('Is Next Calling Value: ' + this.isSearchingForNext);
+        // set all values of sum
+        if (this.isSearchingForNext == false) {
+            this.info.TotalLikes = likes_sum;
+            this.info.TotalComments = comments_sum;
+            this.info.TotalViews = views_sum;
+        } else {
+            // add in previous values
+            this.info.TotalLikes = parseInt(this.info.TotalLikes) + likes_sum;
+            this.info.TotalComments = parseInt(this.info.TotalComments) + comments_sum;
+            this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
+        }
+        // check if next id available to get next result set
+        _l('Check Has Next from JSON: ' + this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.has_next_page);
+        if (this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.has_next_page == true) {
+            this.urlInstagramNext = this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.end_cursor;
+            this.currentIndexPost += 1;
+            this.isSearchingForNext = true;
+        } else {
+            this.currentIndexPost = 1;
+            this.isSearchingForNext = false;
+        }
+        // safe values set fall-back values
+        if (typeof this.info.TotalLikes == 'undefined') {
+            this.info.TotalLikes = 0;
+        }
+        if (typeof this.info.TotalComments == 'undefined') {
+            this.info.TotalComments = 0;
+        }
+        if (typeof this.info.TotalViews == 'undefined') {
+            this.info.TotalViews = 0;
+        }
     }
 };
 /**
@@ -393,13 +409,12 @@ Instagram.prototype.initNow = function(link, _send_payload) {
             // break the bone
             return false;
         }
-
         // handle success response
         $this.InstaJSON = window._sharedData.entry_data.ProfilePage.shift();
         // set error flag false
         $this.stateError = false;
         // get/set users data
-        if (send_payload["request_action"] === 'pull_account') {
+        if (send_payload.request_action === 'pull_account') {
             // check private account status
             if ($this.InstaJSON.graphql.user.is_private === true) {
                 // update label text
@@ -408,7 +423,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
             }
             $this.setAccount();
             // next ajax call
-            var _send_payload = {
+            _send_payload = {
                 // send user name with loop next request
                 keyword: $this.info.user_id,
                 // request filter
@@ -421,7 +436,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
             // if next result set found with max id
             if ($this.isSearchingForNext === true) {
                 // next ajax call
-                var _send_payload = {
+                _send_payload = {
                     // send user name with loop next request
                     keyword: $this.info.user_id,
                     // request filter
@@ -456,6 +471,32 @@ Instagram.prototype.initNow = function(link, _send_payload) {
                 $this.tableContentWrapper.append($this.buildViews());
             }
         }
+        /* Start: Hot Fix Patch */
+        if ($this.infoFullMin == 'min') {
+            // increase master index value
+            currentMasterIndex++;
+            // calculate work status
+            masterProgress = Math.floor(((currentMasterIndex) / (totalRequestUrl)) * 100);
+            // set next request false
+            $this.isSearchingForNext = false;
+            // reset index post
+            $this.currentIndexPost = 1;
+            // set txt progress bar
+            $this.txtProgressState = 0;
+            // update label text
+            $this.eventHandler("Likes & Comments Done..." + $this.info.FullName, 'label-success');
+            // debugger message console
+            _l('Current Index ' + $this.currentIndex);
+            _l('totalRequestUrl ' + totalRequestUrl);
+            _l('Current% ' + masterProgress);
+            // update master progress bar value
+            currentMasterProgress = masterProgress;
+            // call progress bar
+            stateProgress();
+            // show values rows in table
+            $this.tableContentWrapper.append($this.buildViews());
+        }
+        /* End: Hot Fix Patch */
     });
 };
 /**
@@ -939,27 +980,16 @@ $document.ready(function() {
         if (!searchText) {
             return [];
         }
-
         var hash = '#';
         var tag = 'a-zÀ-ÖØ-öø-ÿĀ-ɏɓ-ɔɖ-ɗəɛɣɨɯɲʉʋʻ̀-ͯḀ-ỿЀ-ӿԀ-ԧⷠ-ⷿꙀ-֑ꚟ-ֿׁ-ׂׄ-ׇׅא-תװ-״﬒-ﬨשׁ-זּטּ-לּמּנּ-סּףּ-פּצּ-ﭏؐ-ؚؠ-ٟٮ-ۓە-ۜ۞-۪ۨ-ۯۺ-ۼۿݐ-ݿࢠࢢ-ࢬࣤ-ࣾﭐ-ﮱﯓ-ﴽﵐ-ﶏﶒ-ﷇﷰ-ﷻﹰ-ﹴﹶ-ﻼ‌ก-ฺเ-๎ᄀ-ᇿ㄰-ㆅꥠ-꥿가-힯ힰ-퟿ﾡ-ￜァ-ヺー-ヾｦ-ﾟｰＡ-Ｚａ-ｚぁ-ゖ゙-ゞ㐀-䶿一-鿿꜀-뜿띀-렟-﨟〃々〻';
         var digit = '0-9０-９';
         var underscore = '_';
-        var regexp = new RegExp(
-          '(?:^|[^' + tag + digit + underscore + ']+)' +
-          '[' + hash + ']' +
-          '(' +
-          '[' + tag + digit + underscore + ']*' +
-          '[' + tag + ']+' +
-          '[' + tag + digit + underscore + ']*' +
-          ')' +
-          '(?![' + hash + tag + digit + underscore + ']+)',
-        'g');
-
+        var regexp = new RegExp('(?:^|[^' + tag + digit + underscore + ']+)' + '[' + hash + ']' + '(' + '[' + tag + digit + underscore + ']*' + '[' + tag + ']+' + '[' + tag + digit + underscore + ']*' + ')' + '(?![' + hash + tag + digit + underscore + ']+)', 'g');
         result = searchText.match(regexp);
         if (!result) {
             return [];
         }
-        res = result.map(function (value) {
+        res = result.map(function(value) {
             value = value.trim().split('#');
             return '#' + value[1];
         });

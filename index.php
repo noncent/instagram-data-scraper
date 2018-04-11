@@ -700,7 +700,7 @@
     <script type="text/javascript" src="./public/mustache/mustache.min.js"></script>
     <script type="text/javascript" src="./public/jQCloud/dist/jqcloud.min.js"></script>
     <script type="text/javascript" src="./public/typeahead/typeahead.min.js"></script>
-    <script type="text/javascript" src="./public/core/js/core.min.js"></script>
+    <script type="text/javascript" src="./public/core/js/core.js"></script>
 </body>
 
 </html>

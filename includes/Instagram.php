@@ -21,16 +21,16 @@ class Instagram
      * @var array
      */
     public $endpoint = array(
-        'account' => 'https://www.instagram.com/{user}',
-        'account_next_call' => 'https://www.instagram.com/{user}/?max_id={max_id}',
-        'account_json' => 'https://www.instagram.com/{user}/?__a=1',
-        'account_json_next_call' => 'https://www.instagram.com/{user}/?__a=1&max_id={max_id}',
-        'account_media_json' => 'https://instagram.com/graphql/query/?query_id=17888483320059182&id={user_id}&first=12',
-        'account_media_json_next_call' => 'https://instagram.com/graphql/query/?query_id=17888483320059182&id={user_id}&first=12&after={max_id}',
-        'search_tags_json' => 'https://www.instagram.com/explore/tags/{tag}/?__a=1',
-        'search_tags_json_next_call' => 'https://www.instagram.com/explore/tags/{tag}/?__a=1&max_id={max_id}',
-        'search_all_tags_json' => 'https://www.instagram.com/web/search/topsearch/?context=blended&query={keyword}&__a=1',
-        'search_username_by_tagcode_json' => 'https://www.instagram.com/p/{code}/?tagged={tag}&__a=1',
+        'account'                         => 'https://www.instagram.com/{user}',
+        'account_next_call'               => 'https://www.instagram.com/{user}/?max_id={max_id}',
+        'account_json'                    => 'https://www.instagram.com/{user}/?__a=1',
+        'account_json_next_call'          => 'https://www.instagram.com/{user}/?__a=1&max_id={max_id}',
+        'account_media_json'              => 'https://instagram.com/graphql/query/?query_id=17888483320059182&id={user_id}&first=12',
+        'account_media_json_next_call'    => 'https://instagram.com/graphql/query/?query_id=17888483320059182&id={user_id}&first=12&after={max_id}',
+        'search_tags_json'                => 'https://www.instagram.com/explore/tags/{tag}/?__a=1',
+        'search_tags_json_next_call'      => 'https://www.instagram.com/explore/tags/{tag}/?__a=1&max_id={max_id}',
+        'search_all_tags_json'            => 'https://www.instagram.com/web/search/topsearch/?context=blended&query={keyword}&__a=1',
+        'search_username_by_tagcode_json' => 'https://www.instagram.com/p/{code}/?tagged={tag}&__a=1'
     );
     /**
      * Set your data scrape fetch mode
@@ -74,39 +74,39 @@ class Instagram
      */
     protected $regexPattern = array(
         // Get  '<script></script>' tag from source code, html
-        'script' => '/<script[^>](.*)_sharedData(.*)<\/script>/',
+        'script'          => '/<script[^>](.*)_sharedData(.*)<\/script>/',
         // This is RegxPattern to extract JavaScript variables from html source code
-        'json' => '/(?i)<script[[:space:]]+type="text\/JavaScript"(.*?)>([^\a]+?)<\/script>/si',
+        'json'            => '/(?i)<script[[:space:]]+type="text\/JavaScript"(.*?)>([^\a]+?)<\/script>/si',
         // This is RegexPattern to get only json object for php
-        'object' => '/(window\.\_sharedData \=|\;)/',
+        'object'          => '/(window\.\_sharedData \=|\;)/',
         // short call json data __a=1
         'filter_response' => 'window._sharedData={"entry_data":{"ProfilePage":[{source}]}};',
         // If in case any error, return this json in ajax response
-        'error_response' => 'window._sharedData = {"error": "{error}"};',
+        'error_response'  => 'window._sharedData = {"error": "{error}"};',
         // This RegexPattern to detect if response is null/empty
-        'empty_error' => '"entry_data": {}',
+        'empty_error'     => '"entry_data": {}'
     );
     /**
      * Class constructor function
      * @param string $request_action
      */
-    public function initialize($request_action = 'pull_account', $request_data = array())
+    public function initialize( $request_action = 'pull_account', $request_data = array() )
     {
         // validate request
-        if ($this->validateRequestType() === true) {
+        if ( $this->validateRequestType() === true ) {
             // set action
             $this->request_action = $request_action;
             // set data in class property
-            if (!empty($request_data) && is_array($request_data)) {
+            if ( !empty( $request_data ) && is_array( $request_data ) ) {
                 // set link or search array data
                 $this->users_input = $request_data;
             } else {
                 // set error response
-                $this->exitErrorString('request');
+                $this->exitErrorString( 'request' );
             }
         } else {
             // set error response
-            $this->exitErrorString('request');
+            $this->exitErrorString( 'request' );
         }
     }
     /**
@@ -115,7 +115,7 @@ class Instagram
      */
     private function validateRequestType()
     {
-        return in_array($this->request_action, $this->default_request_action);
+        return in_array( $this->request_action, $this->default_request_action );
     }
     /**
      * Set action as per request
@@ -123,73 +123,73 @@ class Instagram
      */
     public function setInstagramRequest()
     {
-        if (1) {
+        if ( 1 ) {
             // check action type & build request url according to request
-            if ($this->request_action === 'pull_account') {
+            if ( $this->request_action === 'pull_account' ) {
                 // build request url
-                if (isset($this->users_input['max_id'])) {
-                    $this->users_input = str_replace(array('{user}', '{max_id}'), array($this->users_input[$this->input_key], $this->users_input['max_id']), $this->endpoint['account_json_next_call']);
+                if ( isset( $this->users_input['max_id'] ) ) {
+                    $this->users_input = str_replace( array( '{user}', '{max_id}' ), array( $this->users_input[$this->input_key], $this->users_input['max_id'] ), $this->endpoint['account_json_next_call'] );
                 } else {
-                    $this->users_input = str_replace('{user}', $this->users_input[$this->input_key], $this->endpoint['account_json']);
+                    $this->users_input = str_replace( '{user}', $this->users_input[$this->input_key], $this->endpoint['account_json'] );
                 }
                 // user's account information requested, bulk mode, account name information, single user
-                if ($this->sendInstagramRequest() && $this->buildResultFromCurl()) {
+                if ( $this->sendInstagramRequest() && $this->buildResultFromCurl() ) {
                     // return response
                     return $this->getInstagramResponse();
                 } else {
                     // fall-back error data
-                    if (is_null($this->curlResponseData)) {
-                        $this->exitErrorString('url');
+                    if ( is_null( $this->curlResponseData ) ) {
+                        $this->exitErrorString( 'url' );
                     }
                     // return response
                     return $this->getInstagramResponse();
                 }
-            } elseif ($this->request_action === 'pull_hashtag') {
+            } elseif ( $this->request_action === 'pull_hashtag' ) {
                 // check if hash tag or account name
-                if (trim($this->users_input[$this->input_key])) {
+                if ( trim( $this->users_input[$this->input_key] ) ) {
                     // build request url
-                    if (isset($this->users_input['next']) && $this->users_input['next'] !== 'false') {
+                    if ( isset( $this->users_input['next'] ) && $this->users_input['next'] !== 'false' ) {
                         // if user send max_id as in request param next
-                        $this->users_input = str_replace(array('{tag}', '{max_id}'), array($this->users_input[$this->input_key], $this->users_input['next']), $this->endpoint['search_tags_json_next_call']);
+                        $this->users_input = str_replace( array( '{tag}', '{max_id}' ), array( $this->users_input[$this->input_key], $this->users_input['next'] ), $this->endpoint['search_tags_json_next_call'] );
                     } else {
                         // if next param has false
-                        $this->users_input = str_replace('{tag}', $this->users_input[$this->input_key], $this->endpoint['search_tags_json']);
-                    }                    
+                        $this->users_input = str_replace( '{tag}', $this->users_input[$this->input_key], $this->endpoint['search_tags_json'] );
+                    }
                     // hash tag search
-                    if ($this->sendInstagramRequest() && $this->buildResultFromCurl()) {
+                    if ( $this->sendInstagramRequest() && $this->buildResultFromCurl() ) {
                         // return response
                         return $this->getInstagramResponse();
                     } else {
                         // fall-back error data
-                        if (is_null($this->curlResponseData)) {
-                            $this->exitErrorString('url');
+                        if ( is_null( $this->curlResponseData ) ) {
+                            $this->exitErrorString( 'url' );
                         }
                         // return response
                         return $this->getInstagramResponse();
                     }
                 }
-            } elseif ($this->request_action === 'pull_media') {
+            } elseif ( $this->request_action === 'pull_media' ) {
                 // build request url
-                if (isset($this->users_input['max_id'])) {
-                    $this->users_input = str_replace(array('{user_id}', '{max_id}'), array($this->users_input[$this->input_key], $this->users_input['max_id']), $this->endpoint['account_media_json_next_call']);
+                if ( isset( $this->users_input['max_id'] ) ) {
+                    $this->users_input = str_replace( array( '{user_id}', '{max_id}' ), array( $this->users_input[$this->input_key], $this->users_input['max_id'] ), $this->endpoint['account_media_json_next_call'] );
                 } else {
-                    $this->users_input = str_replace('{user_id}', $this->users_input[$this->input_key], $this->endpoint['account_media_json']);
+                    $this->users_input = str_replace( '{user_id}', $this->users_input[$this->input_key], $this->endpoint['account_media_json'] );
                 }
                 // user's media information requested, bulk mode, account name information, single user
-                if ($this->sendInstagramRequest() && $this->buildResultFromCurl()) {
+                if ( $this->sendInstagramRequest() && $this->buildResultFromCurl() ) {
                     // return response
                     return $this->getInstagramResponse();
                 } else {
                     // fall-back error data
-                    if (is_null($this->curlResponseData)) {
-                        $this->exitErrorString('url');
+                    if ( is_null( $this->curlResponseData ) ) {
+                        $this->exitErrorString('default');
                     }
                     // return response
                     return $this->getInstagramResponse();
                 }
             } else {
                 // error request
-                $this->exitErrorString('request');
+                $this->exitErrorString( 'request' );
             }
         } else {
             return $this->getInstagramResponse();
@@ -201,17 +201,17 @@ class Instagram
     private function sendInstagramRequest()
     {
         // check allow_url_fopen settings
-        if (ini_get('allow_url_fopen') && extension_loaded('openssl')) {
+        if ( ini_get( 'allow_url_fopen' ) && extension_loaded( 'openssl' ) ) {
             // get source html data
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $this->users_input);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $this->curlResponseData = curl_exec($ch);
-            curl_close($ch);
+            curl_setopt( $ch, CURLOPT_URL, $this->users_input );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+            $this->curlResponseData = curl_exec( $ch );
+            curl_close( $ch );
             //file_put_contents(time() . '.txt', $this->curlResponseData, FILE_APPEND);
             // pre($http_response_header);
             // check return data status
-            if ($this->curlResponseData != false) {
+            if ( $this->curlResponseData != false ) {
                 // return status
                 return true;
             } else {
@@ -220,42 +220,42 @@ class Instagram
             }
         }
         // make sure cURL enable
-        elseif (function_exists('curl_version')) {
+        elseif ( function_exists( 'curl_version' ) ) {
             // execute multi curl
             $parallelcurl = new \ParallelCurl();
             // set curl option
-            $parallelcurl->setOptions($this->cUrlOptionHandler());
+            $parallelcurl->setOptions( $this->cUrlOptionHandler() );
             // send link and get response by callback
-            $parallelcurl->startRequest($this->users_input, function ($data) {
+            $parallelcurl->startRequest( $this->users_input, function ( $data ) {
                 // set response data
                 $this->curlResponseData = $data;
-            });
+            } );
             // get response
             $parallelcurl->finishAllRequests();
             //file_put_contents(time() . '.txt', $this->curlResponseData, FILE_APPEND);
             // check return data status
-            if ($this->curlResponseData && !$this->curlResponseData) {
+            if ( $this->curlResponseData && !$this->curlResponseData ) {
                 // return status
                 return true;
             }
         } else {
             // show error
-            $this->exitErrorString('curl');
+            $this->exitErrorString( 'curl' );
         }
     }
     /**
      * Check if array has valid urls or url
      * @param array $request
      */
-    private function validateUrls($key, $request = array())
+    private function validateUrls( $key, $request = array() )
     {
         // extract array key as php vars
-        extract($request);
+        extract( $request );
         // url validation & data assign
-        if ((isset($$key) && is_array($$key) && filter_var_array($$key, FILTER_VALIDATE_URL)) || isset($$key) && filter_input(INPUT_POST, $key, FILTER_VALIDATE_URL)) {
+        if (  ( isset( $$key ) && is_array( $$key ) && filter_var_array( $$key, FILTER_VALIDATE_URL ) ) || isset( $$key ) && filter_input( INPUT_POST, $key, FILTER_VALIDATE_URL ) ) {
             return true;
         } else {
-            $this->exitErrorString('url');
+            $this->exitErrorString( 'url' );
         }
     }
     /**
@@ -263,54 +263,54 @@ class Instagram
      */
     private function buildResultFromCurl()
     {
-        if (!is_null($this->curlResponseData)) {
+        if ( !is_null( $this->curlResponseData ) ) {
             // get <script></script> tag
-            preg_match_all($this->regexPattern['script'], $this->curlResponseData, $filter);
+            preg_match_all( $this->regexPattern['script'], $this->curlResponseData, $filter );
             // get script inside json data
-            preg_match($this->regexPattern['json'], array_shift($filter[0]), $output);
+            preg_match( $this->regexPattern['json'], array_shift( $filter[0] ), $output );
             // if source get check scrape mode
-            if ($this->scrap_mode === 'PHP_ARRAY' && !empty($output)) {
+            if ( $this->scrap_mode === 'PHP_ARRAY' && !empty( $output ) ) {
                 // if want to PHP array
-                if ($this->request_action === 'pull_account') {
+                if ( $this->request_action === 'pull_account' ) {
                     // check empty response
-                    if (strpos($output[2], $this->regexPattern['empty_error']) !== false) {
+                    if ( strpos( $output[2], $this->regexPattern['empty_error'] ) !== false ) {
                         // remove JavaScript var from data & build result array, you have to manage html view by array
-                        $this->curlResponseData = $this->buildJsonToPhpArray(json_decode(preg_replace($this->regexPattern['object'], '', $output[2]), true));
+                        $this->curlResponseData = $this->buildJsonToPhpArray( json_decode( preg_replace( $this->regexPattern['object'], '', $output[2] ), true ) );
                     } else {
                         // url error
-                        $this->exitErrorString('url');
+                        $this->exitErrorString( 'url' );
                     }
                 }
                 // else if filter on
-                elseif ($this->request_action === 'pull_hashtag') {
+                elseif ( $this->request_action === 'pull_hashtag' ) {
                     // build result array, you have to manage html view by array
-                    $this->curlResponseData = $this->buildJsonToPhpArray(json_decode($this->curlResponseData, true));
+                    $this->curlResponseData = $this->buildJsonToPhpArray( json_decode( $this->curlResponseData, true ) );
                 } else {
                     // error response
-                    $this->exitErrorString('default');
+                    $this->exitErrorString( 'default' );
                 }
             }
             // return as JavaScript json
-            elseif ($this->scrap_mode === 'JSON' && !empty($output)) {
+            elseif ( $this->scrap_mode === 'JSON' && !empty( $output ) ) {
                 // if wanna json data
-                if ($this->request_action === 'pull_account') {
+                if ( $this->request_action === 'pull_account' ) {
                     // check empty response
-                    if (strpos($output[2], $this->regexPattern['empty_error']) !== false) {
+                    if ( strpos( $output[2], $this->regexPattern['empty_error'] ) !== false ) {
                         $this->curlResponseData = $output[2];
                         // build result array, you have to manage html view by array
-                        $this->curlResponseData = str_replace('{source}', $this->curlResponseData, $this->regexPattern['filter_response']);
+                        $this->curlResponseData = str_replace( '{source}', $this->curlResponseData, $this->regexPattern['filter_response'] );
                     } else {
                         // url error
-                        $this->exitErrorString('url');
+                        $this->exitErrorString( 'url' );
                     }
-                } elseif ($this->request_action === 'pull_hashtag') {
+                } elseif ( $this->request_action === 'pull_hashtag' ) {
                     // build result array, you have to manage html view by array
-                    $this->curlResponseData = str_replace('{source}', $this->curlResponseData, $this->regexPattern['filter_response']);
+                    $this->curlResponseData = str_replace( '{source}', $this->curlResponseData, $this->regexPattern['filter_response'] );
                 } else {
-                    $this->exitErrorString('default');
+                    $this->exitErrorString( 'default' );
                 }
             } else {
-                $this->curlResponseData = str_replace('{source}', $this->curlResponseData, $this->regexPattern['filter_response']);
+                $this->curlResponseData = str_replace( '{source}', $this->curlResponseData, $this->regexPattern['filter_response'] );
                 return $this->curlResponseData;
             }
         }
@@ -320,39 +320,39 @@ class Instagram
      * @param  [type] $data           [description]
      * @return [type] [description]
      */
-    public function buildJsonToPhpArray($data)
+    public function buildJsonToPhpArray( $data )
     {
         $array_data = array();
         // collect all personal information, same key as in result data
-        $array_data['country_code'] = $data['country_code'];
+        $array_data['country_code']  = $data['country_code'];
         $array_data['language_code'] = $data['language_code'];
         // get
-        extract(array_shift($data['entry_data']['ProfilePage']));
+        extract( array_shift( $data['entry_data']['ProfilePage'] ) );
         // this is total post count
-        $array_data['count'] = $user['media']['count'];
-        $array_data['biography'] = $user['biography'];
-        $array_data['external_url'] = $user['external_url'];
-        $array_data['count'] = $user['followed_by']['count'];
-        $array_data['count'] = $user['follows']['count'];
-        $array_data['follows_viewer'] = $user['follows_viewer'];
-        $array_data['full_name'] = $user['full_name'];
-        $array_data['id'] = $user['id'];
-        $array_data['username'] = $user['username'];
-        $array_data['external_url'] = $user['external_url'];
-        $array_data['profile_pic_url'] = $user['profile_pic_url'];
+        $array_data['count']              = $user['media']['count'];
+        $array_data['biography']          = $user['biography'];
+        $array_data['external_url']       = $user['external_url'];
+        $array_data['count']              = $user['followed_by']['count'];
+        $array_data['count']              = $user['follows']['count'];
+        $array_data['follows_viewer']     = $user['follows_viewer'];
+        $array_data['full_name']          = $user['full_name'];
+        $array_data['id']                 = $user['id'];
+        $array_data['username']           = $user['username'];
+        $array_data['external_url']       = $user['external_url'];
+        $array_data['profile_pic_url']    = $user['profile_pic_url'];
         $array_data['followed_by_viewer'] = $user['followed_by_viewer'];
         // collect all post information
-        if ($user['media']['nodes']) {
+        if ( $user['media']['nodes'] ) {
             // parse one by one
-            foreach ($user['media']['nodes'] as $index => $array) {
-                $array_data['post']['data'][$index]['id'] = $array['id'];
+            foreach ( $user['media']['nodes'] as $index => $array ) {
+                $array_data['post']['data'][$index]['id']            = $array['id'];
                 $array_data['post']['data'][$index]['thumbnail_src'] = $array['thumbnail_src'];
-                $array_data['post']['data'][$index]['is_video'] = $array['is_video'];
-                $array_data['post']['data'][$index]['date'] = $array['date'];
-                $array_data['post']['data'][$index]['display_src'] = $array['display_src'];
-                $array_data['post']['data'][$index]['caption'] = isset($array['caption']) ? $array['caption'] : '';
-                $array_data['post']['data'][$index]['comments'] = $array['comments']['count'];
-                $array_data['post']['data'][$index]['likes'] = $array['likes']['count'];
+                $array_data['post']['data'][$index]['is_video']      = $array['is_video'];
+                $array_data['post']['data'][$index]['date']          = $array['date'];
+                $array_data['post']['data'][$index]['display_src']   = $array['display_src'];
+                $array_data['post']['data'][$index]['caption']       = isset( $array['caption'] ) ? $array['caption'] : '';
+                $array_data['post']['data'][$index]['comments']      = $array['comments']['count'];
+                $array_data['post']['data'][$index]['likes']         = $array['likes']['count'];
             }
         }
         return $array_data;
@@ -364,7 +364,7 @@ class Instagram
     public function getInstagramResponse()
     {
         // set json header
-        header('Content-Type: application/javascript');
+        header( 'Content-Type: application/javascript' );
         // get script
         return $this->curlResponseData;
     }
@@ -372,7 +372,7 @@ class Instagram
      * Set User Post Key for Instagram links
      * @param string $key [description]
      */
-    public function setInputKey($key = 'keyword')
+    public function setInputKey( $key = 'keyword' )
     {
         $this->input_key = $key;
     }
@@ -383,31 +383,31 @@ class Instagram
     private function cUrlOptionHandler()
     {
         // create a random ip address
-        $dynamic_ip = "" . mt_rand(0, 255) . "." . mt_rand(0, 255) . "." . mt_rand(0, 255) . "." . mt_rand(0, 255);
+        $dynamic_ip = "" . mt_rand( 0, 255 ) . "." . mt_rand( 0, 255 ) . "." . mt_rand( 0, 255 ) . "." . mt_rand( 0, 255 );
         // add additional curl options here
         return array(
             // return web page
             CURLOPT_RETURNTRANSFER => true,
             // don't return headers
-            CURLOPT_HEADER => false,
+            CURLOPT_HEADER         => false,
             // follow redirects
             CURLOPT_FOLLOWLOCATION => true,
             // handle all encodings
-            CURLOPT_ENCODING => "",
+            CURLOPT_ENCODING       => "",
             // set referrer on redirect
-            CURLOPT_AUTOREFERER => true,
+            CURLOPT_AUTOREFERER    => true,
             // timeout on connect
             CURLOPT_CONNECTTIMEOUT => 120,
             // timeout on response
-            CURLOPT_TIMEOUT => 120,
+            CURLOPT_TIMEOUT        => 120,
             // stop after 10 redirects
-            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_MAXREDIRS      => 10,
             // Disabled SSL Cert checks
             CURLOPT_SSL_VERIFYPEER => false,
             // user agent be present in the request
-            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13',
+            CURLOPT_USERAGENT      => 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13',
             // set fake ip address
-            CURLOPT_HTTPHEADER => array("REMOTE_ADDR: $dynamic_ip", "HTTP_X_FORWARDED_FOR: $dynamic_ip"),
+            CURLOPT_HTTPHEADER     => array( "REMOTE_ADDR: $dynamic_ip", "HTTP_X_FORWARDED_FOR: $dynamic_ip" )
         );
     }
     /**
@@ -415,10 +415,10 @@ class Instagram
      * @param  string    $error_key
      * @return private
      */
-    private function exitErrorString($error_key = 'default')
+    private function exitErrorString( $error_key = 'default' )
     {
         // check request typeof error
-        switch ($error_key) {
+        switch ( $error_key ) {
             case 'curl':
                 $error = "You must enable Curl or 'allow_url_fopen' & 'openssl' to use this application";
                 break;
@@ -436,18 +436,18 @@ class Instagram
                 break;
         }
         // return error response in json format
-        $this->curlResponseData = str_replace('{error}', $error, $this->regexPattern('error_response'));
+        $this->curlResponseData = str_replace( '{error}', $error, $this->regexPattern( 'error_response' ) );
         // return break status
         // return false;
     }
     /**
      * [regexPattern description]
-     * @param  [type] $key [description]
-     * @return [type]      [description]
+     * @param  [type] $key            [description]
+     * @return [type] [description]
      */
-    public function regexPattern($key)
+    public function regexPattern( $key )
     {
-        if (isset($this->regexPattern[$key])) {
+        if ( isset( $this->regexPattern[$key] ) ) {
             return $this->regexPattern[$key];
         } else {
             return false;
@@ -479,19 +479,19 @@ class InstagramWrapper extends Instagram
      */
     public function insta_search()
     {
-        if ($_POST['keyword'] && $this->is_ajax_request()) {
+        if ( $_POST['keyword'] && $this->is_ajax_request() ) {
             // this is ajax request, do something
-            if (filter_input(INPUT_POST, 'request_action') && filter_input(INPUT_POST, 'keyword')) {
+            if ( filter_input( INPUT_POST, 'request_action' ) && filter_input( INPUT_POST, 'keyword' ) ) {
                 // array keys to php vars
-                extract($_POST);
+                extract( $_POST );
             } else {
                 // set request action value in class property
                 $this->request_action = $request_action;
             }
             // parent Instagram constructor
-            $this->initialize($request_action, $_POST);
+            $this->initialize( $request_action, $_POST );
             // call action
-            $this->setInputKey('keyword');
+            $this->setInputKey( 'keyword' );
             // get and return ajax response
             echo $this->setInstagramRequest();
         } else {
@@ -500,19 +500,19 @@ class InstagramWrapper extends Instagram
     }
     public function insta_account()
     {
-        if ($this->is_ajax_request()) {
+        if ( $this->is_ajax_request() ) {
             // this is ajax request, do something
-            if (filter_input(INPUT_POST, 'request_action') && filter_input(INPUT_POST, 'keyword')) {
+            if ( filter_input( INPUT_POST, 'request_action' ) && filter_input( INPUT_POST, 'keyword' ) ) {
                 // array keys to php vars
-                extract($_POST);
+                extract( $_POST );
             } else {
                 // set request action value in class property
                 $this->request_action = $request_action;
             }
             // parent Instagram constructor
-            $this->initialize($request_action, $_POST);
+            $this->initialize( $request_action, $_POST );
             // call action
-            $this->setInputKey('keyword');
+            $this->setInputKey( 'keyword' );
             // get and return ajax response
             echo $this->setInstagramRequest();
         } else {
@@ -521,7 +521,7 @@ class InstagramWrapper extends Instagram
     }
     public function is_ajax_request()
     {
-        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        if ( !empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
             return true;
         } else {
             return false;
