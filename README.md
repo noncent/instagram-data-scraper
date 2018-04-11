@@ -1,4 +1,6 @@
-## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 06-March-2018
+## Instagram Fetch Account issue: In Progress....
+
+## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 12-April-2018
 
 ## 😊 Active Contributor (Thanks! a lot)
 | #  | 📷 |Say Hello! 😇 |
