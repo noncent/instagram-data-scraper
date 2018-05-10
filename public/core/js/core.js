@@ -393,7 +393,7 @@ Instagram.prototype.initNow = function(link, _send_payload) {
         // set var counter
         var masterProgress = 0;
         // if any error in ajax response
-        if (window._sharedData.error) {
+        if (window._sharedData && window._shareData.error) {
             // set error flag
             $this.stateError = true;
             // show error message
@@ -530,9 +530,7 @@ $document.ready(function() {
         chkOpt = $(this).val();
         Config.setItem('infoFullMin', chkOpt);
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     $("[data-toggle=tooltip]").tooltip();
     /**
      * [description]
@@ -548,9 +546,7 @@ $document.ready(function() {
             }
         };
     }(jQuery));
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /**
      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      * Happy: Word Emo Analytic Cloud
@@ -588,9 +584,7 @@ $document.ready(function() {
         autoResize: true,
         height: 350
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /**
      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      * Bad: Word Emo Analytic Cloud
@@ -622,9 +616,7 @@ $document.ready(function() {
         text: '#Ban',
         weight: 28
     }];
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // execute bad
     $('.oh').jQCloud(bad, {
         colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c"],
@@ -632,9 +624,7 @@ $document.ready(function() {
         autoResize: true,
         height: 350
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /**
      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      * Instagram Super Search Object
@@ -642,9 +632,7 @@ $document.ready(function() {
      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      */
     var superScraper = function() {};
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /**
      * Internet Connection Status and Template
      */
@@ -654,9 +642,7 @@ $document.ready(function() {
             $('.wrapper').html(template);
         }
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /**
      * Class download is for download data in excel from table by table id
      * use table id in a tag as data-id attr
@@ -674,9 +660,7 @@ $document.ready(function() {
         // create download button and trigger
         _this.attr('download', 'ExcelExport-' + new Date().getTime() + '.xls').attr('href', elData).attr('target', '_blank');
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // search input type object
     var queryText = $(Config.getItem('txtSearch'));
     // auto complete query text
@@ -689,9 +673,7 @@ $document.ready(function() {
         showHintOnFocus: true,
         dupChecker: true,
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     queryText.change(function() {
         var current = queryText.typeahead("getActive");
         if (current) {
@@ -706,47 +688,35 @@ $document.ready(function() {
             // Nothing is active so it is a new value (or maybe empty value)
         }
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // ajax action loader
     $document.ajaxStart(function() {
         $('body').flash('Please wait...request in progress');
     }).ajaxStop(function() {
         $('body').flash();
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /** on modal close */
     booClose.modal("hide");
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /** tool tip code */
     $("body").tooltip({
         selector: "[rel=tooltip]",
         trigger: "hover"
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /** zoom effect on image post */
     $document.delegate('*[data-toggle="lightbox"]', "click", function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // random color for chart
     function hexColor() {
         var hexaPattern = 0xffffff - Math.floor(Math.random() * 0x1000000);
         return "#" + ("000000" + hexaPattern.toString(16)).substr(-6);
     }
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // display the chart
     function showChart(options) {
         var el = "chart_" + new Date().getTime();
@@ -809,9 +779,7 @@ $document.ready(function() {
         // set flag
         is_chart_created = true;
     }
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // chart customization if needed resize
     function customizeCharts(chart) {
         if (typeof chart !== "undefined") {
@@ -839,24 +807,18 @@ $document.ready(function() {
             chart.render();
         }
     }
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // collect all words
     function getKeyContainer() {
         keyContainer = keyContainer.filter(onlyUnique);
         return keyContainer;
     }
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // filter keyword by uniqueness
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
     }
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // call chart
     function renderAllCharts() {
         if (is_chart_created === true) {
@@ -865,9 +827,7 @@ $document.ready(function() {
             }
         }
     }
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     /**
      * Core & Helper Functions for JavaScript
      * array sum
@@ -879,9 +839,7 @@ $document.ready(function() {
         });
         return ret;
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // Instagram Search object
     var InstagramSearch = function(option) {
         this.filterKeywords = option.filterKeywords;
@@ -922,16 +880,14 @@ $document.ready(function() {
         // return self object
         return this;
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // initialize Instagram Search Object
     InstagramSearch.prototype.initStart = function() {
         // special to collect this keyword
         var _self = this;
         /** each data normal post */
         return $.post(_self.requestUrl, {
-            // send key word
+            // send keyword
             keyword: _self.keyword,
             // send next id
             next: _self.nextId,
@@ -939,7 +895,7 @@ $document.ready(function() {
             request_action: _self.action
         }, function(json) {
             // if any error in ajax response
-            if (window._sharedData.error) {
+            if (typeof window._sharedData == 'undefined' ||  window._sharedData.hasOwnProperty("error")) {
                 // break the bone
                 return false;
             } else {
@@ -972,9 +928,7 @@ $document.ready(function() {
             _self.onCallNextRequest();
         });
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // Check if hash tag Exist
     InstagramSearch.prototype.findHashtags = function findHashtags(searchText) {
         if (!searchText) {
@@ -995,9 +949,7 @@ $document.ready(function() {
         });
         return res;
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // Count Words by Group
     InstagramSearch.prototype.keyWordsGroupCount = function(arrObj) {
         var _self = this;
@@ -1009,9 +961,7 @@ $document.ready(function() {
             }
         });
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // build the template view
     InstagramSearch.prototype.buildTemplateView = function() {
         var _self = this;
@@ -1060,9 +1010,7 @@ $document.ready(function() {
             keywords: Object.keys(this.keyWordsGroupCountValue).length
         };
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // build media top post image
     InstagramSearch.prototype.buildMediaPost = function(json) {
         var _self = this;
@@ -1094,9 +1042,7 @@ $document.ready(function() {
             }, this);
         });
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // build top media comments
     InstagramSearch.prototype.buildTopPostMedia = function(json) {
         var _self = this;
@@ -1148,9 +1094,7 @@ $document.ready(function() {
             });
         });
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // set top navigation counters
     InstagramSearch.prototype.buildSummarizeCount = function(elOptions) {
         // get all likes count
@@ -1167,9 +1111,7 @@ $document.ready(function() {
         this.sumOfTotalShare.text(parseInt(this.sumOfTotalShare.text()) + Object.keys(this.keyWordsGroupCountValue).length);
         this.sumOfTotalPosts.text(parseInt(this.sumOfTotalPosts.text()) + this.sumOfPosts);
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // next request call
     InstagramSearch.prototype.onCallNextRequest = function() {
         // special to collect this keyword
@@ -1189,9 +1131,7 @@ $document.ready(function() {
             _self.callback(_self.chartOptions);
         }
     };
-    /**
-     * ============================================================================================
-     */
+    /* ---------------------------------------------------------------------------------------------------- */
     // APP Instance
     var APP = new superScraper();
     // Cache values
