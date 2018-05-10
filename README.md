@@ -1,4 +1,6 @@
-## Instagram Fetch Account issue: In Progress....
+```diff
+- ## Instagram User's Account Search is Suspended For Now And Currently Hashtag Search is Working :(
+```
 
 ## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 12-April-2018
 
