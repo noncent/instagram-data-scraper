@@ -1,3 +1,7 @@
+---
+## 💯 Hurray!!!! Now we have [LIVE!! LINK](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
+---
+
 ```diff
 - ## Instagram User's Account Search is Suspended For Now And Currently Hashtag Search is Working :(
 ```
