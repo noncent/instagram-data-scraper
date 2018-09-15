@@ -13,8 +13,16 @@ $show_account = false;
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async  src="https://www.googletagmanager.com/gtag/js?id=UA-38328701-1"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag() { dataLayer.push(arguments); } gtag('js', new Date());gtag('config', 'UA-38328701-1');</script>
+    <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
-    <title>Instagram | Super Scraper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Instagram Data Scraper | Web Scraper | Post Scraper | Scraper | Content Scraper | Super Scraper | Page Scraper | Scarpe Instagram Data">
+    <meta name="keywords" content="Instagram Data Scraper, Instagram Scraper, Instagram Content Scraper, Instagram Web Scraper">
+    <meta name="author" content="Neeraj Singh">
+    <title>Instagram | Super Scraper | Data Scraper | Scrape Instagram Data</title>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -22,10 +30,22 @@ $show_account = false;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" href="./public/bootstrap-3.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="./public/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./public/jQCloud/dist/jqcloud.min.css">
+    <link rel="stylesheet" href="./public/jqcloud/dist/jqcloud.min.css">
     <link type="text/css" href="./public/core/css/core.min.css" rel="stylesheet">
+    <style>
+    .se-pre-con {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url(./public/core/images/loader.gif) center no-repeat #fff;
+    }
+    </style>
 </head>
 <body>
+     <div class="se-pre-con"></div>
     <div class="wrapper">
         <div class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
@@ -38,7 +58,7 @@ $show_account = false;
                     <a class="navbar-brand" href="javascript:void(0);">
                         <span>
                             <img width="30px" src="./public/core/images/logo.png">
-                        </span>Instagram Super Scraper
+                        </span>Instagram Super Scraper 2.5.3
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
@@ -56,6 +76,11 @@ $show_account = false;
                         <li>
                             <a href="javascript:void(0);">
                                 <e aria-expanded="false" data-placement="bottom" id="SumOfTotalLikes" rel="tooltip" data-original-title="Total likes"> <i class="txt-pink fa fa-heart"> </i> <span class="badge badge-pill"> 0 </span></e>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <e aria-expanded="false" data-placement="bottom" id="SumOfVideoViews" rel="tooltip" data-original-title="Total Video Views"> <i class="txt-warning fa fa-video-camera"> </i> <span class="badge badge-pill"> 0 </span></e>
                             </a>
                         </li>
                         <li>
@@ -413,8 +438,8 @@ $show_account = false;
                                         </a>
                                     </div>
                                     <div class="col card card-block col-md-4">
-                                        <a target="_new" style="margin-top: 15px;" class="navbar-left text-muted" href="http://mistic100.github.io/jQCloud/demo.html">
-                                            <span><img src="./public/core/images/jQCloud.png"/></span>&nbsp;&nbsp; jQClod
+                                        <a target="_new" style="margin-top: 15px;" class="navbar-left text-muted" href="http://mistic100.github.io/jqcloud/demo.html">
+                                            <span><img src="./public/core/images/jqcloud.png"/></span>&nbsp;&nbsp; jQClod
                                         </a>
                                     </div>
                                     <div class="col card card-block col-md-4">
@@ -709,7 +734,7 @@ $show_account = false;
             <script type="text/javascript" src="./public/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="./public/canvasjs/canvasjs.min.js"></script>
             <script type="text/javascript" src="./public/mustache/mustache.min.js"></script>
-            <script type="text/javascript" src="./public/jQCloud/dist/jqcloud.min.js"></script>
+            <script type="text/javascript" src="./public/jqcloud/dist/jqcloud.min.js"></script>
             <script type="text/javascript" src="./public/typeahead/typeahead.min.js"></script>
             <script type="text/javascript" src="./public/core/js/core.min.js"></script>
         </body>

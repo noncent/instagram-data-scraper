@@ -104,14 +104,17 @@ var Config = {
     // get Config item
     getItem: function(item) {
         if (this[item].toString()) {
+            _l('Item found: ' + item);
             return this[item].toString();
         } else {
+            _l('Item not found: ' + item);
             return false;
         }
     },
     // set Config item
     setItem: function(item, value) {
         if (this[item]) {
+            _l('Item found and set value: ' + item + ' : ' + value);
             this[item] = value;
         }
     }
@@ -141,6 +144,8 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
  */
 var stateProgress = function() {
     // debugger message console
+    _l('currentMasterIndex: ' + currentMasterIndex);
+    _l('currentMasterProgress: ' + currentMasterProgress);
     // update progress bar
     // $loadingContainer.attr({
     //     'aria-valuenow': currentMasterProgress
@@ -217,11 +222,14 @@ Instagram.prototype.setAccount = function() {
  * Instagram JSON and set in Object Property
  */
 Instagram.prototype.setMedia = function() {
+    _l('Set Media Calling....');
     var _this = this;
     // show label, no of total post / 12
     var userPostIndex = Math.ceil(this.info.Posts / 12);
     this.eventHandler("Likes & Comments: " + this.currentIndexPost + "/" + userPostIndex + ", " + this.info.FullName);
     this.txtProgressState = Math.ceil(this.currentIndexPost * 100) / userPostIndex;
+    _l('New JSON Data .... ');
+    _l(this.InstaJSON);
     // +++++++++++++++++++++++++++++++++++
     // get users social data from json
     // +++++++++++++++++++++++++++++++++++
@@ -262,6 +270,7 @@ Instagram.prototype.setMedia = function() {
                 views_sum += parseInt(this) || 0;
             });
         }
+        _l('Is Next Calling Value: ' + this.isSearchingForNext);
         // set all values of sum
         if (this.isSearchingForNext == false) {
             this.info.TotalLikes = likes_sum;
@@ -274,6 +283,7 @@ Instagram.prototype.setMedia = function() {
             this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
         }
         // check if next id available to get next result set
+        _l('Check Has Next from JSON: ' + this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.has_next_page);
         if (this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.has_next_page == true) {
             this.urlInstagramNext = this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.end_cursor;
             this.currentIndexPost += 1;
@@ -449,6 +459,9 @@ Instagram.prototype.initNow = function(link, _send_payload) {
                 // update label text
                 $this.eventHandler("Likes & Comments Done..." + $this.info.FullName, 'label-success');
                 // debugger message console
+                _l('Current Index ' + $this.currentIndex);
+                _l('totalRequestUrl ' + totalRequestUrl);
+                _l('Current% ' + masterProgress);
                 // update master progress bar value
                 currentMasterProgress = masterProgress;
                 // call progress bar
@@ -472,6 +485,9 @@ Instagram.prototype.initNow = function(link, _send_payload) {
             // update label text
             $this.eventHandler("Likes & Comments Done..." + $this.info.FullName, 'label-success');
             // debugger message console
+            _l('Current Index ' + $this.currentIndex);
+            _l('totalRequestUrl ' + totalRequestUrl);
+            _l('Current% ' + masterProgress);
             // update master progress bar value
             currentMasterProgress = masterProgress;
             // call progress bar
@@ -630,6 +646,7 @@ $document.ready(function() {
      * @return {[type]}     [description]
      */
     $(document).on('click', 'a.download', function() {
+        _l('Download triggered....');
         // a tag
         var _this = $(this);
         // table id
@@ -888,6 +905,7 @@ $document.ready(function() {
                 json = window._sharedData.entry_data.ProfilePage.shift();
             }
             // store all json data in class property
+            _l(json);
             // json in to local var
             _self.dataJson = json;
             // if next id present in json
@@ -900,6 +918,7 @@ $document.ready(function() {
                 // no next request
                 _self.isNextOn = false;
             }
+            _l(json);
             // parse the json data
             _self.buildMediaPost(json);
             // parse most popular posts, only for once

@@ -2,7 +2,7 @@
 - ## Instagram User's Account Search is Suspended For Now And Currently Hashtag Search is Working :(
 ```
 
-## :star: Instagram-Super-Scraper V 2.5.2 (Dev) - Last Updated : 12-April-2018
+## :star: Instagram-Super-Scraper V 2.5.3 (Dev) - Last Updated : 16-Sep-2018
 
 ## 😊 Active Contributor (Thanks! a lot)
 | #  | 📷 |Say Hello! 😇 |
@@ -41,8 +41,8 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 
 ---
 
-##  :scream_cat: Screenshot of New 2.5.2 (Dev) released:
-![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/new-screen-app.png)
+##  :scream_cat: Screenshot of New 2.5.3 (Dev) released:
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/2.5.3.screen.app.png)
 
 ---
 
@@ -160,6 +160,10 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ##  :chart_with_upwards_trend: Change logs:
 
+
+> Committed repo change code version 2.5.3
+- Video total view count added at top of bar
+- Video view count added for each hashtag
 
 > Committed repo change code version 2.5.2
 - Account Information Likes has Post Preview

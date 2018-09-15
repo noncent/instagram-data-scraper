@@ -1859,3 +1859,5 @@ textarea {
     /* Vertically center the text there */
     background-color: #f5f5f5;
 }
+
+.chart-container{margin-top: 50px;}
