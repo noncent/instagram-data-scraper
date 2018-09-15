@@ -1,3 +1,7 @@
+---
+## 💯 Hurray!!!! Now we have [LIVE!! LINK](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
+---
+
 ```diff
 - ## Instagram User's Account Search is Suspended For Now And Currently Hashtag Search is Working :(
 ```
@@ -11,7 +15,7 @@
 
 
 
-##  :see_no_evil: What... Instagram Super Scraper DOES?
+##  :see_no_evil: What... Instagram Super Scraper DO?
 
 Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
 related to user e.g. likes, comments, post count, images, likes on images etc... Currently only User Name, Biography, Followers,
