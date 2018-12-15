@@ -30,3 +30,19 @@ function is_htaccess_enable()
     }
 
 }
+
+/**
+ * Create log file with data
+ *
+ * @param [type] $file_name
+ * @param [type] $anything
+ * @return void
+ */
+function write_log($file_name, $anything)
+{
+    // catch each request data
+    file_put_contents($file_name, $anything, FILE_APPEND);
+    // separator
+    file_put_contents($file_name, PHP_EOL . str_repeat('+', 25) . PHP_EOL, FILE_APPEND);
+
+}

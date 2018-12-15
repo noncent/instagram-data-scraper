@@ -8,6 +8,19 @@
 |
 */
 $show_account = false;
+
+/*
+|--------------------------------------------------------------------------
+| ON PAGE RELOAD SESSION WILL BE EMPTY
+|--------------------------------------------------------------------------
+|
+|  SESSION data delete
+|
+ */
+
+// !session_id() ? session_start() : session_destroy();
+// $_SESSION['array_data'] = null;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
