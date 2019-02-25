@@ -1,17 +1,13 @@
 ---
-## 💯 Hurray!!!! Now we have [LIVE!! LINK](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
+## 💯 Wow! now we have [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
 ---
 
 ```diff
-- ## Instagram User's Account Search is Suspended For Now And Currently Hashtag Search is Working :(
++ ## Instagram user account search coming soon. EPD - 30-Feb-2019
 ```
 
 ## :star: Instagram-Super-Scraper V 2.5.3 (Dev) - Last Updated : 16-Sep-2018
 
-## 😊 Active Contributor (Thanks! a lot)
-| #  | 📷 |Say Hello! 😇 |
-| ------------- | ------------- |-------------|
-| 1  |![Yuzuru Suzuki](https://avatars0.githubusercontent.com/u/1485195?s=120&v=4)|🌟 Yuzuru Suzuki(https://github.com/YuzuruS)|
 
 
 
@@ -212,5 +208,10 @@ any illegal use. Kindly, respect user's privacy and others efforts. Do not try t
 
 ## Next Build Development:
 #### (Working on next build - Location with Facebook, RSS & Twitter)
+
+
+## List Of Contributors:
+- [Yuzuru Suzuki](https://github.com/YuzuruS)
+
 
 Thank you all :) :|
