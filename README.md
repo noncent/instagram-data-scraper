@@ -3,7 +3,7 @@
 ---
 
 ```diff
-+ ## Instagram user account search coming soon. EPD - 30-Feb-2019
++ ## Instagram user account search work in progress...
 ```
 
 ## :star: Instagram-Super-Scraper V 2.5.3 (Dev) - Last Updated : 16-Sep-2018
