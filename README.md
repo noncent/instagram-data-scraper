@@ -30,7 +30,7 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 - Select Full or Minimum Account information by toggle option
 - Now you can Search #Hashtags and @UserAccounts simultaneously - New Feature
 - Searching Keyword added - New Feature
-- Keywords Analytic s - New Feature
+- Keywords Analytics - New Feature
 - Top Posts - New Feature
 - Top Post Comments - New Feature
 - Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
