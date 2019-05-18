@@ -1,5 +1,5 @@
 ---
-## 💯 Wow! now we have [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
+## 💯 Now, we have [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
 ---
 
 ```diff
