@@ -1,8 +1,7 @@
 
 
-### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 19 August 2019
+### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 19 August 2019 ([Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/))
 
-### 💯 [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) See a working example (#Hashtag & @Account Search).
 ---
 As I had promised **@useraccount search is now available now**.
 You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID. Just login in your instagram account and copy the session id from your broswer (click to 'Set session' button to get more help).
