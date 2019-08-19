@@ -1,15 +1,14 @@
-## :star: Instagram-Super-Scraper V 2.6 (Dev) - Last Updated : 19 August 2019
-
----
-## 💯 Now, we have [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
+## :star: Instagram-Super-Scraper V 2.6 (Beta) - Last Updated : 19 August 2019
 ---
 
-## [x] As promised @useraccount search now available.
-You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID
+## 💯 [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper (#Hashtag & @Account Search).
+---
+
+## [x] As promised @useraccount search is now available. You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID
 
 ---
 
-##  :see_no_evil: What... Instagram Super Scraper DO?
+##  :see_no_evil: What... Instagram Super Scraper does?
 
 Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
 related to user e.g. likes, comments, post count, images, likes on images etc... Currently only User Name, Biography, Followers,
@@ -23,7 +22,7 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 
 ---
 
-## :innocent: What's new in Instagram Super Scraper (BETA)?
+## :innocent: What's new in Instagram Super Scraper (Beta)?
 - [x] Hashtag search
 - [x] Hashtag Likes
 - [x] Hashtag Comments
@@ -45,7 +44,7 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 ---
 
 ##  :scream_cat: Screenshot of New 2.6 (Beta) released:
-![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/2.5.3.screen.app.png)
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/2.6.screen.app.png)
 
 ---
 
