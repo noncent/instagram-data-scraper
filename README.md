@@ -2,16 +2,15 @@
 ## 💯 Now, we have [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper.
 ---
 
-```diff
-+ ## Instagram user account search work in progress...
-```
 
 ## :star: Instagram-Super-Scraper V 2.5.3 (Dev) - Last Updated : 16-Sep-2018
 
 
 
-## As promised @useraccount search now available.
+## [x] As promised @useraccount search now available.
 You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID
+
+---
 
 ##  :see_no_evil: What... Instagram Super Scraper DO?
 
