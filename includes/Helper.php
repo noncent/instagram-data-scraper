@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @param array $data
  */
@@ -40,9 +41,23 @@ function is_htaccess_enable()
  */
 function write_log($file_name, $anything)
 {
-    // catch each request data
-    file_put_contents($file_name, $anything, FILE_APPEND);
-    // separator
-    file_put_contents($file_name, PHP_EOL . str_repeat('+', 25) . PHP_EOL, FILE_APPEND);
+    global $config;
+    if ($config['logs'] === true) {
+        // first check if log folder exists
+        if (is_dir($config['log_folder']) && is_writable($config['log_folder'])) {
+            // log file name
+            if (!isset($file_name)) {
+                $file_name = $config['log_folder'] . "/" . $config['log_file_name'];
+            }
+            // catch each request data
+            file_put_contents($config['log_folder'] . "/" . $file_name, $anything, FILE_APPEND);
+            // separator
+            file_put_contents($config['log_folder'] . "/" . $file_name, PHP_EOL . str_repeat('+', 25) . PHP_EOL, FILE_APPEND);
+        } else {
+            // Make sure the log folder is writable
+            mkdir($config['log_folder']);
+            chmod($config['log_folder'], $config['file_folder_permission']);
+        }
+    }
 
 }

@@ -1,19 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Application Error Settings
-| On/Off PHP Errors
-|--------------------------------------------------------------------------
-|
-|  Comment Description
-|
- */
-
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
-error_reporting(0);
-
 /*
 |--------------------------------------------------------------------------
 | Define project base path
@@ -28,6 +13,18 @@ define('ABSPATH', dirname(dirname(__FILE__)) . '/');
 
 /*
 |--------------------------------------------------------------------------
+| Included PHP Constant file
+| Check Constant values
+|--------------------------------------------------------------------------
+|
+|  Comment Description
+|
+ */
+
+include_once ABSPATH . 'config/Constants.php';
+
+/*
+|--------------------------------------------------------------------------
 | Get all AjaxPOST request here.. for Non Htaccess Support Server or Not Enable
 | MODE Re Write Module Apache
 |--------------------------------------------------------------------------
@@ -36,12 +33,47 @@ define('ABSPATH', dirname(dirname(__FILE__)) . '/');
 |
  */
 
-// load Instagram class file
+$config = include_once ABSPATH . 'config/Config.php';
+
+/*
+|--------------------------------------------------------------------------
+| load Instagram class file
+| Check Class Instagram
+|--------------------------------------------------------------------------
+|
+|  Comment Description
+|
+ */
+
 require_once ABSPATH . 'includes/Instagram.php';
-// load helper file
+
+/*
+|--------------------------------------------------------------------------
+| load App Helper file
+| Check Helper File
+|--------------------------------------------------------------------------
+|
+|  Comment Description
+|
+ */
+
 require_once ABSPATH . 'includes/Helper.php';
 
 // pre($_REQUEST);die;
+// pre($config);
+
+/*
+|--------------------------------------------------------------------------
+| Application Error Settings
+| On/Off PHP Errors
+|--------------------------------------------------------------------------
+|
+|  Comment Description
+|
+ */
+ini_set('display_errors', $config['show_error']);
+ini_set('display_startup_errors', $config['show_error']);
+error_reporting($config['show_error']);
 
 // create Instagram class object
 $instagram = new InstagramWrapper();
@@ -54,19 +86,19 @@ if (isset($_REQUEST['request_action'])) {
 }
 
 // condition for account info
-if ($request_action == 'pull_account') {
+if (in_array($request_action, array('pull_media', 'pull_account'))) {
     // echo output
     echo $instagram->insta_account();
 }
-// condition for hash tag search 
+// condition for hash tag search
 else {
     echo $instagram->insta_search();
 }
 
-/**
+/*
  * Debug JSON Data Test
  * @var [type]
  */
-# $json = file_get_contents('data.json');
-# header('Content-Type: application/javascript');
-# echo $json;
+// $json = file_get_contents('data.json');
+// header('Content-Type: application/javascript');
+// echo $json;

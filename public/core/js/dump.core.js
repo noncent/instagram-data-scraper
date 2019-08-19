@@ -112,18 +112,14 @@ var Config = {
   // get Config item
   getItem: function(item) {
     if (this[item].toString()) {
-      _log('Item found: ' + item);
       return this[item].toString();
     } else {
-      _log('Item not found: ' + item);
       return false;
     }
   },
   // set Config item
   setItem: function(item, value) {
-    _log('Item request to set: ' + item + ' : ' + value);
     if (this[item].toString()) {
-      _log('Item found and set value: ' + item + ' : ' + value);
       this[item] = value;
     }
   }
@@ -138,16 +134,10 @@ $document.on('click', $account_filters, function() {
 });
 // Application log method
 var _l = function(data_object_array) {
-  if (logInfo === true) {
-    _log(data_object_array);
-  }
+  if (logInfo === true) {}
 };
 // check if a json has property
 function hasProp(obj, prop) {
-  _log('obj');
-  _log(obj);
-  _log('prop');
-  _log(prop);
   if (obj !== undefined) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
   }
@@ -197,8 +187,6 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
  */
 var stateProgress = function() {
   // debugger message console
-  _log('currentMasterIndex: ' + currentMasterIndex);
-  _log('currentMasterProgress: ' + currentMasterProgress);
   // update progress bar
   // $loadingContainer.attr({
   // 'aria-valuenow': currentMasterProgress
@@ -279,12 +267,8 @@ InstagramAccountSearch.prototype.setAccount = function() {
  * users account-information
  */
 InstagramAccountSearch.prototype.buildAccountTableSummary = function() {
-  _log('Set Media Calling....');
   var _this = this;
   // show label, no of total post / 12
-  _log('No of total POST is, ' + this.info.Posts);
-  _log('Current Index is, ' + this.currentIndexPost);
-  _log('STEP: A currentIndexPost = ' + this.currentIndexPost);
   var userPostIndex = Math.ceil(this.info.Posts / MAX_POST_RETURNS);
   console.info(this.currentIndexPost + ' - ' + userPostIndex);
   this.eventHandler('Likes & Comments: ' + this.currentIndexPost + '/' + userPostIndex + ', ' + this.info.FullName);
@@ -292,8 +276,6 @@ InstagramAccountSearch.prototype.buildAccountTableSummary = function() {
   // if requested full information only then call script
   if (this.infoFullMin === FILTER_FULL) {
     console.info('Full request access');
-    _log('JSON data is .... ');
-    _log(this.InstaJSON);
     // +++++++++++++++++++++++++++++++++++
     // get users social data from json
     // +++++++++++++++++++++++++++++++++++
@@ -306,13 +288,9 @@ InstagramAccountSearch.prototype.buildAccountTableSummary = function() {
     var comments_sum = 0;
     var views_sum = 0;
     var userJsonData = {};
-    _log('InstaJSON debug data');
-    _log(this.InstaJSON);
     // check if property exist
     if (hasProp(this.InstaJSON, 'graphql') || hasProp(this.InstaJSON, 'data')) {
-      _log('Entering in graphql or data mode');
       if (hasProp(this.InstaJSON.graphql, 'user') || hasProp(this.InstaJSON.data, 'user')) {
-        _log('Entering in user');
         // collectors empty arrays
         if (hasProp(this.InstaJSON.graphql, 'user')) {
           // change json data node
@@ -326,16 +304,11 @@ InstagramAccountSearch.prototype.buildAccountTableSummary = function() {
           userJsonData = this.InstaJSON.data.user;
         } else {
           {
-            _log("No data or graphql has user property");
             return false;
           }
         }
         // check if request is full or minimum
-        _log("JSON edge is printing");
-        _log(Edges);
         $.each(Edges, function(index, edge) {
-          _log('Displaying edge');
-          _log(edge);
           _this.info.Thumbs.push({
             'thumb-src': edge.node.thumbnail_resources[0].src,
             comments: edge.node.edge_media_to_comment.count,
@@ -355,35 +328,25 @@ InstagramAccountSearch.prototype.buildAccountTableSummary = function() {
           views_sum += parseInt(v) || 0;
         });
       }
-      _log('Is Next Calling Value: ' + this.isSearchingForNext);
       // set all values of sum
       if (!this.isSearchingForNext) {
-        _log('likes sum value is: ' + likes_sum);
         this.info.TotalLikes = likes_sum;
-        _log('comments sum value is: ' + comments_sum);
         this.info.TotalComments = comments_sum;
-        _log('views sum value is: ' + views_sum);
         this.info.TotalViews = views_sum;
       } else {
         // add in previous values
         this.info.TotalLikes = parseInt(this.info.TotalLikes) + likes_sum;
         this.info.TotalComments = parseInt(this.info.TotalComments) + comments_sum;
         this.info.TotalViews = parseInt(this.info.TotalViews) + views_sum;
-        _log('Searching for next....');
       }
       // check if next id available to get next result set
-      _log('Check Has Next from JSON: ' + userJsonData.edge_owner_to_timeline_media.page_info.has_next_page);
       if (userJsonData.edge_owner_to_timeline_media.page_info.has_next_page === true) {
         this.urlInstagramNext = userJsonData.edge_owner_to_timeline_media.page_info.end_cursor;
         this.currentIndexPost++;
-        _log('STEP: B ++ currentIndexPost = ' + this.currentIndexPost);
         this.isSearchingForNext = true;
-        _log('Next page is requested');
       } else {
         this.currentIndexPost = 1;
-        _log('STEP: C Reset currentIndexPost = 1');
         this.isSearchingForNext = false;
-        _log('Next page not requested');
       }
       // safe values set fall-back values
       if (typeof this.info.TotalLikes === undefined) {
@@ -443,7 +406,7 @@ InstagramAccountSearch.prototype.buildTableRowsContent = function() {
   var template = $(Config.getItem('accountThumbPopup')).html();
   // optional, speeds up future uses
   Mustache.parse(template);
-  // _log(this.info.Thumbs)
+  //
   // set form input with search values
   rendered = Mustache.render(template, {
     username: this.info.UserName,
@@ -496,7 +459,6 @@ InstagramAccountSearch.prototype.eventHandler = function(label, error_class) {
 InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
   // cache main object
   var $this = this;
-  _log('Calling init now');
   var send_payload = _send_payload;
   // set default payload object
   if (!send_payload) {
@@ -506,18 +468,14 @@ InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
       // send cookie name
       sessionid: Config.getItem('session_key')
     };
-    _log('Sending payload is:');
-    _log(send_payload);
   }
   // you said promise
   return $.post($this.sendRequestUrl, send_payload, function(data, textStatus, xhr) {
     // set var counter
-    _log('inside ajax request: Searching for Next, ' + $this.isSearchingForNext);
     var masterProgress = 0;
     // if any error in ajax response
     if (window._sharedData && window._sharedData.error) {
       // set error flag
-      _log('JSON has error, terminating process now.');
       $this.stateError = true;
       // show error message
       $this.errorHandler(window._sharedData.error);
@@ -531,62 +489,45 @@ InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
       currentMasterIndex++;
       // break the bone
       return false;
-    } else {
-      _log('Success, no ajax error in response');
-    }
+    } else {}
     // handle success response
     $this.InstaJSON = window._sharedData.entry_data.ProfilePage.shift();
-    _log('This is what response fetched');
-    _log($this.InstaJSON);
     // set error flag false
     $this.stateError = false;
     // check if property exist
     if ($this.InstaJSON.graphql) {
-      _log('graphql found in response');
       // instagram returns graphql on first request then on 2nd request returns data property (check else condition)
       if ($this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.has_next_page === true && $this.infoFullMin == FILTER_FULL) {
         console.info('Full request access II');
         $this.urlInstagramNext = $this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.end_cursor;
-        _log('STEP: D ++ currentIndexPost = ' + $this.currentIndexPost);
         $this.currentIndexPost++;
         $this.isSearchingForNext = true;
-        _log('Next page is requested graphql: end_cursor - ' + $this.urlInstagramNext);
       } else {
         $this.currentIndexPost = 1;
-        _log('STEP: E Reset currentIndexPost = 1');
         $this.isSearchingForNext = false;
-        _log('STEP: Next page not requested graphql: end_cursor - ' + $this.urlInstagramNext);
       }
     } else if ($this.InstaJSON.data && $this.infoFullMin === FILTER_FULL) {
       console.info('Full request access III');
       if ($this.InstaJSON.data.user.edge_owner_to_timeline_media.page_info.has_next_page === true) {
         $this.urlInstagramNext = $this.InstaJSON.data.user.edge_owner_to_timeline_media.page_info.end_cursor;
-        _log('STEP: F ++ currentIndexPost = ' + $this.currentIndexPost);
         $this.currentIndexPost++;
         $this.isSearchingForNext = true;
-        _log('Next page is requested data: end_cursor - ' + $this.urlInstagramNext);
       } else {
-        _log('STEP: G Reset currentIndexPost = 1');
         $this.currentIndexPost = 1;
         $this.isSearchingForNext = false;
-        _log('Next page not requested data: end_cursor - ' + $this.urlInstagramNext);
       }
     } else {
-      _log('No data or graphql found');
       return false;
     }
     // $this.InstaJSON.graphql.user.edge_owner_to_timeline_media.page_info.end_cursor
-    _log('Requesting action is:' + send_payload.request_action);
     // get/set users data
     if (send_payload.request_action === 'pull_account') {
       // check private account status
       if ($this.InstaJSON.graphql.user.is_private === true) {
-        _log('Requested account is private');
         // update label text
         $this.eventHandler('This is Private account: ' + $this.InstaJSON.graphql.user.full_name, 'label-danger');
         return false;
       }
-      _log('Setting user account with information');
       $this.setAccount();
       // next ajax call
       _send_payload = {
@@ -601,11 +542,9 @@ InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
       // send ajax request again
       if ($this.infoFullMin === FILTER_FULL) {
         console.info('Full request access IV');
-        _log('Call ing init now again...with max is and pull media flag');
         $this.initNow($this.info.UserName, _send_payload);
       }
     } else {
-      _log('running else condition')
       $this.buildAccountTableSummary();
       // if next result set found with max id
       if ($this.isSearchingForNext === true && $this.infoFullMin === FILTER_FULL) {
@@ -631,16 +570,12 @@ InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
         // set next request false
         $this.isSearchingForNext = false;
         // reset index post
-        _log('STEP: H Reset currentIndexPost = 1');
         $this.currentIndexPost = 1;
         // set txt progress bar
         $this.txtProgressState = 0;
         // update label text
         $this.eventHandler('Likes & Comments Done...' + $this.info.FullName, 'label-success');
         // debugger message console
-        _log('Current Index ' + $this.currentIndex);
-        _log('totalRequestUrl ' + totalRequestUrl);
-        _log('Current% ' + masterProgress);
         // update master progress bar value
         currentMasterProgress = masterProgress;
         // call progress bar
@@ -652,7 +587,6 @@ InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
     /* Start: Hot Fix Patch */
     if ($this.infoFullMin == FILTER_MIN) {
       console.info('Min request access VI: ' + $this.infoFullMin);
-      _log('Search account is Minimum flag');
       // increase master index value
       currentMasterIndex++;
       // calculate work status
@@ -660,16 +594,12 @@ InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
       // set next request false
       $this.isSearchingForNext = false;
       // reset index post
-      _log('STEP: I Reset currentIndexPost = 1');
       $this.currentIndexPost = 1;
       // set txt progress bar
       $this.txtProgressState = 0;
       // update label text
       $this.eventHandler('Likes & Comments Done...' + $this.info.FullName, 'label-success');
       // debugger message console
-      _log('Current Index ' + $this.currentIndex);
-      _log('totalRequestUrl ' + totalRequestUrl);
-      _log('Current% ' + masterProgress);
       // update master progress bar value
       currentMasterProgress = masterProgress;
       // call progress bar
@@ -679,7 +609,6 @@ InstagramAccountSearch.prototype.initNow = function(link, _send_payload) {
     } else {
       console.info('Requested info type is: ' + $this.infoFullMin);
       console.info('Full request access VII');
-      _log('Going in Full Condition and Search for Next is TRUE');
       $this.isSearchingForNext = true;
     }
     /* End: Hot Fix Patch */
@@ -705,7 +634,6 @@ $document.ready(function() {
     //console.info(Config.getItem('infoFullMin'));
   });
   $(instagramSessionInput).on('change paste keyup', function() {
-    _log('Session value reset: ' + $(this).val());
     Cookies.set(instaCookieName, $(this).val());
   }); // if cookie set then get value
   if (instagramSessionCookie) {
@@ -820,7 +748,6 @@ $document.ready(function() {
    * @return {[type]} [description]
    */
   $(document).on('click', 'a.download', function() {
-    _log('Download triggered....');
     // a tag
     var _this = $(this);
     // table id
@@ -1057,7 +984,6 @@ $document.ready(function() {
         json = window._sharedData.entry_data.ProfilePage.shift();
       }
       // store all json data in class property
-      _log(json);
       // json in to local var
       _self.dataJson = json;
       // if next id present in json
@@ -1070,7 +996,6 @@ $document.ready(function() {
         // no next request
         _self.isNextOn = false;
       }
-      _log(json);
       // parse the json data
       _self.buildMediaPost(json);
       // parse most popular posts, only for once
@@ -1307,7 +1232,6 @@ $document.ready(function() {
   }); // Click search button
   $(Config.getItem('btnSearch')).click(function(e) {
     // check if user share their instagram session
-    _log('Btn Search Clicked');
     // connections
     if (!is_online) {
       alert(Config.getItem('offlineMsg'));
@@ -1317,23 +1241,19 @@ $document.ready(function() {
     let userInstagramSessionId = $.trim(instagramSessionInput.val());
     // value
     if (!instagramSessionCookie && userInstagramSessionId) {
-      _log('Cookie set as: ' + instaCookieName + ' & value: ' + Cookies.get(instaCookieName));
       // value, create a new cookie and store session
       Cookies.set(instaCookieName, userInstagramSessionId);
     }
     // form template
     var template = $(Config.getItem('queryFormTemplate')).html();
     // optional, speeds up future uses
-    _log('Template ready: ' + template);
     // text result container
     Mustache.parse(template);
     var txtContainer = $(Config.getItem('searchFormContainer'));
     // search text
     var searchQuery = $(Config.getItem('txtSearch')).val();
-    _log('Search Query listed here: ' + searchQuery);
     // if not empty
     if (searchQuery) {
-      _log('Search Query not empty');
       var instanceOfSuperScraper = new superScraper();
       // split search text with space to make array
       var tagListArray = searchQuery.split(' ');
@@ -1342,13 +1262,11 @@ $document.ready(function() {
       // for each search item
       $.each(tagListArray, function(i, val) {
         // i = index, val = value
-        _log('Parsing and finding search value type');
         // =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  =
         // search hashtag search
         // =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  =
         // for hash tags, check if value is hastag
         if (tagListArray[i].indexOf('#') === 0) {
-          _log('its a hashtag value: ' + val);
           // set form input
           if (!$(".form-control.insta-url[value='" + val + "']").length) {
             // with search values
@@ -1385,7 +1303,6 @@ $document.ready(function() {
         // search users account
         // =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  = =  =  =
         if (tagListArray[i].indexOf('@') === 0) {
-          _log('its a user handle value: ' + val);
           if (Cookies.get(instaCookieName)) {
             // set form
             // input with earch values
@@ -1426,7 +1343,6 @@ $document.ready(function() {
                   // promise action can be done here
                 } else {
                   // reset index post master
-                  _log('STEP: J Reset currentIndexPost = 1');
                   accountSearch.currentIndexPost = 1;
                   // if any error
                   accountSearch.eventHandler('Error in Instagram profile link, wrong link', 'label-danger');
