@@ -1,37 +1,21 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| DO NOT EDIT THIS HEADER
-|--------------------------------------------------------------------------
-|
-|  Settings for Section
-|
-*/
-$show_account = true;
-/*
-|--------------------------------------------------------------------------
-| ON PAGE RELOAD SESSION WILL BE EMPTY
-|--------------------------------------------------------------------------
-|
-|  SESSION data delete
-|
-*/
-// !session_id() ? session_start() : session_destroy();
-// $_SESSION['array_data'] = null;
+$show_account               = true;
+$cdn_server_url             = "//cdnjs.cloudflare.com/ajax";
+$app_version                = '2.6';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38328701-1"></script> -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38328701-1"></script>
     <script>
-        // window.dataLayer = window.dataLayer || [];
-        // function gtag() {
-        //     dataLayer.push(arguments);
-        // }
-        // gtag('js', new Date());
-        // gtag('config', 'UA-38328701-1');
+         window.dataLayer = window.dataLayer || [];
+         function gtag() {
+             dataLayer.push(arguments);
+         }
+         gtag('js', new Date());
+         gtag('config', 'UA-38328701-1');
     </script>
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
@@ -39,15 +23,15 @@ $show_account = true;
     <meta name="description" content="Instagram Data Scraper | Web Scraper | Post Scraper | Scraper | Content Scraper | Super Scraper | Page Scraper | Scarpe Instagram Data">
     <meta name="keywords" content="Instagram Data Scraper, Instagram Scraper, Instagram Content Scraper, Instagram Web Scraper">
     <meta name="author" content="Neeraj Singh">
-    <title>Instagram | Super Scraper | Data Scraper | Scrape Instagram Data</title>
+    <title>Instagram | Instagram Data Scraper | Data Scraper | Scrape Instagram Data</title>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="./public/bootstrap-3.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link type="text/css" href="./public/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./public/jqcloud/dist/jqcloud.min.css">
+    <link type="text/css" href="<?php echo $cdn_server_url;?>/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo $cdn_server_url;?>/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo $cdn_server_url;?>/libs/jqcloud/1.0.4/jqcloud.min.css" rel="stylesheet" />
     <link type="text/css" href="./public/core/css/core.min.css" rel="stylesheet">
     <style>
         .se-pre-con {
@@ -62,6 +46,7 @@ $show_account = true;
     </style>
 </head>
 <body>
+    <div id="popup" style="display:none" class="alert alert-warning text-center" role="alert"> <button type="button" class="close" data-dismiss="alert">×</button> <strong>Namaste!!</strong> If you are facing any error, simple reload the page else please open an issue ticket <a class="alert-link" href="https://github.com/neerajsinghsonu/Instagram-Data-Scraper" target="_new">Github</a>.<br/>Thank you very much.. you are wonderful! :) </div>
     <div class="se-pre-con"></div>
     <div class="wrapper">
         <div class="navbar navbar-default navbar-static-top">
@@ -75,7 +60,7 @@ $show_account = true;
                     <a class="navbar-brand" href="javascript:void(0);">
                         <span>
                             <img width="30px" src="./public/core/images/logo.png">
-                        </span>Instagram Super Scraper 2.5.3
+                        </span>Instagram Data Scraper <?=$app_version;?>
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
@@ -919,13 +904,16 @@ $show_account = true;
     </div>
     <!-- End Modal Console -->
     <!-- end all template here -->
-    <script type="text/javascript" src="./public/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="./public/core/js/cookies.min.js"></script>
-    <script type="text/javascript" src="./public/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./public/canvasjs/canvasjs.min.js"></script>
-    <script type="text/javascript" src="./public/mustache/mustache.min.js"></script>
-    <script type="text/javascript" src="./public/jqcloud/dist/jqcloud.min.js"></script>
+    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/mustache.js/2.3.2/mustache.min.js"></script>
+    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
     <script type="text/javascript" src="./public/typeahead/typeahead.min.js"></script>
     <script type="text/javascript" src="./public/core/js/core.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() { if (localStorage.getItem('popState') != 'shown') { $("#popup").delay(2000).fadeIn(); localStorage.setItem('popState', 'shown') } $('#popup-close').click(function(e) { $('#popup').fadeOut(); }); $('#popup').click(function(e) { $('#popup').fadeOut(); }); }); 
+    </script>
 </body>
 </html>
