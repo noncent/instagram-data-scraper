@@ -1,28 +1,24 @@
-## :star: Instagram-Super-Scraper V 2.6 (Beta) - Last Updated : 19 August 2019
----
 
-## 💯 [Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/) to use Instagram Data Scraper (#Hashtag & @Account Search).
----
 
-## [x] As promised @useraccount search is now available. You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID
+### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 19 August 2019 ([Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/))
 
 ---
-
-##  :see_no_evil: What... Instagram Super Scraper does?
-
-Instagram Super Scraper is a PHP script which takes http://www.instagram/user-name/ as input and returns all information
-related to user e.g. likes, comments, post count, images, likes on images etc... Currently only User Name, Biography, Followers,
-Following, Posts, Likes, Comments & Views data in displaying. For other details you have to enable from php script code, Update
-Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';"
-
-jQuery is using to build the Awesome View, to handle each and every request separately. I hope you like this small chunk of code
-> The Instagram Scrapper is a PHP, Html, jQuery Script to get user's data from their Instagram account url.
-> Example: https://www.instagram.com/any-user-name/, You can add any link and can get their Total Likes, Total Posts, Comments etc.
-> You can also get their post images but it's just a POC so you have to change PHP Code. What you need to just decode json string >and parse by PHP arrays... let me know if you like or want improvement..
+As I had promised **@useraccount search is now available now**.
+You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID. Just login in your instagram account and copy the session id from your broswer (click to 'Set session' button to get more help).
 
 ---
+###  :see_no_evil: What... Instagram Data Scraper does?
 
-## :innocent: What's new in Instagram Super Scraper (Beta)?
+Instagram Data Scraper is a PHP script which takes @username or #hashtag as input and returns all information related to users e.g. likes, comments, post counts, images, likes on images etc.
+
+Currently only User's Name, Biography, Followers,
+Following, Posts, Likes, Comments & Views data in displaying. For other details you have to enable from php script code, Update Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';"
+
+jQuery is being used to build  Awesome Views, to handle each and every request separately. I hope you like this small chunk of code :)
+
+---
+### :innocent: What's new in Instagram Data Scraper (Beta)?
+Following features are available for now:
 - [x] Hashtag search
 - [x] Hashtag Likes
 - [x] Hashtag Comments
@@ -43,12 +39,12 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 
 ---
 
-##  :scream_cat: Screenshot of New 2.6 (Beta) released:
+###  :scream_cat: Screenshot of New 2.6 (Beta) released:
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/2.6.screen.app.png)
 
 ---
 
-##  :pencil2: Development Notes:
+###  :pencil2: Development Notes:
 - Instagram Super Scraper can fetch #hashtag likes, views, top posts (10), comments, keywords count.
 - You can set N Depth Level Search by editing JavaScript code, currently it's 4 level see. 'this.maxRequestNo = 4;' in core.js file. The depth control currently set for only keyword Search, Account Search is still open without any limit, but in future you may see Depth Controller for Account Search too.
 - You may have Depth Search Controller in future release.
@@ -65,7 +61,7 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 
 ---
 
-##  :package: Data available in Super Scraper
+###  :package: Data available in Super Scraper
 
 1 - Account information - N Level Search
 
@@ -89,7 +85,7 @@ jQuery is using to build the Awesome View, to handle each and every request sepa
 
 ---
 
-## Instagram JSON Response Endpoints & Parameters:
+### Instagram JSON Response Endpoints & Parameters:
 
 ```php
 
@@ -130,7 +126,7 @@ public $endpoint = array(
 ```
 ---
 
-## For your application
+### For your application
 
 Use PHP Class, HTML & Core.js to tweak as per your requirement.
 
@@ -138,7 +134,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ---
 
-##  :wrench: Requirement
+###  :wrench: Requirement
 
 > Apache version => 2.4
 > PHP version =>5.*
@@ -154,13 +150,15 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 > B-) Enable .htaccess (optional)
 
 
-## Note
+### Notes
 
 > C-) Rename dev.htaccess to .htaccess (If you are using windows just rename file dev.htaccess to .htaccess. and window will ignore last dot.. )
 
 ---
 
-##  :chart_with_upwards_trend: Change logs:
+###  :chart_with_upwards_trend: Change logs:
+> Committed repo change code version 2.6
+- User account search activated
 
 
 > Committed repo change code version 2.5.3
@@ -204,15 +202,12 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 Feel free to use and enjoy!! & Yes! all feedback's, enhancements are most welcome...
 
-## Request:
-The application is provided free of cost and for learning purpose that how we can scrape a website html source code. It not intended to harm anyone or
-any illegal use. Kindly, respect user's privacy and others efforts. Do not try to intent break something. The World is Beautiful More Then We thought :)
+---
+### Request:
+This application/Code/Script is provided by free of cost and for learning purpose that's how we can scrape a website html source code. It is not intended to harm anyone or to make any illegal use. Kindly, respect user's privacy and other peoples effort. Do not try to intent break anything. This World is Beautiful... More Then We thought :)
 
-## Next Build Development:
-#### (Working on next build - Location with Facebook, RSS & Twitter)
-
-
-## List Of Contributors:
+---
+### List Of Contributors:
 - [Yuzuru Suzuki](https://github.com/YuzuruS)
 
 
