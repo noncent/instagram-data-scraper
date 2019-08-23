@@ -1,6 +1,8 @@
 /**
  * This is global JavaScript file
  *
+ * @lastUpdated - 23-August-2019 without console.log
+ *
  * This file contains all global level variable and function which needs to call
  * in separate modular file
  *

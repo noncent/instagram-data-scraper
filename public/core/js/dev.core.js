@@ -1,6 +1,8 @@
 /**
  * This is global JavaScript file
  *
+ * @lastUpdated - 23-August-2019
+ *
  * This file contains all global level variable and function which needs to call
  * in separate modular file
  *
@@ -412,20 +414,20 @@ InstagramAccountSearch.prototype.buildTableRowsContent = function() {
   row += '<td>' + this.info.Followers + '</td>';
   row += '<td>' + this.info.Following + '</td>';
   row += '<td>' + this.info.Posts + '</td>';
-  if(this.info.TotalLikes){
+  if (this.info.TotalLikes) {
     row += '<td><a href="#" data-toggle="modal" data-target="#thumb-' + this.info.UserName + '">' + this.info.TotalLikes +
       '</a></td>';
-  }else{
+  } else {
     row += '<td>0</td>';
   }
-  if(this.info.TotalComments){
-  row += '<td>' + this.info.TotalComments + '</td>';
-  }else{
+  if (this.info.TotalComments) {
+    row += '<td>' + this.info.TotalComments + '</td>';
+  } else {
     row += '<td>0</td>';
   }
-  if(this.info.TotalViews){
-      row += '<td>' + this.info.TotalViews + '</td>';
-  }else{
+  if (this.info.TotalViews) {
+    row += '<td>' + this.info.TotalViews + '</td>';
+  } else {
     row += '<td>0</td>';
   }
   row += '<td>';
