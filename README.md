@@ -1,6 +1,6 @@
 
 
-### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 19 August 2019 ([Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/))
+### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 09 May 2020 ([Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/))
 
 ---
 As I had promised **@useraccount search is now available now**.
