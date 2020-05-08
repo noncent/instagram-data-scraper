@@ -211,4 +211,4 @@ This application/Code/Script is provided by free of cost and for learning purpos
 - [Yuzuru Suzuki](https://github.com/YuzuruS)
 
 
-Thank you all :) :|
+Thank you all :)
