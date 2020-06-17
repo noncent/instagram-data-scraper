@@ -1,6 +1,10 @@
 
+```diff
+- Online DEMO is, Out of Service. We are maintaing the code and will be back soon. Apologies for the inconvenience caused.
+```
 
-### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 09 May 2020 ([Online DEMO](https://dev.techcorpasia.com/instagram-data-scraper/))
+### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 17 June 2020 
+
 
 ---
 As I had promised **@useraccount search is now available now**.
