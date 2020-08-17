@@ -1,9 +1,14 @@
+<em>Hey Guys,<br/>
+Instagram has blocked my server IP hence the online demo isn't working anymore.
+Apologies for any inconvenience, but the good news is “You can download the code and run the tool onto your machine/laptop/desktop as LAMP or WAMP.</em>
+ 
+### <em>Online demo version - Suspended due to IP Block</em>
+### <em>Source code build - Working fine</em>
 
-```diff
-- Online DEMO is, Out of Service. We are maintaing the code and will be back soon. Apologies for the inconvenience caused.
-```
+---
+<br>
 
-### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 17 June 2020 
+### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 18 August 2020 
 
 
 ---
