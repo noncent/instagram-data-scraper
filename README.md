@@ -1,6 +1,3 @@
-<center><img align="center" src="https://github-readme-stats.vercel.app/api?username=neerajsinghsonu&show_icons=true&theme=buefy" /></center>
-
-
 <em>Hey Guys,<br/>
 Instagram has blocked my server IP hence the online demo isn't working anymore.
 Apologies for any inconvenience, but the good news is “You can download the code and run the tool onto your machine/laptop/desktop as LAMP or WAMP.</em>
