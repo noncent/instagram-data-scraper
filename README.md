@@ -19,7 +19,7 @@ As I had promised **@useraccount search is now available now**.
 You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID. Just login in your instagram account and copy the session id from your broswer (click to 'Set session' button to get more help).
 
 ---
-###  :see_no_evil: What... Instagram Data Scraper does?
+###  :see_no_evil: What does Instagram Data Scraper?
 
 Instagram Data Scraper is a PHP script which takes @username or #hashtag as input and returns all information related to users e.g. likes, comments, post counts, images, likes on images etc.
 
