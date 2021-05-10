@@ -6,15 +6,15 @@ Dear people,
 
 Instagram doing lots of changes in their APIs and Endpoints, hence lots of issues occurring everywhere. We are in the phase to observe all the changes and will come up with the final solution. Till then we are apologies for the inconvenience caused.
 
-### Status:
-- [ ] Hashtag Search
-- [ ] Hashtag Likes
-- [ ] Hashtag Comments
-- [ ] Hashtag Keywords
-- [ ] Hashtag Video Views
-- [ ] Hashtag Top Post Keywords
-- [ ] Hashtag Top Post Preview
-- [ ] Hashtag Top Post Data
+### Status (Up and Running):
+- [x] Hashtag Search
+- [x] Hashtag Likes
+- [x] Hashtag Comments
+- [x] Hashtag Keywords
+- [x] Hashtag Video Views
+- [x] Hashtag Top Post Keywords
+- [x] Hashtag Top Post Preview
+- [x] Hashtag Top Post Data
 - [x] User Account Search
 - [x] User Account Biography
 - [x] User Account Followers
@@ -26,6 +26,7 @@ Instagram doing lots of changes in their APIs and Endpoints, hence lots of issue
 - [x] Download data in excel
 
 ### Last issue reported on date - 10 May 2021
+### Last issue fixed #50 & #51 on date - 10 May 2021
 
 <p>&nbsp;</p>
 
