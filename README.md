@@ -58,7 +58,9 @@ jQuery is being used to build  Awesome Views, to handle each and every request s
 ---
 ### :innocent: What's new in Instagram Data Scraper (Beta)?
 Following features are available for now:
-- [x] Hashtag search
+- [ ] Instagram Reels Search (WIP)
+- [ ] Instagram Reels Likes/Views/Play/Comments & Counts (WIP)
+- [ ] Instagram Reels Video Play (WIP)
 - [x] Hashtag Likes
 - [x] Hashtag Comments
 - [x] Hashtag Keywords
