@@ -1,3 +1,34 @@
+<p>&nbsp;</p>
+
+# ⚠️ Warning
+
+Dear people,
+
+Instagram doing lots of changes in their APIs and Endpoints, hence lots of issues occurring everywhere. We are in the phase to observe all the changes and will come up with the final solution. Till then we are apologies for the inconvenience caused.
+
+### Status:
+- [ ] Hashtag Search
+- [ ] Hashtag Likes
+- [ ] Hashtag Comments
+- [ ] Hashtag Keywords
+- [ ] Hashtag Video Views
+- [ ] Hashtag Top Post Keywords
+- [ ] Hashtag Top Post Preview
+- [ ] Hashtag Top Post Data
+- [x] User Account Search
+- [x] User Account Biography
+- [x] User Account Followers
+- [x] User Account Following
+- [x] User Account Posts (Images are breaking)
+- [x] User Account Likes
+- [x] User Account Comments
+- [x] User Account Views
+- [x] Download data in excel
+
+### Last issue reported on date - 10 May 2021
+
+<p>&nbsp;</p>
+
 <em>Hey Guys,<br/>
 Instagram has blocked my server IP hence the online demo isn't working anymore.
 Apologies for any inconvenience, but the good news is “You can download the code and run the tool onto your machine/laptop/desktop as LAMP or WAMP.</em>
