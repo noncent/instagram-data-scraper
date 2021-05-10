@@ -910,6 +910,7 @@ $app_version                = '2.6';
     <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
     <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/mustache.js/2.3.2/mustache.min.js"></script>
     <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
+    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
     <script type="text/javascript" src="./public/typeahead/typeahead.min.js"></script>
     <script type="text/javascript" src="./public/core/js/core.min.js"></script>
     <script type="text/javascript">

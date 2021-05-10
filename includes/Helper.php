@@ -32,6 +32,13 @@ function is_htaccess_enable()
 
 }
 
+function fetchInstaImages ($url)
+{
+    // instagram only has jpeg images for now..
+    header("Content-type: image/jpeg");
+    readfile( $url );
+}
+
 /**
  * Create log file with data
  *

@@ -78,6 +78,13 @@ error_reporting($config['show_error']);
 // create Instagram class object
 $instagram = new InstagramWrapper();
 
+// Hotfix for issue #51
+if(isset($_GET['url']))
+{
+	fetchInstaImages($_GET['url']);
+	exit;
+}
+
 // get action request
 if (isset($_REQUEST['request_action'])) {
     extract($_REQUEST);
