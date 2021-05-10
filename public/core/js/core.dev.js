@@ -1257,7 +1257,8 @@ $document.ready(function() {
         no: sr,
         posts: _self.caption,
         likes_count: val.node.edge_liked_by.count,
-        comments_count: val.node.edge_media_to_comment.count
+        comments_count: val.node.edge_media_to_comment.count,
+        video_view_count: parseInt(val.node.video_view_count) || 0
       });
     });
   }; // set top navigation counters

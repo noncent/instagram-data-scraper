@@ -5,17 +5,19 @@ $app_version                = '2.6';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38328701-1"></script>
     <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag() {
-             dataLayer.push(arguments);
-         }
-         gtag('js', new Date());
-         gtag('config', 'UA-38328701-1');
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-38328701-1');
     </script>
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
@@ -29,9 +31,9 @@ $app_version                = '2.6';
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="<?php echo $cdn_server_url;?>/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link type="text/css" href="<?php echo $cdn_server_url;?>/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link type="text/css" href="<?php echo $cdn_server_url;?>/libs/jqcloud/1.0.4/jqcloud.min.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo $cdn_server_url; ?>/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo $cdn_server_url; ?>/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo $cdn_server_url; ?>/libs/jqcloud/1.0.4/jqcloud.min.css" rel="stylesheet" />
     <link type="text/css" href="./public/core/css/core.min.css" rel="stylesheet">
     <style>
         .se-pre-con {
@@ -45,8 +47,9 @@ $app_version                = '2.6';
         }
     </style>
 </head>
+
 <body>
-    <div id="popup" style="display:none" class="alert alert-warning text-center" role="alert"> <button type="button" class="close" data-dismiss="alert">×</button> <strong>Namaste!!</strong> If you are facing any error, simple reload the page else please open an issue ticket <a class="alert-link" href="https://github.com/neerajsinghsonu/Instagram-Data-Scraper" target="_new">Github</a>.<br/>Thank you very much.. you are wonderful! :) </div>
+    <div id="popup" style="display:none" class="alert alert-warning text-center" role="alert"> <button type="button" class="close" data-dismiss="alert">×</button> <strong>Namaste!!</strong> If you are facing any error, simple reload the page else please open an issue ticket <a class="alert-link" href="https://github.com/neerajsinghsonu/Instagram-Data-Scraper" target="_new">Github</a>.<br />Thank you very much.. you are wonderful! :) </div>
     <div class="se-pre-con"></div>
     <div class="wrapper">
         <div class="navbar navbar-default navbar-static-top">
@@ -60,7 +63,7 @@ $app_version                = '2.6';
                     <a class="navbar-brand" href="javascript:void(0);">
                         <span>
                             <img width="30px" src="./public/core/images/logo.png">
-                        </span>Instagram Data Scraper <?=$app_version;?>
+                        </span>Instagram Data Scraper <?= $app_version; ?>
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
@@ -104,7 +107,7 @@ $app_version                = '2.6';
                     <form class="navbar-form">
                         <div class="form-group" style="display:inline;">
                             <div class="input-group" style="display:table;">
-                                <input class="form-control" id="txtSearch" name="txtSearch" placeholder="Use single space to seprate multiple keyword as #hashtag or @account or both..." autocomplete="off" autofocus="autofocus" type="text" value="@lionking #india @blackbucks_ #mtvdance @cpyadav17 @pizzaboyskw #flowers" />
+                                <input class="form-control" id="txtSearch" name="txtSearch" placeholder="Use single space to seprate multiple keyword as #hashtag or @account or both..." autocomplete="off" autofocus="autofocus" type="text" value="@lionking #Covid19 @demimoore #instagramreels @evalongoria" />
                                 <span id="btnSearch" class="input-group-addon" style="width:1%; cursor: pointer;">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </span>
@@ -185,6 +188,100 @@ $app_version                = '2.6';
                         </div>
                     </div>
                 </div>
+                <!-- Start Table Section-->
+                <?php if ($show_account) : ?>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-user-circle"></i> Instagram account details
+                                </div>
+                                <div class="panel-body">
+                                    <!-- Social Details -->
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6 text-right">
+                                                <a data-id="search-account-table" href="javascript:void(0);" class="btn btn-default download"><i class="fa fa-download"></i> Download Data in Excel</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table id="search-account-table" class="table table-bordred table-striped">
+                                                        <thead>
+                                                            <th>
+                                                                <input type="checkbox" id="checkall" />
+                                                            </th>
+                                                            <th>Link</th>
+                                                            <th>Biography</th>
+                                                            <th>Followers</th>
+                                                            <th>Following</th>
+                                                            <th>Posts</th>
+                                                            <th>Likes</th>
+                                                            <th>Comments</th>
+                                                            <th>Views</th>
+                                                            <th>Actions</th>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                                    <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <input class="form-control " type="text" placeholder="World">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input class="form-control " type="text" placeholder="is">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea rows="2" class="form-control" placeholder="Beautiful"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer ">
+                                                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                                    <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+                                                </div>
+                                                <div class="modal-footer ">
+                                                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- End Social Details -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <!-- End Table Section-->
                 <!-- End Form In line -->
                 <div class="container-fluid">
                     <div class="row">
@@ -198,11 +295,11 @@ $app_version                = '2.6';
                                     <div class="col col-md-12">
                                         <div class="row text-center">
                                             <div class="col col-md-6">
-                                                <h4>Wow! Trending</h4>
+                                                <h4>Trending Now</h4>
                                                 <div class="wow jqcloud"></div>
                                             </div>
                                             <div class="col col-md-6">
-                                                <h4>Ouch! Trending</h4>
+                                                <h4>Top Search</h4>
                                                 <div class="oh jqcloud"></div>
                                             </div>
                                         </div>
@@ -285,100 +382,6 @@ $app_version                = '2.6';
                     </div>
                 </div>
                 <!-- End Account Analytics -->
-                <!-- Start Table Section-->
-                <?php if ($show_account): ?>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-user-circle"></i> Instagram account details
-                            </div>
-                            <div class="panel-body">
-                                <!-- Social Details -->
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-6"></div>
-                                        <div class="col-md-6 text-right">
-                                            <a data-id="search-account-table" href="javascript:void(0);" class="btn btn-default download"><i class="fa fa-download"></i> Download Data in Excel</a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="table-responsive">
-                                                <table id="search-account-table" class="table table-bordred table-striped">
-                                                    <thead>
-                                                        <th>
-                                                            <input type="checkbox" id="checkall" />
-                                                        </th>
-                                                        <th>Link</th>
-                                                        <th>Biography</th>
-                                                        <th>Followers</th>
-                                                        <th>Following</th>
-                                                        <th>Posts</th>
-                                                        <th>Likes</th>
-                                                        <th>Comments</th>
-                                                        <th>Views</th>
-                                                        <th>Actions</th>
-                                                    </thead>
-                                                    <tbody></tbody>
-                                                </table>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <input class="form-control " type="text" placeholder="World">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input class="form-control " type="text" placeholder="is">
-                                                </div>
-                                                <div class="form-group">
-                                                    <textarea rows="2" class="form-control" placeholder="Beautiful"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer ">
-                                                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                                <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-                                            </div>
-                                            <div class="modal-footer ">
-                                                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- End Social Details -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php endif?>
-                <!-- End Table Section-->
             </div>
         </div>
         <footer class="footer">
@@ -388,7 +391,7 @@ $app_version                = '2.6';
                         <a class="label label-danger" href="#" data-toggle="modal" data-target="#console">Debug Console:</a> | <a class="label label-success" href="#" data-toggle="modal" data-target="#credit">Credits</a> | <a class="label label-warning" href="#" data-toggle="modal" data-target="#tnc">Terms of Service</a> | <a class="label label-info" href="#" data-toggle="modal" data-target="#tnc">Privacy</a>
                     </div>
                     <div class="col-md-6 pull-right text-right">
-                        <p class="muted">© 2017 Company Name. All rights reserved</p>
+                        <p class="muted">© <?php echo date('Y'); ?> Company Name. All rights reserved</p>
                     </div>
                 </div>
             </div>
@@ -620,7 +623,7 @@ $app_version                = '2.6';
                 <div class="modal-content">
                     <div class="modal-header">
                         <a href="javascript:void(0);" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                        <h5 class="modal-title"><i class="fa fa-star-o"></i> Whatever our Power is, It should Beautiful... always to Serve not to Take</h5>
+                        <h5 class="modal-title"><i class="fa fa-star-o"></i>Instagram Data Scraper T&C</h5>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -628,23 +631,23 @@ $app_version                = '2.6';
                                 <img src="./public/core/images/tnc.png" class="img-responsive">
                             </div>
                             <div class="col-md-6 text-justify">
-                                <h4>Privacy Policy | Terms &amp; Condition:</h4>
+                                <h4>Privacy Policy | Terms &amp; Conditions</h4>
                                 <p>
-                                    Instagram Super Scraper, is a learning peace of code. It's developed as sample to help the people who want to build Instagram data scraper or using their API's to get Instagram informations. It may help people who want some data from Instagram. This is not for any Commercial Product or not for Sale or not for Product Build. By using the script/application/code you accepting the application's terms &amp; condition.
+                                    Instagram Data Scraper, is a learning piece of code. It's developed as a sample to help the people who want to build Instagram data scraper or using their APIs to get Instagram information. It may help people who want some data from Instagram. This is not for any Commercial Product or not for Sale or not for Product Build. By using the script/application/code you accepting the application's terms & conditions.
                                 </p>
                                 <p>
-                                    If you like this application and want to build or want to use with your commercial product then kindly get a valid <a href="https://www.instagram.com/developer/" target="_new"><i class="fa fa-external-link"></i> Instagram APP ID</a> and then use without any worry. Follow the all <a href="https://www.instagram.com/about/legal/terms/api/"><i class="fa fa-external-link"></i> Platform Policy</a> &amp; <a href="https://css-tricks.com/everything-need-know-instagram-api-integration/"><i class="fa fa-external-link"></i> Instagram API Practices</a> to make your own candy.
+                                    If you like this application and want to build or want to use it with your commercial product then kindly get a valid <a href="https://www.instagram.com/developer/" target="_new"><i class="fa fa-external-link"></i> Instagram APP ID</a> and then use it without any worry. Follow all the <a href="https://www.instagram.com/about/legal/terms/api/"><i class="fa fa-external-link"></i> Platform Policy</a> &amp; <a href="https://css-tricks.com/everything-need-know-instagram-api-integration/"><i class="fa fa-external-link"></i> Instagram API Practices</a> to make your own candy.
                                 </p>
                                 <p>
-                                    In this application all used brands name and logo are their properties.
+                                    In this application, all used brand's name and logo are their properties.
                                 </p>
                                 <p>
-                                    Kindly don't take interest to breaking something.
+                                    Kindly don't take an interest in break something.
                                 </p>
                                 <p>
-                                    You all are Stars.... You love everyone.... Built with Love for Love
+                                    Build with Love for Love
                                     <br>
-                                    <br> <i class="fa fa-handshake-o"></i> Thank you all lovely people
+                                    <br> <i class="fa fa-handshake-o"></i> Thanks a lot you lovely people
                                 </p>
                                 <div class="space-ten"></div>
                             </div>
@@ -810,7 +813,7 @@ $app_version                = '2.6';
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item active">
-                                            <a class="nav-link active" data-toggle="tab" href="#{{container}}-table-summery" role="tab">Data Summery</a>
+                                            <a class="nav-link active" data-toggle="tab" href="#{{container}}-table-summery" role="tab">Data Summary</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#{{container}}-view-gallery" role="tab">Post Preview</a>
@@ -830,6 +833,7 @@ $app_version                = '2.6';
                                                         <th>Post</th>
                                                         <th>Likes</th>
                                                         <th>Comments</th>
+                                                        <th>Views</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -839,6 +843,7 @@ $app_version                = '2.6';
                                                         <td>{{posts}}</td>
                                                         <td>{{likes_count}}</td>
                                                         <td>{{comments_count}}</td>
+                                                        <td>{{video_view_count}}</td>
                                                     </tr>
                                                     {{/table-summery}}
                                                 </tbody>
@@ -904,17 +909,30 @@ $app_version                = '2.6';
     </div>
     <!-- End Modal Console -->
     <!-- end all template here -->
-    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="<?= $cdn_server_url; ?>/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="./public/core/js/cookies.min.js"></script>
-    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
-    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/mustache.js/2.3.2/mustache.min.js"></script>
-    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
-    <script type="text/javascript" src="<?=$cdn_server_url;?>/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    <script type="text/javascript" src="<?= $cdn_server_url; ?>/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?= $cdn_server_url; ?>/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+    <script type="text/javascript" src="<?= $cdn_server_url; ?>/libs/mustache.js/2.3.2/mustache.min.js"></script>
+    <script type="text/javascript" src="<?= $cdn_server_url; ?>/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
+    <script type="text/javascript" src="<?= $cdn_server_url; ?>/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
     <script type="text/javascript" src="./public/typeahead/typeahead.min.js"></script>
-    <script type="text/javascript" src="./public/core/js/core.min.js"></script>
+    <!-- we are in development mode hence do not use core.min.js file yet -->
+    <script type="text/javascript" src="./public/core/js/core.dev.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() { if (localStorage.getItem('popState') != 'shown') { $("#popup").delay(2000).fadeIn(); localStorage.setItem('popState', 'shown') } $('#popup-close').click(function(e) { $('#popup').fadeOut(); }); $('#popup').click(function(e) { $('#popup').fadeOut(); }); }); 
+        $(document).ready(function() {
+            if (localStorage.getItem('popState') != 'shown') {
+                $("#popup").delay(2000).fadeIn();
+                localStorage.setItem('popState', 'shown')
+            }
+            $('#popup-close').click(function(e) {
+                $('#popup').fadeOut();
+            });
+            $('#popup').click(function(e) {
+                $('#popup').fadeOut();
+            });
+        });
     </script>
 </body>
+
 </html>

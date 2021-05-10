@@ -29,6 +29,7 @@ class Instagram
     public $endpoint = array(
         'account'                         => 'https://www.instagram.com/{user}',
         'account_next_call'               => 'https://www.instagram.com/{user}/?max_id={max_id}',
+        // 'account_json'                    => 'https://www.instagram.com/{user}/channel/?__a=1',
         'account_json'                    => 'https://www.instagram.com/{user}/?__a=1',
         'account_json_next_call'          => 'https://www.instagram.com/{user}/?__a=1&max_id={max_id}',
         'account_media_json'              => 'https://instagram.com/graphql/query/?query_id=17888483320059182&id={user_id}&first=12',
@@ -106,7 +107,7 @@ class Instagram
         'empty_error'     => '"entry_data": {}',
     );
     /**
-     * Dont change if want to save json data in mysql
+     * Don't change if want to save json data in mysql
      * Note: You have to parse PHP array and will have to make your desire output to save.
      *
      * @var string
@@ -263,7 +264,7 @@ class Instagram
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $this->curl_response = curl_exec($ch);
             curl_close($ch);
-            write_log(DEBUG, $this->curl_response);
+            //write_log(DEBUG, $this->curl_response);
             // check return data status
             if ($this->curl_response != false) {
                 // return status
@@ -290,7 +291,7 @@ class Instagram
             });
             // get response
             $parallelcurl->finishAllRequests();
-            write_log(DEBUG, $this->curl_response);
+            //write_log(DEBUG, $this->curl_response);
             //@todo MySQL Saving Configurations
             // collect data in array to store later in anywhere
             if (isset($this->save_as) && $this->save_as === 'mysql') {
@@ -474,7 +475,7 @@ class Instagram
         //     $_SESSION['insta-ip-address'] = $dynamic_ip;
         // }
         // print_r($this->post_array);
-        if ($this->request_action === 'pull_account' || $this->request_action === 'pull_media') {
+        if ($this->validateRequestType()) {
             if (isset($this->post_array['sessionid']) && isset($_COOKIE[$this->post_array['sessionid']])) {
                 $sessionid = $_COOKIE[$this->post_array['sessionid']];
             }
