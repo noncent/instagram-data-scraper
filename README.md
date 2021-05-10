@@ -1,5 +1,3 @@
-<p>&nbsp;</p>
-
 # ⚠️ Warning
 
 Dear people,
