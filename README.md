@@ -80,9 +80,13 @@ Following features are available for now:
 
 ---
 
-###  :scream_cat: Screenshot of New 2.6 (Beta) released:
+###  :scream_cat: Screenshot - [A] 2.6 (Beta) released:
 ![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/2.6.screen.app.png)
 
+<p>&nbsp;</p>
+
+###  :scream_cat: Screenshot - [B] 2.6 (Beta) released:
+![App Screenshot](https://github.com/neerajsinghsonu/Instagram-Scraper/blob/master/public/core/images/2.6.screen.app-I.png)
 ---
 
 ###  :pencil2: Development Notes:
