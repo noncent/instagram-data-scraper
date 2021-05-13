@@ -61,6 +61,10 @@ Following features are available for now:
 - [ ] Instagram Reels Search (WIP)
 - [ ] Instagram Reels Likes/Views/Play/Comments & Counts (WIP)
 - [ ] Instagram Reels Video Play (WIP)
+- [ ] Top 100 Posts for user (WIP)
+- [ ] Top trending hashtags (WIP)
+- [ ] Trend by location (WIP)
+- [ ] Most likeed posts (WIP)
 - [x] Hashtag Likes
 - [x] Hashtag Comments
 - [x] Hashtag Keywords
