@@ -6,13 +6,6 @@ Instagram doing lots of changes in their APIs and Endpoints, hence lots of issue
 
 <p>&nbsp;</p>
 
-<em>Hey Guys,<br/>
-Instagram has blocked my server IP hence the online demo isn't working anymore.
-Apologies for any inconvenience, but the good news is “You can download the code and run the tool onto your machine/laptop/desktop as LAMP or WAMP.</em>
- 
-### <em>Online demo version - Suspended due to IP Block</em>
-### <em>Source code build - Working fine</em>
-
 ---
 <br>
 
