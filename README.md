@@ -207,6 +207,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ###  :chart_with_upwards_trend: Change logs:
 > Committed repo change code version 2.6
+- Video views count added in Table and Excel #24
 - User account search activated
 
 
