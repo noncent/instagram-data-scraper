@@ -4,28 +4,6 @@ Dear people,
 
 Instagram doing lots of changes in their APIs and Endpoints, hence lots of issues occurring everywhere. We are in the phase to observe all the changes and will come up with the final solution. Till then we are apologies for the inconvenience caused.
 
-### Status (Up and Running):
-- [x] Hashtag Search
-- [x] Hashtag Likes
-- [x] Hashtag Comments
-- [x] Hashtag Keywords
-- [x] Hashtag Video Views
-- [x] Hashtag Top Post Keywords
-- [x] Hashtag Top Post Preview
-- [x] Hashtag Top Post Data
-- [x] User Account Search
-- [x] User Account Biography
-- [x] User Account Followers
-- [x] User Account Following
-- [x] User Account Posts (Images are breaking)
-- [x] User Account Likes
-- [x] User Account Comments
-- [x] User Account Views
-- [x] Download data in excel
-
-### Last issue reported on date - 10 May 2021
-### Last issue fixed #50 & #51 on date - 10 May 2021
-
 <p>&nbsp;</p>
 
 <em>Hey Guys,<br/>
@@ -43,15 +21,15 @@ Apologies for any inconvenience, but the good news is “You can download the co
 
 ---
 As I had promised **@useraccount search is now available now**.
-You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID. Just login in your instagram account and copy the session id from your broswer (click to 'Set session' button to get more help).
+You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID. Just log in to your Instagram account and copy the session id from your browser (click to 'Set session' button to get more help).
 
 ---
 ###  :see_no_evil: What is Instagram Data Scraper?
 
-Instagram Data Scraper is a PHP script which takes @username or #hashtag as input and returns all information related to users e.g. likes, comments, post counts, images, likes on images etc.
+Instagram Data Scraper is a PHP script that takes @username or #hashtag as input and returns all information related to users e.g. likes, comments, post counts, images, likes on images etc.
 
-Currently only User's Name, Biography, Followers,
-Following, Posts, Likes, Comments & Views data in displaying. For other details you have to enable from php script code, Update Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';"
+Currently only the User's Name, Biography, Followers,
+Following, Posts, Likes, Comments & Views data in displaying. For other details you have to enable from PHP script code, Update Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';"
 
 jQuery is being used to build  Awesome Views, to handle each and every request separately. I hope you like this small chunk of code :)
 
@@ -95,11 +73,11 @@ Following features are available for now:
 
 ###  :pencil2: Development Notes:
 - Instagram Super Scraper can fetch #hashtag likes, views, top posts (10), comments, keywords count.
-- You can set N Depth Level Search by editing JavaScript code, currently it's 4 level see. 'this.maxRequestNo = 4;' in core.js file. The depth control currently set for only keyword Search, Account Search is still open without any limit, but in future you may see Depth Controller for Account Search too.
-- You may have Depth Search Controller in future release.
+- You can set N Depth Level Search by editing JavaScript code, currently it's 4 levels see. 'this.maxRequestNo = 4;' in core.js file. The depth control currently set for only keyword Search, Account Search is still open without any limit, but in future, you may see Depth Controller for Account Search too.
+- You may have Depth Search Controller in a future release.
 - Instagram Scraper doesn't follow any Standard API Rules (Because it's POC/Demo purpose only). If you thinking to make this as Commercial the Have OWN INSTAGRAM VALID API ACCESS, MODIFY THE REQUEST PART & ENJOY!
-- Currently Instagram Scraper works on Purely Scrape Method, there is no API implemented. It's open some Instagram link which returns JSON data and then application creating view by business logics.
-- The Instagram links are uncertain and may change any time so Please don't depend on them and have VALID INSTAGRAM API to BUILD APPLICATION. Below are some examples:
+- Currently, Instagram Scraper works on Purely Scrape Method, there is no API implemented. It's open some Instagram link which returns JSON data and then application creating view by business logic.
+- The Instagram links are uncertain and may change at any time so please don't depend on them and have VALID INSTAGRAM API to BUILD APPLICATION. Below are some examples:
 - Simple Application Flow:
 
 > All code is well commented to understand the flow and functionality, if I missed something or
@@ -130,7 +108,7 @@ Following features are available for now:
     - No Of Likes by Hashtags
     - No Of Comments by Hashtag
     - Top 10 Posts, Comments and Likes by Hashtag
-    - Keyword summery, how many times a word used in Posts
+    - Keyword summary, how many times a word used in Posts
 
 ---
 
@@ -201,7 +179,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 ### Notes
 
-> C-) Rename dev.htaccess to .htaccess (If you are using windows just rename file dev.htaccess to .htaccess. and window will ignore last dot.. )
+> C-) Rename dev.htaccess to .htaccess (If you are using windows just rename file dev.htaccess to .htaccess. and the window will ignore the last dot.. )
 
 ---
 
@@ -212,7 +190,7 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 
 > Committed repo change code version 2.5.3
-- Video total view count added at top of bar
+- Video total view count added at top of the bar
 - Video view count added for each hashtag
 
 > Committed repo change code version 2.5.2
@@ -227,10 +205,10 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 - Keywords Analytics - New Feature
 - Top Posts - New Feature
 - Top Post Comments - New Feature
-- Each request is being handled separately; so don't take hiccup if you click some where during the request - Improved
-- Pure html file to make easy template to use in PHP or ASP or any language.
-- Search tips: '#' to search Hash tags and '@' to search account information
-- Use 'Space' to search multiple hash tags and accounts
+- Each request is being handled separately; so don't take a hiccup if you click somewhere during the request - Improved
+- Pure HTML file to make an easy template to use in PHP or ASP or any language.
+- Search tips: '#' to search Hashtags and '@' to search account information
+- Use 'Space' to search multiple hashtags and accounts
 - Download in Excel available
 
 > Committed repo change code version 2.1
@@ -242,9 +220,9 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 
 > Committed repo change code version 2.0
 - 1 - Added data file example
-- 2 - Added result php array example
-- 3 - Updated nav bar css
-- 4 - Update js file and css file and minify files
+- 2 - Added result PHP array example
+- 3 - Updated navbar CSS
+- 4 - Update js file and CSS file and minify files
 - 5 - Remove htaccess [re_write apache module] dependencies
 - 6 - Added PHP Code to build PHP array
 - 7 - Some minor UI changes
@@ -254,7 +232,7 @@ Feel free to use and enjoy!! & Yes! all feedback's, enhancements are most welcom
 
 ---
 ### Request:
-This application/Code/Script is provided by free of cost and for learning purpose that's how we can scrape a website html source code. It is not intended to harm anyone or to make any illegal use. Kindly, respect user's privacy and other peoples effort. Do not try to intent break anything. This World is Beautiful... More Then We thought :)
+This application/Code/Script is provided free of cost and for learning purpose that's how we can scrape a website HTML source code. It is not intended to harm anyone or to make any illegal use. Kindly, respect the user's privacy and other peoples effort. Do not try to intent break anything. This World is Beautiful... More Then We thought :)
 
 ---
 ### List Of Contributors:
