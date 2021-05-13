@@ -227,9 +227,5 @@ Feel free to use and enjoy!! & Yes! all feedback's, enhancements are most welcom
 ### Request:
 This application/Code/Script is provided free of cost and for learning purpose that's how we can scrape a website HTML source code. It is not intended to harm anyone or to make any illegal use. Kindly, respect the user's privacy and other peoples effort. Do not try to intent break anything. This World is Beautiful... More Then We thought :)
 
----
-### List Of Contributors:
-- [Yuzuru Suzuki](https://github.com/YuzuruS)
-
 
 Thank you all :)
