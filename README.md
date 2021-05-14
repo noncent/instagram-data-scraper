@@ -4,13 +4,9 @@ Dear people,
 
 Instagram doing lots of changes in their APIs and Endpoints, hence lots of issues occurring everywhere. We are in the phase to observe all the changes and will come up with the final solution. Till then we are apologies for the inconvenience caused.
 
-<p>&nbsp;</p>
-
 ---
-<br>
 
-### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 18 August 2020 
-
+### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 11th May 2021 
 
 ---
 As I had promised **@useraccount search is now available now**.
