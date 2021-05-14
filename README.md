@@ -61,7 +61,7 @@ Following features are available for now:
 ---
 
 ###  :pencil2: Development Notes:
-- Instagram Super Scraper can fetch #hashtag likes, views, top posts (10), comments, keywords count.
+- Instagram Data Scraper can fetch #hashtag likes, views, top posts (10), comments, keywords count.
 - You can set N Depth Level Search by editing JavaScript code, currently it's 4 levels see. 'this.maxRequestNo = 4;' in core.js file. The depth control currently set for only keyword Search, Account Search is still open without any limit, but in future, you may see Depth Controller for Account Search too.
 - You may have Depth Search Controller in a future release.
 - Instagram Scraper doesn't follow any Standard API Rules (Because it's POC/Demo purpose only). If you thinking to make this as Commercial the Have OWN INSTAGRAM VALID API ACCESS, MODIFY THE REQUEST PART & ENJOY!
@@ -77,7 +77,7 @@ Following features are available for now:
 
 ---
 
-###  :package: Data available in Super Scraper
+###  :package: Data available in Instagram Data Scraper
 
 1 - Account information - N Level Search
 
