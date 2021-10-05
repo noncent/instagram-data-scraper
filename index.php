@@ -388,7 +388,7 @@ $app_version                = '2.6';
             <div class="container-fluid">
                 <div class="col-md-12">
                     <div class="col-md-6 pull-left">
-                        <a class="label label-danger" href="#" data-toggle="modal" data-target="#console">Debug Console:</a> | <a class="label label-success" href="#" data-toggle="modal" data-target="#credit">Credits</a> | <a class="label label-warning" href="#" data-toggle="modal" data-target="#tnc">Terms of Service</a> | <a class="label label-info" href="#" data-toggle="modal" data-target="#tnc">Privacy</a>
+                        <a class="label label-danger" href="#" data-toggle="modal" data-target="#console">Debug Console</a> | <a class="label label-success" href="#" data-toggle="modal" data-target="#credit">Credits</a> | <a class="label label-warning" href="#" data-toggle="modal" data-target="#tnc">Terms of Service</a> | <a class="label label-info" href="#" data-toggle="modal" data-target="#tnc">Privacy</a>
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <p class="muted">© <?php echo date('Y'); ?> Company Name. All rights reserved</p>
@@ -596,7 +596,7 @@ $app_version                = '2.6';
                             </div>
                             <div class="col card card-block col-md-4">
                                 <a target="_new" style="margin-top: 15px;" class="navbar-left text-muted" href="http://mistic100.github.io/jqcloud/demo.html">
-                                    <span><img src="./public/core/images/jQCloud.png" /></span>&nbsp;&nbsp; jQClod
+                                    <span><img src="./public/core/images/jQCloud.png" /></span>&nbsp;&nbsp; jQCloud
                                 </a>
                             </div>
                             <div class="col card card-block col-md-4">
