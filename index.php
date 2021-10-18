@@ -388,7 +388,7 @@ $app_version                = '2.6';
             <div class="container-fluid">
                 <div class="col-md-12">
                     <div class="col-md-6 pull-left">
-                        <a class="label label-danger" href="#" data-toggle="modal" data-target="#console">Debug Console:</a> | <a class="label label-success" href="#" data-toggle="modal" data-target="#credit">Credits</a> | <a class="label label-warning" href="#" data-toggle="modal" data-target="#tnc">Terms of Service</a> | <a class="label label-info" href="#" data-toggle="modal" data-target="#tnc">Privacy</a>
+                        <a class="label label-danger" href="#" data-toggle="modal" data-target="#console">Debug Console</a> | <a class="label label-success" href="#" data-toggle="modal" data-target="#credit">Credits</a> | <a class="label label-warning" href="#" data-toggle="modal" data-target="#tnc">Terms of Service</a> | <a class="label label-info" href="#" data-toggle="modal" data-target="#tnc">Privacy</a>
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <p class="muted">© <?php echo date('Y'); ?> Company Name. All rights reserved</p>
@@ -522,16 +522,16 @@ $app_version                = '2.6';
                                                 </ul>
                                                 <div class="tab-content ">
                                                     <div class="tab-pane active" id="1">
-                                                        <img src="./public/core/images/browser-sessionid/firefox.png" alt="Firefox Instagram Session ID" class="img-responsive">
+                                                        <img src="./public/core/images/browser-sessionid/Firefox.png" alt="Firefox Instagram Session ID" class="img-responsive">
                                                     </div>
                                                     <div class="tab-pane" id="2">
-                                                        <img src="./public/core/images/browser-sessionid/chrome.png" alt="Chrome Instagram Session ID" class="img-responsive">
+                                                        <img src="./public/core/images/browser-sessionid/Chrome.png" alt="Chrome Instagram Session ID" class="img-responsive">
                                                     </div>
                                                     <div class="tab-pane" id="3">
-                                                        <img src="./public/core/images/browser-sessionid/safari.png" alt="Safari Instagram Session ID" class="img-responsive">
+                                                        <img src="./public/core/images/browser-sessionid/Safari.png" alt="Safari Instagram Session ID" class="img-responsive">
                                                     </div>
                                                     <div class="tab-pane" id="4">
-                                                        <img src="./public/core/images/browser-sessionid/ie-edge.png" alt="IE-Edge Instagram Session ID" class="img-responsive">
+                                                        <img src="./public/core/images/browser-sessionid/IE-Edge.png" alt="IE-Edge Instagram Session ID" class="img-responsive">
                                                     </div>
                                                 </div>
                                                 <hr />
@@ -596,7 +596,7 @@ $app_version                = '2.6';
                             </div>
                             <div class="col card card-block col-md-4">
                                 <a target="_new" style="margin-top: 15px;" class="navbar-left text-muted" href="http://mistic100.github.io/jqcloud/demo.html">
-                                    <span><img src="./public/core/images/jqcloud.png" /></span>&nbsp;&nbsp; jQClod
+                                    <span><img src="./public/core/images/jQCloud.png" /></span>&nbsp;&nbsp; jQCloud
                                 </a>
                             </div>
                             <div class="col card card-block col-md-4">
