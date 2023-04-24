@@ -1,53 +1,52 @@
 # ⚠️ Warning
 
-Dear people,
+Dear folks,
 
-Instagram doing lots of changes in their APIs and Endpoints, hence lots of issues occurring everywhere. We are in the phase to observe all the changes and will come up with the final solution. Till then we are apologies for the inconvenience caused.
+Instagram has been making many changes to their APIs and Endpoints, resulting in various issues popping up. We're currently in the process of monitoring all the changes and will provide a final solution soon. We apologize for any inconvenience caused in the meantime.
+
+---
+
+### :star: Instagram-Data-Scraper | Version 2.6 (Beta) | Latest Update: May 11th, 2021
+
+---
+As I promised, the ability to search for @useraccount is now available. However, in order to use this feature, you must set your own Instagram session ID. To obtain your session ID, log in to your Instagram account and copy the session ID from your browser. Click the 'Set session' button for further assistance.
+
+---
+### :see_no_evil: What is Instagram Data Scraper?
+
+
+Instagram Data Scraper is a PHP script that allows users to input an @username or #hashtag and receive information related to that user or hashtag. This information includes data such as likes, comments, post counts, images, and likes on images. Currently, the script only displays the user's name, biography, followers, following, posts, likes, comments, and views. However, users can enable additional details by updating the Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';" within the PHP script code. The script uses jQuery to build Awesome Views and handle each request individually. It's a small but powerful piece of code that we hope you'll find useful.
 
 ---
 
-### :star: Instagram-Data-Scraper V 2.6 (Beta) - Last Updated : 11th May 2021 
-
----
-As I had promised **@useraccount search is now available now**.
-You have to set your own Instagram session ID to pull account search. You can follow the instructions to get SESSION ID. Just log in to your Instagram account and copy the session id from your browser (click to 'Set session' button to get more help).
-
----
-###  :see_no_evil: What is Instagram Data Scraper?
-
-Instagram Data Scraper is a PHP script that takes @username or #hashtag as input and returns all information related to users e.g. likes, comments, post counts, images, likes on images etc.
-
-Currently only the User's Name, Biography, Followers,
-Following, Posts, Likes, Comments & Views data in displaying. For other details you have to enable from PHP script code, Update Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';"
-
-jQuery is being used to build  Awesome Views, to handle each and every request separately. I hope you like this small chunk of code :)
-
----
 ### :innocent: What's new in Instagram Data Scraper (Beta)?
 Following features are available for now:
-- [ ] Instagram Reels Search (WIP)
-- [ ] Instagram Reels Likes/Views/Play/Comments & Counts (WIP)
-- [ ] Instagram Reels Video Play (WIP)
-- [ ] Top 100 Posts for user (WIP)
-- [ ] Top trending hashtags (WIP)
-- [ ] Trend by location (WIP)
-- [ ] Most likeed posts (WIP)
-- [x] Hashtag Likes
-- [x] Hashtag Comments
-- [x] Hashtag Keywords
-- [x] Hashtag Video Views
-- [x] Hashtag Top Post Keywords
-- [x] Hashtag Top Post Preview
-- [x] Hashtag Top Post Data
-- [x] User Account Search
-- [x] User Account Biography
-- [x] User Account Followers
-- [x] User Account Following
-- [x] User Account Posts
-- [x] User Account Likes
-- [x] User Account Comments
-- [x] User Account Views
-- [x] Download data in excel
+| Feature                             | Status   |
+|-------------------------------------|----------|
+| Instagram Reels Search              | WIP      |
+| Instagram Reels Likes/Views/Play/Comments & Counts | WIP      |
+| Instagram Reels Video Play          | WIP      |
+| Top 100 Posts for user              | WIP      |
+| Top trending hashtags               | WIP      |
+| Trend by location                   | WIP      |
+| Most liked posts                    | WIP      |
+| Hashtag Likes                       | &#x2713; |
+| Hashtag Comments                    | &#x2713; |
+| Hashtag Keywords                    | &#x2713; |
+| Hashtag Video Views                 | &#x2713; |
+| Hashtag Top Post Keywords           | &#x2713; |
+| Hashtag Top Post Preview            | &#x2713; |
+| Hashtag Top Post Data               | &#x2713; |
+| User Account Search                 | &#x2713; |
+| User Account Biography              | &#x2713; |
+| User Account Followers              | &#x2713; |
+| User Account Following              | &#x2713; |
+| User Account Posts                  | &#x2713; |
+| User Account Likes                  | &#x2713; |
+| User Account Comments               | &#x2713; |
+| User Account Views                  | &#x2713; |
+| Download data in excel              | &#x2713; |
+
 
 ---
 
@@ -61,19 +60,46 @@ Following features are available for now:
 ---
 
 ###  :pencil2: Development Notes:
-- Instagram Data Scraper can fetch #hashtag likes, views, top posts (10), comments, keywords count.
-- You can set N Depth Level Search by editing JavaScript code, currently it's 4 levels see. 'this.maxRequestNo = 4;' in core.js file. The depth control currently set for only keyword Search, Account Search is still open without any limit, but in future, you may see Depth Controller for Account Search too.
-- You may have Depth Search Controller in a future release.
-- Instagram Scraper doesn't follow any Standard API Rules (Because it's POC/Demo purpose only). If you thinking to make this as Commercial the Have OWN INSTAGRAM VALID API ACCESS, MODIFY THE REQUEST PART & ENJOY!
-- Currently, Instagram Scraper works on Purely Scrape Method, there is no API implemented. It's open some Instagram link which returns JSON data and then application creating view by business logic.
-- The Instagram links are uncertain and may change at any time so please don't depend on them and have VALID INSTAGRAM API to BUILD APPLICATION. Below are some examples:
-- Simple Application Flow:
+- The Instagram Data Scraper tool is capable of retrieving various data related to a particular #hashtag, such as the number of likes, views, comments, and the count of keywords used. Additionally, it can also retrieve the top 10 posts associated with the hashtag. This feature can be very helpful for marketers and social media analysts who wish to track the performance of specific hashtags and analyze user engagement. By gathering information on likes, views, and comments, users can gain insights into the popularity of certain hashtags and the types of content that resonate with their audience.
 
-> All code is well commented to understand the flow and functionality, if I missed something or
-> any improvement/suggestion you have, kindly let me know.. .... [Read More on Wiki](https://github.com/neerajsinghsonu/Instagram-Data-Scraper/wiki)
+- You have the option to customize the N Depth Level Search by editing the JavaScript code in the Instagram Data Scraper tool. The current setting is set to 4 levels, which can be found in the 'this.maxRequestNo = 4;' line of the core.js file. This depth control is currently only available for keyword searches, as account searches have no limit. However, it's possible that in the future, a Depth Controller for Account Search may be implemented as well.
 
-> (A) - User Input > Account or Hashtag > Request Link > JSON Response > Make Result
-> (B) - (A) -> JSON Response -> If Next Page or Has Next Page > User Input > Account or Hashtag > Request Link > JSON Response > Make Result
+- Please note that the Instagram Scraper tool does not follow any standard API rules, as it is intended for proof-of-concept/demo purposes only. If you are considering using this tool for commercial purposes, you must have your own Instagram valid API access and modify the request part accordingly to comply with Instagram's API rules. We do not condone the use of the Instagram Scraper tool for any activity that violates Instagram's terms of use.
+
+- At present, the Instagram Scraper tool operates purely on a scrape method, without any API implementation. It accesses certain Instagram links, which then return JSON data that the application uses to create views based on business logic. Please note that scraping Instagram data without proper authorization or consent may violate Instagram's terms of use and could potentially result in legal consequences.
+
+- It's important to note that the Instagram links used by the Scraper tool are subject to change at any time, so it's not advisable to rely on them. To ensure a stable and reliable source of Instagram data for your application, it's recommended to have a valid Instagram API access and build your application using the API. Below are some examples of links that the Scraper tool may access:
+
+| Endpoint | Description |
+| --- | --- |
+| https://www.instagram.com/{username}/?__a=1 | Returns JSON data for a user's profile |
+| https://www.instagram.com/explore/tags/{hashtag}/?__a=1 | Returns JSON data for a hashtag search |
+| https://www.instagram.com/web/search/topsearch/?query={query} | Returns JSON data for a general search query |
+| https://www.instagram.com/web/search/hashtag/?query={query}&__a=1 | Returns JSON data for a hashtag search query |
+
+
+Please keep in mind that using unauthorized or non-approved methods to access Instagram data may be a violation of Instagram's terms of use and could result in legal consequences.
+
+- The following is a simplified flow of how the Instagram Scraper tool works:
+
+The user inputs an @username or #hashtag into the tool.
+The tool accesses certain Instagram links to retrieve relevant JSON data, such as user information, post counts, likes, comments, and keywords.
+The tool uses this data to create views, such as user profiles and posts, using business logic.
+The views are presented to the user for analysis and further use.
+It's important to note that this is a simplified flow and there may be additional steps involved in the actual implementation of the tool. Additionally, please keep in mind that unauthorized access to Instagram data may be a violation of Instagram's terms of use and could result in legal consequences.
+
+The code for the Instagram Scraper tool has been commented thoroughly to aid understanding of the flow and functionality. If there are any suggestions or improvements to be made, please let the developer know.
+
+The basic flow of the application can be summarized in two steps:
+
+(A) User Input > Account or Hashtag > Request Link > JSON Response > Create Result
+
+(B) JSON Response -> If Next Page or Has Next Page > User Input > Account or Hashtag > Request Link > JSON Response > Create Result
+
+In step (A), the user inputs an @username or #hashtag, and the tool accesses a specific Instagram link to request JSON data related to that input. Once the JSON response is received, the tool uses the data to create a result that can be presented to the user.
+
+In step (B), if the JSON response indicates that there is a next page or has more data available, the tool will prompt the user for additional inputs to request the next set of data. This process continues until all desired data has been retrieved and results can be created.
+
 
 ---
 
@@ -217,11 +243,13 @@ You can see a working demo here [Click to See](https://drive.google.com/file/d/0
 - 7 - Some minor UI changes
 `
 
-Feel free to use and enjoy!! & Yes! all feedback's, enhancements are most welcome...
+The developer encourages users to freely use and enjoy the Instagram Scraper tool. Any feedback or suggestions for enhancement are also most welcome.
 
 ---
 ### Request:
-This application/Code/Script is provided free of cost and for learning purpose that's how we can scrape a website HTML source code. It is not intended to harm anyone or to make any illegal use. Kindly, respect the user's privacy and other peoples effort. Do not try to intent break anything. This World is Beautiful... More Then We thought :)
+The developer hopes that users will find the Instagram Scraper tool useful and enjoyable. While it is provided free of cost for learning purposes, it should not be used to harm anyone or for any illegal activities. It is important to respect the privacy of others and the effort they have put into their content. Please do not attempt to break anything or engage in any malicious activities.
+
+Remember that the world is beautiful and full of wonder, and we should use technology to enhance our lives and share our experiences in a positive and respectful manner.
 
 
-Thank you all :)
+Thank you all :heart:
