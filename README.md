@@ -2,20 +2,20 @@
 
 Dear folks,
 
-Instagram has been making many changes to their APIs and Endpoints, resulting in various issues popping up. We're currently in the process of monitoring all the changes and will provide a final solution soon. We apologize for any inconvenience caused in the meantime.
+Instagram has made several modifications to their APIs and Endpoints, which have resulted in multiple issues. We are currently keeping a close eye on all the changes and will provide a permanent solution shortly. We apologize for any inconvenience caused in the meantime.
 
 ---
 
 ### :star: Instagram-Data-Scraper | Version 2.6 (Beta) | Latest Update: May 11th, 2021
 
 ---
-As I promised, the ability to search for @useraccount is now available. However, in order to use this feature, you must set your own Instagram session ID. To obtain your session ID, log in to your Instagram account and copy the session ID from your browser. Click the 'Set session' button for further assistance.
+As per my promise, the search feature for @useraccount is now accessible. But, to avail this feature, you need to set up your own Instagram session ID. To obtain your session ID, log in to your Instagram account and copy the session ID from your browser. Click the 'Set session' button for further assistance.
 
 ---
 ### :see_no_evil: What is Instagram Data Scraper?
 
 
-Instagram Data Scraper is a PHP script that allows users to input an @username or #hashtag and receive information related to that user or hashtag. This information includes data such as likes, comments, post counts, images, and likes on images. Currently, the script only displays the user's name, biography, followers, following, posts, likes, comments, and views. However, users can enable additional details by updating the Controller/Instagram Class "public $result_type = 'JSON' or 'ARRAY';" within the PHP script code. The script uses jQuery to build Awesome Views and handle each request individually. It's a small but powerful piece of code that we hope you'll find useful.
+The Instagram Data Scraper is a PHP script that allows users to enter an Instagram username or hashtag and receive data related to that account or post. The information provided includes post counts, likes, comments, images, and likes on images. Currently, the script displays basic user information such as name, biography, followers, following, posts, likes, comments, and views. However, users can access additional details by updating the Controller/Instagram Class in the PHP script code with "public $result_type = 'JSON' or 'ARRAY'." The script also uses jQuery to create Awesome Views and handle each request individually. It is a small yet powerful piece of code that we believe will be useful for you.
 
 ---
 
@@ -60,7 +60,7 @@ Following features are available for now:
 ---
 
 ###  :pencil2: Development Notes:
-- The Instagram Data Scraper tool is capable of retrieving various data related to a particular #hashtag, such as the number of likes, views, comments, and the count of keywords used. Additionally, it can also retrieve the top 10 posts associated with the hashtag. This feature can be very helpful for marketers and social media analysts who wish to track the performance of specific hashtags and analyze user engagement. By gathering information on likes, views, and comments, users can gain insights into the popularity of certain hashtags and the types of content that resonate with their audience.
+- The Instagram Data Scraper tool is a powerful tool that can extract various data related to a specific hashtag. It can retrieve information such as the number of likes, views, comments and the count of keywords used. In addition, it has the ability to fetch the top 10 posts associated with the hashtag. This feature is highly beneficial for marketers and social media analysts who want to track the performance of specific hashtags and analyze user engagement. By gathering data on likes, views, and comments, users can gain valuable insights into the popularity of certain hashtags and the type of content that resonates with their audience.
 
 - You have the option to customize the N Depth Level Search by editing the JavaScript code in the Instagram Data Scraper tool. The current setting is set to 4 levels, which can be found in the 'this.maxRequestNo = 4;' line of the core.js file. This depth control is currently only available for keyword searches, as account searches have no limit. However, it's possible that in the future, a Depth Controller for Account Search may be implemented as well.
 
